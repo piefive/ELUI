@@ -4,6 +4,9 @@
     "@babel/preset-typescript",
     "@babel/preset-react"
   ],
+  "plugins": [
+    ["styled-components", { "ssr": false, "pure": true }]
+  ],
   "env": {
     "test": {
       "plugins": ["@babel/plugin-transform-runtime"]

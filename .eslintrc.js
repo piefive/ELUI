@@ -44,7 +44,7 @@ module.exports = {
     'no-debugger': 'error',
     'no-nested-ternary': 'error',
     'no-restricted-imports': 'off',
-    'arrow-body-style': 'error',
+    'arrow-body-style': 'off',
 
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
