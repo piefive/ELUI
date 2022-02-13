@@ -7,5 +7,5 @@
       { "transform": "typescript-transform-paths", "afterDeclarations": true }
     ]
   },
-  "exclude": ["**/__tests__/**", "**/*.test.tsx", "src/**/*.stories.tsx"]
+  "exclude": ["**/__tests__/**", "**/*.test.tsx", "src/**/*.stories.tsx", "src/stories/**"]
 }

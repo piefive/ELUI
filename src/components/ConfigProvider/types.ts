@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 
-export type TConfigProvider = {
+export type TConfigProviderProps = {
   children: ReactNode;
+  fontURL?: string;
 };

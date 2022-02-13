@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "outDir": "dist",
-    "baseUrl": "src",
+    "baseUrl": "./src",
+    "paths": {
+      "components/*": ["./components/*"],
+      "lib/*": ["./lib/*"]
+    },
     "moduleResolution": "node",
     "target": "es2017",
     "importsNotUsedAsValues": "error",
@@ -12,7 +16,8 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "typeRoots": ["./@types"],
   },
   "include": ["src/**/*"],
   "exclude": ["**/__tests__/**", "**/*.test.ts"]

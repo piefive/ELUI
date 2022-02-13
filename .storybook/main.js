@@ -4,7 +4,7 @@ const getPath = (...p) => path.resolve(process.cwd(), ...p);
 
 module.exports = {
   staticDirs: ['../public'],
-  stories: ["../src/**/*.stories.@(tsx|mdx)"],
+  stories: ["../src/**/*.stories.@(tsx|mdx)", "../src/stories/*.stories.@(tsx|mdx)"],
   addons: [
     {
       name: '@storybook/addon-docs',
