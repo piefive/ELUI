@@ -1,7 +1,16 @@
 import type { FC } from 'react';
+import { ThemeProvider } from 'styled-components';
 
-import type { TConfigProvider } from './types';
+import { theme } from 'lib';
 
-export const ConfigProvider: FC<TConfigProvider> = ({ children }) => {
-  return <div>{children}</div>;
+import type { TConfigProviderProps } from './types';
+import { StyledFont } from './styled';
+
+export const ConfigProvider: FC<TConfigProviderProps> = ({ children }) => {
+  return (
+    <ThemeProvider theme={theme}>
+      <StyledFont />
+      {children}
+    </ThemeProvider>
+  );
 };
