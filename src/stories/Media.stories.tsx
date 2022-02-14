@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { theme } from 'lib';
+import { Typography } from 'components';
 
 export const Media = () => {
   const [scrollLeft, setScrollLeft] = useState(0);
@@ -28,7 +29,9 @@ export const Media = () => {
         return (
           <StyledMedia key={width} style={{ width }}>
             <StyledContent style={{ transform: `translateX(${scrollLeft}px)` }}>
-              {key} {width}
+              <Typography variant="subtitle_bold">
+                {key} {width}
+              </Typography>
             </StyledContent>
           </StyledMedia>
         );

@@ -1,9 +1,9 @@
 import { palette } from './palette';
-import { FONTS } from './font';
+import { FONT_FAMILY } from './font-family';
 import { media } from './media';
 
 export const theme = {
   palette,
   media,
-  fonts: FONTS,
+  fontFamily: FONT_FAMILY,
 };

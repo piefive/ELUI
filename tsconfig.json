@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "outDir": "dist",
-    "baseUrl": "./src",
-    "paths": {
-      "components/*": ["./components/*"],
-      "lib/*": ["./lib/*"]
-    },
+    "baseUrl": "src",
     "moduleResolution": "node",
     "target": "es2017",
     "importsNotUsedAsValues": "error",
@@ -19,6 +15,5 @@
     "jsx": "react-jsx",
     "typeRoots": ["./@types"],
   },
-  "include": ["src/**/*"],
   "exclude": ["**/__tests__/**", "**/*.test.ts"]
 }
