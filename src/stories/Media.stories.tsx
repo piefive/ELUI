@@ -40,6 +40,15 @@ export const Media = () => {
   );
 };
 
+Media.parameters = {
+  previewTabs: {
+    'storybook/docs/panel': {
+      hidden: true,
+    },
+  },
+  options: { showPanel: false },
+};
+
 const StyledMedia = styled.div`
   position: relative;
   display: flex;
