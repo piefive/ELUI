@@ -41,6 +41,14 @@ export const VariantsLorem = (props: TTypography) => {
   );
 };
 
+VariantsLorem.parameters = {
+  previewTabs: {
+    'storybook/docs/panel': {
+      hidden: true,
+    },
+  },
+};
+
 const TypographyView: FC<{ variant: TTypographyVariant; title: string }> = ({ title, children, variant }) => {
   const [computedStyle, setComputedStyle] = useState<CSSStyleDeclaration>();
   const typographyRef = useRef<HTMLElement>();

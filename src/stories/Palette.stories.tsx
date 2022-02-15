@@ -45,6 +45,15 @@ export const Palette = () => {
   );
 };
 
+Palette.parameters = {
+  previewTabs: {
+    'storybook/docs/panel': {
+      hidden: true,
+    },
+  },
+  options: { showPanel: false },
+};
+
 const PaletteItem = ({ paletteName, textPaletteName }: TPaletteItem) => {
   const { palette } = useTheme();
   const current = palette[paletteName];
