@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 import type { TStyledComponentsProps } from '../../lib';
@@ -11,39 +11,39 @@ export default {
   component: Typography,
   title: 'ui/Typography',
   argTypes: {
-    tag: { control: 'text' },
+    tag: { control: { type: null } },
+    children: { control: 'text' },
   },
   args: {
-    tag: 'span',
-    variant: 'h1',
+    variant: 'h4',
+    children: 'The innovative path we have chosen has not become a limiting factor.',
   },
 };
 
-export const Default = (args: TTypography) => <Typography {...args}>Typography</Typography>;
+export const Default = (args: TTypography) => <Typography {...args} />;
 
-export const VariantsLorem = () => {
+export const VariantsLorem = (props: TTypography) => {
   return (
     <>
-      <TypographyView variant="h1" title="Headline 1" />
-      <TypographyView variant="h2" title="Headline 2" />
-      <TypographyView variant="h3" title="Headline 3" />
-      <TypographyView variant="h4" title="Headline 4" />
-      <TypographyView variant="h5" title="Headline 5" />
-      <TypographyView variant="h6" title="Headline 6" />
-      <TypographyView variant="st1" title="Subtitle 1" />
-      <TypographyView variant="st2" title="Subtitle 2" />
-      <TypographyView variant="b1" title="Body 1" />
-      <TypographyView variant="b2" title="Body 2" />
-      <TypographyView variant="caption" title="Caption" />
-      <TypographyView variant="overline" title="Overline" />
+      <TypographyView {...props} variant="h1" title="Headline 1" />
+      <TypographyView {...props} variant="h2" title="Headline 2" />
+      <TypographyView {...props} variant="h3" title="Headline 3" />
+      <TypographyView {...props} variant="h4" title="Headline 4" />
+      <TypographyView {...props} variant="h5" title="Headline 5" />
+      <TypographyView {...props} variant="h6" title="Headline 6" />
+      <TypographyView {...props} variant="st1" title="Subtitle 1" />
+      <TypographyView {...props} variant="st2" title="Subtitle 2" />
+      <TypographyView {...props} variant="b1" title="Body 1" />
+      <TypographyView {...props} variant="b2" title="Body 2" />
+      <TypographyView {...props} variant="caption" title="Caption" />
+      <TypographyView {...props} variant="overline" title="Overline" />
     </>
   );
 };
 
-const TypographyView = ({ title, ...rest }: { variant: TTypographyVariant; title: string }) => {
+const TypographyView: FC<{ variant: TTypographyVariant; title: string }> = ({ title, children, variant }) => {
   const [computedStyle, setComputedStyle] = useState<CSSStyleDeclaration>();
   const typographyRef = useRef<HTMLElement>();
-  const { variant } = rest;
 
   useEffect(() => {
     const instance = typographyRef.current;
@@ -56,7 +56,7 @@ const TypographyView = ({ title, ...rest }: { variant: TTypographyVariant; title
       <Typography
         ref={typographyRef}
         tag="h2"
-        {...rest}
+        variant={variant}
         typographyStyle={({ theme }) => ({
           marginBottom: 24,
           paddingBottom: 24,
@@ -73,7 +73,7 @@ const TypographyView = ({ title, ...rest }: { variant: TTypographyVariant; title
           <TypographyContent label="Line height" value={computedStyle?.lineHeight ?? 'computed'} />
           <TypographyContent label="Letter spacing" value={computedStyle?.letterSpacing ?? 'computed'} />
         </StyledContent>
-        <Typography {...rest}>The innovative path we have chosen has not become a limiting factor.</Typography>
+        <Typography variant={variant}>{children}</Typography>
       </StyledContent>
     </StyledTypographyView>
   );
@@ -89,7 +89,9 @@ const TypographyContent = ({ label, value }: { label: string; value: string }) =
 );
 
 const StyledTypographyView = styled.div`
-  margin-bottom: 64px;
+  background-color: ${({ theme }) => theme.palette.white};
+  margin: -1rem;
+  padding: 1rem;
 `;
 
 const StyledContent = styled.div<{ contentStyle?: TStyledComponentsProps }>`
@@ -100,4 +102,6 @@ const StyledContent = styled.div<{ contentStyle?: TStyledComponentsProps }>`
 
 VariantsLorem.argTypes = {
   tag: { control: { type: null } },
+  variant: { control: { type: null } },
+  typographyStyle: { control: { type: null } },
 };
