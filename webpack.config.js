@@ -9,7 +9,7 @@ module.exports = {
   entry: getPath('src', 'index.ts'),
   output: {
     libraryTarget: 'system',
-    filename: 'jicon.production.js',
+    filename: 'elui.production.js',
     path: getPath('dist', 'system'),
   },
   resolve: {

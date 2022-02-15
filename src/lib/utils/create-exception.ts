@@ -10,11 +10,8 @@ const INITIAL_OPTIONS: TExceptionOptions = {
   withName: false,
 };
 
-export const createException = (
-  error: string,
-  { variant, withName }: TExceptionOptions = INITIAL_OPTIONS
-) => {
-  const message = `${withName ? 'Jicon error: ' : ''}${error}`;
+export const createException = (error: string, { variant, withName }: TExceptionOptions = INITIAL_OPTIONS) => {
+  const message = `${withName ? 'Elui error: ' : ''}${error}`;
 
   if (variant === 'throw') throw new Error(message);
   // eslint-disable-next-line no-console
