@@ -11,7 +11,7 @@ const uiTheme = create({
   colorSecondary: theme.palette.primary_400,
 
   appBg: theme.palette.white,
-  appContentBg: theme.palette.white,
+  appContentBg: theme.palette.grey_200,
   appBorderColor: theme.palette.grey_200,
   appBorderRadius: 4,
 
