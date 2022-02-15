@@ -29,7 +29,7 @@ export const Media = () => {
         return (
           <StyledMedia key={width} style={{ width }}>
             <StyledContent style={{ transform: `translateX(${scrollLeft}px)` }}>
-              <Typography variant="subtitle_bold">
+              <Typography variant="st1">
                 {key} {width}
               </Typography>
             </StyledContent>

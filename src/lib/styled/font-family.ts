@@ -1,1 +1,1 @@
-export const FONT_FAMILY = `'Nunito', sans-serif`;
+export const FONT_FAMILY = `'Rubik', sans-serif`;

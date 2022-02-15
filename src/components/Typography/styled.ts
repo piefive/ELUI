@@ -14,70 +14,84 @@ const getTypographyVariant = ({ variant }: IStyledTypography) => {
   switch (variant) {
     case 'h1':
       return css`
+        font-weight: 400;
         font-size: 96px;
         line-height: 112px;
+        letter-spacing: -1.5px;
       `;
     case 'h2':
       return css`
-        font-size: 60px;
-        line-height: 72px;
+        font-weight: 400;
+        font-size: 48px;
+        line-height: 64px;
+        letter-spacing: 0;
       `;
     case 'h3':
       return css`
+        font-weight: 400;
         font-size: 48px;
         line-height: 64px;
+        letter-spacing: 0;
       `;
     case 'h4':
       return css`
+        font-weight: 400;
         font-size: 34px;
         line-height: 40px;
+        letter-spacing: 0.25px;
       `;
     case 'h5':
       return css`
+        font-weight: 400;
         font-size: 24px;
         line-height: 32px;
+        letter-spacing: 0;
       `;
     case 'h6':
       return css`
+        font-weight: 500;
         font-size: 20px;
         line-height: 28px;
-        font-weight: 500;
+        letter-spacing: 0.15px;
       `;
-    case 'subtitle':
+    case 'st1':
       return css`
-        font-size: 14px;
-        font-weight: 500;
-        line-height: 20px;
-      `;
-    case 'subtitle_bold':
-      return css`
-        font-size: 16px;
-        font-weight: bold;
-        line-height: 24px;
-      `;
-    case 'body_bold':
-      return css`
-        font-size: 16px;
-        font-weight: bold;
-        line-height: 24px;
-      `;
-    case 'body_normal':
-      return css`
+        font-weight: 600;
         font-size: 16px;
         line-height: 24px;
+        letter-spacing: 0.5px;
       `;
-    case 'body_low':
+    case 'st2':
       return css`
+        font-weight: 600;
         font-size: 14px;
         line-height: 20px;
+        letter-spacing: 0.25px;
+      `;
+    case 'b1':
+      return css`
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+        letter-spacing: 0.25px;
+      `;
+    case 'b2':
+      return css`
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+        letter-spacing: 0.25px;
       `;
     case 'caption':
       return css`
+        font-weight: 400;
         font-size: 12px;
         line-height: 16px;
+        letter-spacing: 0.5px;
       `;
     case 'overline':
       return css`
+        font-weight: 700;
         font-size: 10px;
         line-height: 16px;
         letter-spacing: 1.5px;

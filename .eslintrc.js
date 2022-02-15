@@ -33,6 +33,7 @@ module.exports = {
     'prettier/prettier': [
       'warn',
       {
+        printWidth: 120,
         arrowParens: 'avoid',
         trailingComma: 'es5',
         tabWidth: 2,
@@ -55,14 +56,7 @@ module.exports = {
     'import/order': [
       'warn',
       {
-        groups: [
-          'builtin',
-          'external',
-          'internal',
-          'parent',
-          'sibling',
-          'index',
-        ],
+        groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
         'newlines-between': 'always',
       },
     ],
