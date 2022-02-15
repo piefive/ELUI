@@ -49,7 +49,7 @@ const StyledMedia = styled.div`
   border-radius: 8px;
   overflow: hidden;
   background-color: ${({ theme }) => theme.palette.white};
-  box-shadow: 0 0 10px ${({ theme }) => theme.palette.grey_300};
+  box-shadow: 0 0 8px ${({ theme }) => theme.palette.grey_300};
 `;
 
 const StyledContent = styled.div`
