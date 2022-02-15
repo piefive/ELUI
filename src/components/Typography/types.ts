@@ -9,11 +9,10 @@ export type TTypographyVariant =
   | 'h4'
   | 'h5'
   | 'h6'
-  | 'subtitle'
-  | 'subtitle_bold'
-  | 'body_bold'
-  | 'body_normal'
-  | 'body_low'
+  | 'st1'
+  | 'st2'
+  | 'b1'
+  | 'b2'
   | 'caption'
   | 'overline';
 
