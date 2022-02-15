@@ -6,7 +6,7 @@ import {DocsContainer, DocsPage} from "@storybook/addon-docs";
 import { ConfigProvider } from "../src/components/ConfigProvider";
 
 addDecorator(storyFn => (
-    <ConfigProvider>
+    <ConfigProvider fontURL="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap">
       {storyFn()}
     </ConfigProvider>
 ));
