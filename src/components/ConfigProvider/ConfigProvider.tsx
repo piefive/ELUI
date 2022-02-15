@@ -6,10 +6,13 @@ import { theme } from 'lib';
 import type { TConfigProviderProps } from './types';
 import { StyledFont } from './styled';
 
-export const ConfigProvider: FC<TConfigProviderProps> = ({ children }) => {
+export const ConfigProvider: FC<TConfigProviderProps> = ({
+  children,
+  fontURL,
+}) => {
   return (
     <ThemeProvider theme={theme}>
-      <StyledFont />
+      <StyledFont url={fontURL} />
       {children}
     </ThemeProvider>
   );
