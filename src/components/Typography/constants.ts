@@ -1,3 +1,3 @@
-import { createJiconClassName } from 'lib';
+import { createEluiClassName } from 'lib';
 
-export const TYPOGRAPHY_CN = createJiconClassName('typography');
+export const TYPOGRAPHY_CN = createEluiClassName('typography');

@@ -1,9 +1,9 @@
 {
-  "name": "jicon",
+  "name": "elui",
   "version": "0.0.1",
   "author": "Project five",
   "license": "MIT",
-  "homepage": "https://Naboska.github.io/Jicon",
+  "homepage": "https://Naboska.github.io/Elui",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
