@@ -17,7 +17,7 @@ addDecorator(storyFn => (
 
 const SORT_ORDER = {
   Introduction: ['Getting Started'],
-  UI: ['Typography'],
+  UI: ['Button'],
   Mixins: []
 };
 
