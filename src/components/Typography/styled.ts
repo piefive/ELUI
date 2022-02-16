@@ -4,8 +4,7 @@ import { createException, getComponentStyle, normalizeMixin } from 'lib';
 
 import type { TTypography, TTypographyVariant } from './types';
 
-interface IStyledTypography
-  extends Pick<TTypography, 'variant' | 'typographyStyle'> {
+interface IStyledTypography extends Pick<TTypography, 'variant' | 'typographyStyle' | 'color'> {
   theme: DefaultTheme;
   variant: TTypographyVariant;
 }
@@ -107,9 +106,9 @@ export const StyledTypography = styled.div<IStyledTypography>`
 
   margin: 0;
   padding: 0;
+  color: ${({ color, theme }) => theme.palette[color ?? 'grey_900']};
 
   ${getTypographyVariant};
 
-  ${({ theme, typographyStyle }) =>
-    getComponentStyle(typographyStyle, { theme })};
+  ${({ theme, typographyStyle }) => getComponentStyle(typographyStyle, { theme })};
 `;

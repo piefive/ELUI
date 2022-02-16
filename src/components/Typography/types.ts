@@ -1,4 +1,5 @@
 import type { ElementType, MouseEvent, ReactNode } from 'react';
+import type { DefaultTheme } from 'styled-components';
 
 import type { TStyledComponentsProps } from 'lib';
 
@@ -21,6 +22,7 @@ type TBaseTypography = {
   className?: string;
   children?: ReactNode;
   onClick?: (event: MouseEvent) => void;
+  color?: keyof DefaultTheme['palette'];
   typographyStyle?: TStyledComponentsProps;
 };
 
@@ -28,5 +30,4 @@ interface TAnchor extends Omit<Partial<HTMLAnchorElement>, 'children'> {
   tag: Extract<ElementType, 'a'>;
 }
 
-export type TTypography = (TAnchor | { tag?: Exclude<ElementType, 'a'> }) &
-  TBaseTypography;
+export type TTypography = (TAnchor | { tag?: Exclude<ElementType, 'a'> }) & TBaseTypography;
