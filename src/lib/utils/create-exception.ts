@@ -11,7 +11,7 @@ const INITIAL_OPTIONS: TExceptionOptions = {
 };
 
 export const createException = (error: string, { variant, withName }: TExceptionOptions = INITIAL_OPTIONS) => {
-  const message = `${withName ? 'Elui error: ' : ''}${error}`;
+  const message = `${withName ? 'ELUI error: ' : ''}${error}`;
 
   if (variant === 'throw') throw new Error(message);
   // eslint-disable-next-line no-console

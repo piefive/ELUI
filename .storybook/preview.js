@@ -1,9 +1,12 @@
+import { addDecorator, addParameters, configure } from "@storybook/react";
+import { DocsContainer, DocsPage } from "@storybook/addon-docs";
+
 import { sortStories } from './utils';
-import {addDecorator, addParameters} from "@storybook/react";
-import {DocsContainer, DocsPage} from "@storybook/addon-docs";
 
 // noinspection ES6PreferShortImport
 import { ConfigProvider } from "../src/components/ConfigProvider";
+
+configure(require.context('../src', true, /\.stories\.mdx$/), module);
 
 addDecorator(storyFn => (
     <ConfigProvider fontURL="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap">
@@ -14,7 +17,8 @@ addDecorator(storyFn => (
 
 const SORT_ORDER = {
   Introduction: ['Getting Started'],
-  UI: [],
+  UI: ['Typography'],
+  Mixins: []
 };
 
 addParameters({

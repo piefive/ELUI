@@ -4,29 +4,25 @@ const getPath = (...p) => path.resolve(process.cwd(), ...p);
 
 module.exports = {
   staticDirs: ['../public'],
-  stories: ["../src/**/*.stories.@(tsx|mdx)", "../src/stories/*.stories.@(tsx|mdx)"],
+  stories: ["../src/**/*.stories.@(tsx|mdx)"],
   addons: [
     {
       name: '@storybook/addon-docs',
       options: {
         configureJSX: true,
-        babelOptions: {
-          babelOptions: {
-            plugins: [
-              ['@babel/plugin-proposal-private-property-in-object', {
-                loose: true
-              }],
-            ],
-          },
-        },
-        sourceLoaderOptions: { parser: 'typescript' }
+        babelOptions: {},
+        sourceLoaderOptions: null,
+        transcludeMarkdown: true,
       },
     },
-    '@storybook/addon-actions',
-    '@storybook/addon-controls',
     '@storybook/addon-storysource',
     "@storybook/addon-links",
-    "@storybook/addon-essentials"
+    '@storybook/addon-actions',
+    '@storybook/addon-viewport',
+    '@storybook/addon-controls',
+    '@storybook/addon-toolbars',
+    '@storybook/addon-measure',
+    '@storybook/addon-outline',
   ],
   webpackFinal: async config => ({
     ...config,
