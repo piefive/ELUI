@@ -28,12 +28,23 @@ interface IIcon extends TIconComponent {
   ChevronRight: typeof Icons.ChevronRight;
   ChevronDown: typeof Icons.ChevronDown;
   ChevronLeft: typeof Icons.ChevronLeft;
+  AlertCircle: typeof Icons.AlertCircle;
+  Cross: typeof Icons.Cross;
+  Info: typeof Icons.Info;
+  Mail: typeof Icons.Mail;
+  Resize: typeof Icons.Resize;
+  Search: typeof Icons.Search;
+  Check: typeof Icons.Check;
+  Minus: typeof Icons.Minus;
+  ArrowLeft: typeof Icons.ArrowLeft;
+  Copy: typeof Icons.Copy;
+  Clipboard: typeof Icons.Clipboard;
+  Download: typeof Icons.Download;
+  UploadCloud: typeof Icons.UploadCloud;
+  Grid: typeof Icons.Grid;
 }
 
 export const Icon = IconComponent as IIcon;
 Icon.displayName = 'Icon';
 
-Icon.ChevronUp = Icons.ChevronUp;
-Icon.ChevronRight = Icons.ChevronRight;
-Icon.ChevronDown = Icons.ChevronDown;
-Icon.ChevronLeft = Icons.ChevronLeft;
+for (const NamedIcon in Icons) Icon[NamedIcon] = (Icons as unknown)[NamedIcon];

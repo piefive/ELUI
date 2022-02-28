@@ -6,7 +6,7 @@ import type { TIcon } from '../../types';
 export const ChevronLeft = forwardRef<SVGSVGElement, Omit<TIcon, 'children'>>((props, iconRef) => {
   return (
     <IconComponent ref={iconRef} {...props}>
-      <path d="M15 18L9 12L15 6" stroke="#212121" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M15 18L9 12L15 6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </IconComponent>
   );
 });

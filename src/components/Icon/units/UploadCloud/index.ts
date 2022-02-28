@@ -1,0 +1,1 @@
+export { UploadCloud } from './UploadCloud';
