@@ -1,1 +1,10 @@
 export { useMount } from './use-mount';
+export { useUpdateEffect } from './use-update-effect';
+export { useFirstMountState } from './use-first-mount-state';
+export { useMountedState } from './use-mounted-state';
+export { useRafState } from './use-raf-state';
+export { useWindowSize } from './use-window-size';
+export { useMeasure } from './use-measure';
+export { useAnimateHeight } from './use-animate-height';
+export { useLastValidState } from './use-last-valid-state';
+export { useDebounce } from './use-debounce';
