@@ -7,19 +7,21 @@ import * as Icons from './units';
 import { StyledSvg } from './styled';
 import { ICON_CN } from './constants';
 
-export const IconComponent = forwardRef<SVGSVGElement, TIcon>(({ children, className, size, ...rest }, iconRef) => {
-  return (
-    <StyledSvg
-      ref={iconRef}
-      viewBox="0 0 24 24"
-      className={combineClassNames(className, ICON_CN)}
-      size={size ?? 24}
-      {...rest}
-    >
-      {children}
-    </StyledSvg>
-  );
-});
+export const IconComponent = forwardRef<SVGSVGElement, TIcon>(
+  ({ children, className, size, viewBox, ...rest }, iconRef) => {
+    return (
+      <StyledSvg
+        ref={iconRef}
+        viewBox={viewBox ?? '0 0 24 24'}
+        className={combineClassNames(className, ICON_CN)}
+        size={size ?? 24}
+        {...rest}
+      >
+        {children}
+      </StyledSvg>
+    );
+  }
+);
 
 type TIconComponent = typeof IconComponent;
 

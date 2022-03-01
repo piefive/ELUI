@@ -22,3 +22,5 @@ export const isObject = (value: TAnyValue): value is typeof Object => {
 };
 
 export const isUndefined = (value: unknown): value is undefined => typeof value === 'undefined';
+
+export const isFn = (value: unknown): value is (...args: unknown[]) => unknown => typeof value === 'function';

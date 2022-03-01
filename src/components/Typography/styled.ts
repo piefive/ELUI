@@ -70,9 +70,9 @@ const getTypographyVariant = ({ variant }: IStyledTypography) => {
     case 'b1':
       return css`
         font-weight: 400;
-        font-size: 14px;
-        line-height: 20px;
-        letter-spacing: 0.25px;
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: 0.5px;
       `;
     case 'b2':
       return css`
