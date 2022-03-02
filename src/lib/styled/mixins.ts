@@ -22,3 +22,15 @@ export const smoothCornersMixin = (smoothCorners: { x?: number; y?: number }, bo
     --smooth-corners: ${[smoothCorners?.x ?? 0, smoothCorners?.y].filter(Boolean).join(',')};
   }
 `;
+
+export const tabletMedia = css`
+  ${({ theme }) => `min-width: ${theme.media.tablet}`}
+`;
+
+export const laptopMedia = css`
+  ${({ theme }) => `min-width: ${theme.media.laptop}`}
+`;
+
+export const desktopMedia = css`
+  ${({ theme }) => `min-width: ${theme.media.desktop}`}
+`;

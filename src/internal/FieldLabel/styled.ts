@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-import { Typography } from '../../../Typography';
+import { Typography } from 'components';
 
-export const StyledInputLabel = styled.label`
+export const StyledFieldLabel = styled.label`
   display: flex;
   width: fit-content;
   margin-bottom: 8px;

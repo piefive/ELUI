@@ -1,16 +1,20 @@
 import styled from 'styled-components';
 
-export const StyledInput = styled.input`
+export const StyledTextarea = styled.textarea`
   flex: 1;
   min-width: 1px;
-  height: 24px;
+  min-height: 144px;
+  margin-top: -4px;
   border: none;
   font-size: 16px;
   line-height: 24px;
   letter-spacing: 0.5px;
-  background-color: transparent;
-  color: inherit;
+  font-family: inherit;
   cursor: inherit;
+  resize: none;
+  color: inherit;
+  will-change: height;
+  background-color: transparent;
 
   &:focus {
     outline: none;
