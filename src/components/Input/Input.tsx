@@ -1,14 +1,11 @@
 import { forwardRef } from 'react';
 
-import { FieldMessage } from 'internal';
-import { TStyledComponentsProps, combineClassNames, isBool, useForkForwardedRef, useLastValidState } from 'lib';
+import { TextFieldBox } from 'internal';
+import { combineClassNames, useControlledFocus, useForkForwardedRef } from 'lib';
 
 import type { IInput } from './types';
-import { useInputFocus } from './hooks';
 import { INPUT_CN } from './constants';
-import { InputLabel } from './units';
-import { StyledInput, StyledInputBox, StyledInputWrapper, StyledLeftSlot, StyledValidateMessage } from './styled';
-import { InputRightSlot } from './units/InputRightSlot/InputRightSlot';
+import { StyledInput } from './styled';
 
 export const Input = forwardRef<HTMLInputElement, IInput>(
   (
@@ -18,7 +15,7 @@ export const Input = forwardRef<HTMLInputElement, IInput>(
       type = 'text',
       label,
       isRequired,
-      inputBoxStyle,
+      boxStyle,
       disabled = false,
       validate = null,
       validateMessage,
@@ -33,27 +30,22 @@ export const Input = forwardRef<HTMLInputElement, IInput>(
     },
     inputRef
   ) => {
-    const validateState = useLastValidState(validate, [true, false]);
     const [setRef, ref] = useForkForwardedRef<HTMLInputElement>(inputRef);
-    const { isInputFocused, ...focusState } = useInputFocus({ onFocus, onBlur, isFocused, inputRef: ref });
-
-    const onInputFocus = () => ref?.current.focus();
-
-    const messageStyle: TStyledComponentsProps = { display: 'block', paddingTop: 8 };
+    const { isFocused: isInputFocused, ...focusState } = useControlledFocus({ onFocus, onBlur, isFocused, ref });
 
     return (
-      <StyledInputBox className={combineClassNames(className, INPUT_CN)} boxStyle={inputBoxStyle}>
-        {label && <InputLabel onLabelClick={onInputFocus} {...{ label, isRequired }} />}
-        <StyledInputWrapper onClick={onInputFocus} isDisabled={disabled} isFocused={isInputFocused} {...{ validate }}>
-          {leftSlot && <StyledLeftSlot>{leftSlot}</StyledLeftSlot>}
-          <StyledInput ref={setRef} {...rest} {...focusState} {...{ type, disabled, value }} />
-          <InputRightSlot inputRef={ref} isClearable={Boolean(value && isClearable)} {...{ rightSlot }} />
-        </StyledInputWrapper>
-        <StyledValidateMessage {...{ messageStyle }} validate={validateState}>
-          {isBool(validate) && validateMessage}
-        </StyledValidateMessage>
-        <FieldMessage {...{ messageStyle }}>{message}</FieldMessage>
-      </StyledInputBox>
+      <TextFieldBox<HTMLInputElement>
+        fieldRef={ref}
+        className={combineClassNames(className, INPUT_CN)}
+        isClearable={Boolean(value && isClearable)}
+        isDisabled={disabled}
+        isFocused={isInputFocused}
+        {...{ label, isRequired, validate, leftSlot, rightSlot, validateMessage, message, boxStyle }}
+      >
+        <StyledInput ref={setRef} {...rest} {...focusState} {...{ type, disabled, value }} />
+      </TextFieldBox>
     );
   }
 );
+
+Input.displayName = 'Input';

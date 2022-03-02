@@ -9,4 +9,6 @@ export type TIcon = {
   children: ReactNode;
   iconStyle?: TStyledComponentsProps;
   onClick?: (e: SyntheticEvent<SVGSVGElement>) => void;
+  onMouseDown?: (e: SyntheticEvent<SVGSVGElement>) => void;
+  onMouseUp?: (e: SyntheticEvent<SVGSVGElement>) => void;
 };

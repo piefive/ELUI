@@ -3,8 +3,6 @@ import type { U } from 'ts-toolbelt';
 
 import type { TStyledComponentsProps } from 'lib';
 
-export type TInputValidate = U.Nullable<boolean>;
-
 export interface IInput extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
   value?: string | number;
   type?: 'text' | 'number' | 'password' | 'email' | 'tel';
@@ -13,11 +11,10 @@ export interface IInput extends Omit<InputHTMLAttributes<HTMLInputElement>, 'siz
   isClearable?: boolean;
   isRequired?: boolean;
   isFocused?: boolean;
-  children?: ReactNode;
   onChange?: ChangeEventHandler<HTMLInputElement>;
   label?: string;
   message?: string;
-  validate?: TInputValidate;
+  validate?: U.Nullable<boolean>;
   validateMessage?: string;
-  inputBoxStyle?: TStyledComponentsProps;
+  boxStyle?: TStyledComponentsProps;
 }
