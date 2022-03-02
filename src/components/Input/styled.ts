@@ -90,6 +90,7 @@ export const StyledInputWrapper = styled.div<TInputWrapper>`
   padding: 12px 16px;
   border-radius: 8px;
   border: 4px solid transparent;
+  overflow: hidden;
   transition-property: background-color, border-color, color;
   transition-duration: 0.3s;
   transition-timing-function: ease-out;
@@ -105,7 +106,10 @@ export const StyledLeftSlot = styled.div`
 `;
 
 export const StyledInput = styled.input`
-  flex-basis: 100%;
+  flex: 1;
+  min-width: 1px;
+  height: 24px;
+  margin-top: -4px;
   border: none;
   font-size: 16px;
   line-height: 24px;
