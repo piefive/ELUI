@@ -1,4 +1,7 @@
+import { ChangeEventHandler, useEffect, useState } from 'react';
 import styled from 'styled-components';
+
+import { Icon } from 'components/Icon';
 
 import { Input } from './Input';
 import type { IInput } from './types';
@@ -7,6 +10,15 @@ export default {
   title: 'ui/Input/Base',
   component: Input,
   argTypes: {
+    value: {
+      control: 'text',
+    },
+    leftSlot: {
+      control: { type: null },
+    },
+    rightSlot: {
+      control: { type: null },
+    },
     validate: {
       options: [true, false, null],
       control: { type: 'radio' },
@@ -14,6 +26,8 @@ export default {
   },
   args: {
     label: 'Label',
+    type: 'text',
+    value: '',
     isRequired: true,
     isFocused: false,
     disabled: false,
@@ -24,11 +38,25 @@ export default {
   },
 };
 
-export const Default = (args: IInput) => (
-  <StyledBox>
-    <Input {...args} />
-  </StyledBox>
-);
+export const Default = (args: IInput) => {
+  const { value: controlsValue } = args;
+  const [value, setValue] = useState<string | number>('');
+
+  const handleChange: ChangeEventHandler<HTMLInputElement> = event => {
+    args?.onChange?.(event);
+    setValue(event.target.value);
+  };
+
+  useEffect(() => {
+    setValue(controlsValue);
+  }, [controlsValue]);
+
+  return (
+    <StyledBox>
+      <Input {...args} leftSlot={<Icon.Search />} rightSlot={<Icon.Mail />} value={value} onChange={handleChange} />
+    </StyledBox>
+  );
+};
 
 const StyledBox = styled.div`
   position: relative;

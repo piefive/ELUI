@@ -4,6 +4,7 @@ export * from './ChevronDown';
 export * from './ChevronLeft';
 export * from './AlertCircle';
 export * from './Cross';
+export * from './CrossSm';
 export * from './Info';
 export * from './Mail';
 export * from './Resize';

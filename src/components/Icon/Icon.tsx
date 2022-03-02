@@ -32,6 +32,7 @@ interface IIcon extends TIconComponent {
   ChevronLeft: typeof Icons.ChevronLeft;
   AlertCircle: typeof Icons.AlertCircle;
   Cross: typeof Icons.Cross;
+  CrossSm: typeof Icons.CrossSm;
   Info: typeof Icons.Info;
   Mail: typeof Icons.Mail;
   Resize: typeof Icons.Resize;

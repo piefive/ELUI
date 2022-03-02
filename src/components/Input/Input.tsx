@@ -7,7 +7,8 @@ import type { IInput } from './types';
 import { useInputFocus } from './hooks';
 import { INPUT_CN } from './constants';
 import { InputLabel } from './units';
-import { StyledInput, StyledInputBox, StyledInputWrapper, StyledValidateMessage } from './styled';
+import { StyledInput, StyledInputBox, StyledInputWrapper, StyledLeftSlot, StyledValidateMessage } from './styled';
+import { InputRightSlot } from './units/InputRightSlot/InputRightSlot';
 
 export const Input = forwardRef<HTMLInputElement, IInput>(
   (
@@ -23,6 +24,10 @@ export const Input = forwardRef<HTMLInputElement, IInput>(
       validateMessage,
       onFocus,
       onBlur,
+      value,
+      leftSlot,
+      rightSlot,
+      isClearable = true,
       isFocused,
       ...rest
     },
@@ -40,7 +45,9 @@ export const Input = forwardRef<HTMLInputElement, IInput>(
       <StyledInputBox className={combineClassNames(className, INPUT_CN)} boxStyle={inputBoxStyle}>
         {label && <InputLabel onLabelClick={onInputFocus} {...{ label, isRequired }} />}
         <StyledInputWrapper onClick={onInputFocus} isDisabled={disabled} isFocused={isInputFocused} {...{ validate }}>
-          <StyledInput ref={setRef} {...rest} {...focusState} {...{ type, disabled }} />
+          {leftSlot && <StyledLeftSlot>{leftSlot}</StyledLeftSlot>}
+          <StyledInput ref={setRef} {...rest} {...focusState} {...{ type, disabled, value }} />
+          <InputRightSlot inputRef={ref} isClearable={Boolean(value && isClearable)} {...{ rightSlot }} />
         </StyledInputWrapper>
         <StyledValidateMessage {...{ messageStyle }} validate={validateState}>
           {isBool(validate) && validateMessage}

@@ -27,7 +27,7 @@ const getInputStyle = ({ theme, isFocused, isDisabled, validate }: TInputWrapper
       background-color: ${({ theme }) => theme.palette.grey_100};
       border-color: ${theme.palette.grey_100};
       color: ${theme.palette.grey_400};
-      cursor: not-allowed;
+      pointer-events: none;
 
       input {
         ::-webkit-input-placeholder {
@@ -36,11 +36,27 @@ const getInputStyle = ({ theme, isFocused, isDisabled, validate }: TInputWrapper
       }
     `;
 
+  if (isFocused)
+    return css`
+      background-color: ${({ theme }) => theme.palette.white};
+      border-color: ${theme.palette.primary_700};
+      color: ${theme.palette.grey_900};
+    `;
+
+  const hoverMixin = css`
+    &:hover {
+      background-color: ${({ theme }) => theme.palette.white};
+      border-color: ${theme.palette.primary_100};
+    }
+  `;
+
   if (validate === false)
     return css`
       background-color: ${({ theme }) => theme.palette.white};
       border-color: ${theme.palette.error};
       color: ${theme.palette.grey_900};
+
+      ${hoverMixin}
     `;
 
   if (validate === true)
@@ -48,13 +64,8 @@ const getInputStyle = ({ theme, isFocused, isDisabled, validate }: TInputWrapper
       background-color: ${({ theme }) => theme.palette.white};
       border-color: ${theme.palette.success};
       color: ${theme.palette.grey_900};
-    `;
 
-  if (isFocused)
-    return css`
-      background-color: ${({ theme }) => theme.palette.white};
-      border-color: ${theme.palette.primary_700};
-      color: ${theme.palette.grey_900};
+      ${hoverMixin}
     `;
 
   return css`
@@ -68,10 +79,7 @@ const getInputStyle = ({ theme, isFocused, isDisabled, validate }: TInputWrapper
       }
     }
 
-    &:hover {
-      background-color: ${({ theme }) => theme.palette.white};
-      border-color: ${theme.palette.primary_100};
-    }
+    ${hoverMixin}
   `;
 };
 
@@ -89,7 +97,15 @@ export const StyledInputWrapper = styled.div<TInputWrapper>`
   ${getInputStyle};
 `;
 
+export const StyledLeftSlot = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-right: 16px;
+`;
+
 export const StyledInput = styled.input`
+  flex-basis: 100%;
   border: none;
   font-size: 16px;
   line-height: 24px;
