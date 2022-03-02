@@ -12,7 +12,7 @@
   "scripts": {
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-      "deploy-storybook": "gh-pages -d storybook-static",
+    "deploy-storybook": "gh-pages -d storybook-static",
     "ngrok": "node scripts/ngrok.js",
     "predeploy": "npm run build-storybook",
     "build": "rimraf dist && ttsc -p tsconfig.prod.json && NODE_ENV=production webpack",
