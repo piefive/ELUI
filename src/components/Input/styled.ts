@@ -4,6 +4,7 @@ export const StyledInput = styled.input`
   flex: 1;
   min-width: 1px;
   height: 24px;
+  padding: 0;
   border: none;
   font-size: 16px;
   line-height: 24px;
@@ -11,6 +12,7 @@ export const StyledInput = styled.input`
   background-color: transparent;
   color: inherit;
   cursor: inherit;
+  font-family: inherit;
 
   &:focus {
     outline: none;

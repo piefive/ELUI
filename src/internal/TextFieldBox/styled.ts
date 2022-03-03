@@ -21,11 +21,12 @@ export const StyledTextFieldBox = styled.div<{ boxStyle?: TStyledComponentsProps
   ${({ theme, boxStyle }) => getComponentStyle(boxStyle, { theme })}
 `;
 
+const boxShadowSize = '0 0 0 4px';
+
 const fieldMixin = ({ theme, isFocused, isDisabled, validate }: TField) => {
   if (isDisabled)
     return css`
       background-color: ${({ theme }) => theme.palette.grey_100};
-      border-color: ${theme.palette.grey_100};
       color: ${theme.palette.grey_400};
       pointer-events: none;
 
@@ -40,7 +41,7 @@ const fieldMixin = ({ theme, isFocused, isDisabled, validate }: TField) => {
     return css`
       cursor: text;
       background-color: ${({ theme }) => theme.palette.white};
-      border-color: ${theme.palette.primary_700};
+      box-shadow: ${boxShadowSize} ${theme.palette.primary_700};
       color: ${theme.palette.grey_900};
     `;
 
@@ -49,14 +50,14 @@ const fieldMixin = ({ theme, isFocused, isDisabled, validate }: TField) => {
 
     &:hover {
       background-color: ${({ theme }) => theme.palette.white};
-      border-color: ${theme.palette.primary_100};
+      box-shadow: ${boxShadowSize} ${theme.palette.primary_100};
     }
   `;
 
   if (validate === false)
     return css`
       background-color: ${({ theme }) => theme.palette.white};
-      border-color: ${theme.palette.error};
+      box-shadow: ${boxShadowSize} ${theme.palette.error};
       color: ${theme.palette.grey_900};
 
       ${hoverMixin}
@@ -65,7 +66,7 @@ const fieldMixin = ({ theme, isFocused, isDisabled, validate }: TField) => {
   if (validate === true)
     return css`
       background-color: ${({ theme }) => theme.palette.white};
-      border-color: ${theme.palette.success};
+      box-shadow: ${boxShadowSize} ${theme.palette.success};
       color: ${theme.palette.grey_900};
 
       ${hoverMixin}
@@ -73,7 +74,6 @@ const fieldMixin = ({ theme, isFocused, isDisabled, validate }: TField) => {
 
   return css`
     background-color: ${({ theme }) => theme.palette.grey_200};
-    border-color: ${theme.palette.grey_200};
     color: ${theme.palette.grey_900};
 
     input {
@@ -93,9 +93,8 @@ export const StyledField = styled.div<TField>`
   width: 100%;
   padding: 12px 16px;
   border-radius: 8px;
-  border: 4px solid transparent;
   overflow: hidden;
-  transition-property: background-color, border-color, color;
+  transition-property: background-color, border-color, box-shadow, color;
   transition-duration: 0.3s;
   transition-timing-function: ease-out;
 

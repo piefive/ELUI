@@ -27,17 +27,7 @@ export default {
   args: {
     label: 'Label',
     type: 'text',
-    value: `text
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    text`,
+    value: '',
     isRequired: true,
     isClearable: true,
     disabled: false,

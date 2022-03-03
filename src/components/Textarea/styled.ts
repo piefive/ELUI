@@ -6,7 +6,7 @@ export const StyledTextarea = styled.textarea`
   flex: 1;
   min-width: 1px;
   min-height: 144px;
-  margin-top: -4px;
+  padding: 0;
   border: none;
   font-size: 16px;
   line-height: 24px;
