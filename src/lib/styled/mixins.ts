@@ -1,6 +1,6 @@
 import { css } from 'styled-components';
 
-import { isString } from '../utils';
+import { hexToRgba, isString } from '../utils';
 
 export const normalizeMixin = css`
   &,
@@ -20,6 +20,27 @@ export const smoothCornersMixin = (smoothCorners: { x?: number; y?: number }, bo
     mask-image: paint(smooth-corners);
     -webkit-mask-image: paint(smooth-corners);
     --smooth-corners: ${[smoothCorners?.x ?? 0, smoothCorners?.y].filter(Boolean).join(',')};
+  }
+`;
+
+export const scrollBarMixin = css`
+  ::-webkit-scrollbar,
+  ::-webkit-scrollbar-thumb {
+    width: 26px;
+    height: 26px;
+    border-radius: 13px;
+    background-color: transparent;
+    border: 10px solid transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 0 10px transparent;
+  }
+
+  &:hover {
+    ::-webkit-scrollbar-thumb {
+      box-shadow: inset 0 0 0 10px ${({ theme }) => theme.palette.grey_100};
+    }
   }
 `;
 

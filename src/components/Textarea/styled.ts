@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { scrollBarMixin } from 'lib';
+
 export const StyledTextarea = styled.textarea`
   flex: 1;
   min-width: 1px;
@@ -19,4 +21,6 @@ export const StyledTextarea = styled.textarea`
   &:focus {
     outline: none;
   }
+
+  ${scrollBarMixin}
 `;
