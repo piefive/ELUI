@@ -12,29 +12,25 @@ export default {
 };
 
 export const Default = (args: ISegmentedControlComponent) => {
-  const [value, setValue] = useState(19);
+  const [value, setValue] = useState(3);
 
   return (
     <>
       <StyledBox>
         <SegmentedControl<number> {...args} onSegmentChange={setValue} activeSegment={value}>
-          {Array.from({ length: 19 }, (_, i) => i).map(val => (
-            <SegmentedControl.Segment<typeof val> key={val} value={val}>
-              Segment {val}
-            </SegmentedControl.Segment>
-          ))}
-          <SegmentedControl.Segment value={19}>
+          <SegmentedControl.Segment value={0} leftSlot={<Icon.Mail />}>
+            1
+          </SegmentedControl.Segment>
+          <SegmentedControl.Segment value={1} disabled>
             <Icon.Info />
           </SegmentedControl.Segment>
-          <SegmentedControl.Segment value={20} leftSlot={<Icon.Info />} disabled>
-            Segment 20
+          <SegmentedControl.Segment value={2} leftSlot={<Icon.Grid />}>
+            3
           </SegmentedControl.Segment>
-          <SegmentedControl.Segment value={21} disabled>
-            <Icon.Info />
+          <SegmentedControl.Segment value={3} leftSlot={<Icon.Clipboard />}>
+            4
           </SegmentedControl.Segment>
-          <SegmentedControl.Segment value={22} leftSlot={<Icon.Info />}>
-            Segment 22
-          </SegmentedControl.Segment>
+          <SegmentedControl.Segment value={4}>5+</SegmentedControl.Segment>
         </SegmentedControl>
       </StyledBox>
     </>
@@ -45,7 +41,7 @@ const StyledBox = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  width: 100%;
+  width: fit-content;
   max-width: 100%;
   padding: 16px;
   border-radius: 8px;
