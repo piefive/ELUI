@@ -1,4 +1,5 @@
 import { includes } from 'ramda';
+import { Children, ReactNode, isValidElement } from 'react';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type TAnyValue = any;
@@ -24,3 +25,24 @@ export const isObject = (value: TAnyValue): value is typeof Object => {
 export const isUndefined = (value: unknown): value is undefined => typeof value === 'undefined';
 
 export const isFn = (value: unknown): value is (...args: unknown[]) => unknown => typeof value === 'function';
+
+export const isBetween = (value: number, min: number, max: number): boolean => value >= min && value <= max;
+
+export const isPrimitive = (
+  value: unknown
+): value is string | number | boolean | null | undefined | symbol | bigint => {
+  return value === null || ['string', 'number', 'boolean', 'undefined', 'symbol', 'bigint'].includes(typeof value);
+};
+
+export const isPrimitiveReactNode = (element: ReactNode): element is ReactNode => {
+  const reactArrayElements = Children.toArray(element);
+  let isPrimitiveElement = true;
+
+  for (const reactElement of reactArrayElements)
+    if (!isPrimitive(reactElement)) {
+      isPrimitiveElement = false;
+      break;
+    }
+
+  return isPrimitiveElement;
+};
