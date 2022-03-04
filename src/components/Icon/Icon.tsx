@@ -16,6 +16,7 @@ export const IconComponent = forwardRef<SVGSVGElement, TIcon>(
         className={combineClassNames(className, ICON_CN)}
         size={size ?? 24}
         {...rest}
+        aria-hidden
       >
         {children}
       </StyledSvg>

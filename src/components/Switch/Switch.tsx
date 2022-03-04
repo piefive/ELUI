@@ -42,9 +42,11 @@ export const Switch = forwardRef<HTMLButtonElement, TSwitch>(
       <StyledSwitch
         ref={switchRef}
         type="button"
+        role="switch"
         className={combineClassNames(className, SWITCH_CN)}
         tabIndex={isDisabled ? -1 : 0}
         aria-checked={checked}
+        aria-disabled={isDisabled}
         aria-busy={isLoading}
         onClick={handleChange}
         {...{ disabled, checked, isLoading, boxStyle }}
