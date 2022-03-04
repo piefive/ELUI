@@ -25,8 +25,8 @@ const switchStyleMixin = ({ theme, checked, disabled, isLoading }: TStyledSwitch
       background-color: ${theme.palette.grey_100};
     `;
 
-  const activeStyle = css`
-    &:active {
+  const focusStyle = css`
+    &:focus {
       box-shadow: 0 0 0 4px ${theme.palette.primary_200};
     }
   `;
@@ -35,7 +35,7 @@ const switchStyleMixin = ({ theme, checked, disabled, isLoading }: TStyledSwitch
     return css`
       background-color: ${theme.palette.primary_700};
 
-      ${activeStyle};
+      ${focusStyle};
 
       &:hover {
         background-color: ${theme.palette.primary_400};
@@ -45,7 +45,7 @@ const switchStyleMixin = ({ theme, checked, disabled, isLoading }: TStyledSwitch
   return css`
     background-color: ${theme.palette.grey_200};
 
-    ${activeStyle};
+    ${focusStyle};
 
     &:active {
       background-color: ${theme.palette.grey_200};
