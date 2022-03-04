@@ -32,6 +32,7 @@ export const Button = forwardRef<HTMLButtonElement, IButton>(
       <StyledButton
         className={combineClassNames(className, BUTTON_CN)}
         tabIndex={!disabled ? 0 : -1}
+        aria-disabled={disabled}
         data-button-enter-pressed={isButtonPressed}
         {...pressActions}
         {...{ ...rest, type, ref, variant, disabled }}
