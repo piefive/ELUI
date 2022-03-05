@@ -26,7 +26,7 @@ const switchStyleMixin = ({ theme, checked, disabled, isLoading }: TStyledSwitch
     `;
 
   const focusStyle = css`
-    &:focus {
+    &:active {
       box-shadow: 0 0 0 4px ${theme.palette.primary_200};
     }
   `;
@@ -84,6 +84,7 @@ export const StyledToggle = styled.div<{ disabled?: boolean; checked: boolean; t
     left: 0;
     right: 0;
     transition: left 0.3s ease-in-out;
+    transition-delay: 0.05s;
     background-color: ${({ theme, disabled }) => (disabled ? theme.palette.grey_400 : theme.palette.white)};
   }
 
