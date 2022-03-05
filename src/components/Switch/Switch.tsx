@@ -31,7 +31,7 @@ export const Switch = forwardRef<HTMLButtonElement, TSwitch>(
     };
 
     const toggleAnimateStyle = useSpring({
-      config: config.stiff,
+      config: { tension: 210, friction: 18 },
       from: { x: checked ? SWITCH_WIDTH - SWITCH_OFFSET : 0 },
       to: { x: checked ? SWITCH_WIDTH - TOGGLE_WIDTH - SWITCH_OFFSET * 2 : 0 },
       delay: 50,
