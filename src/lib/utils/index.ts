@@ -6,3 +6,4 @@ export { createException } from './create-exception';
 export { registerPaintWorklet } from './register-paint-worklet';
 export { hexToRgba } from './hex-to-rgba';
 export { mergeRefs } from './merge-refs';
+export { createEluiName } from './create-elui-name';

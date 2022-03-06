@@ -38,6 +38,7 @@
     "@storybook/theming": "^6.4.13",
     "@types/ramda": "^0.27.64",
     "@types/react": "^17.0.39",
+    "@types/react-dom": "^17.0.13",
     "@types/styled-components": "^5.1.22",
     "@typescript-eslint/eslint-plugin": "^5.11.0",
     "@typescript-eslint/parser": "^5.11.0",
@@ -69,8 +70,10 @@
   },
   "dependencies": {
     "@juggle/resize-observer": "^3.3.1",
+    "@popperjs/core": "^2.11.2",
     "@use-gesture/react": "^10.2.7",
     "ramda": "^0.28.0",
+    "react-popper": "^2.2.5",
     "react-spring": "^9.4.3",
     "styled-components": "^5.3.3"
   }

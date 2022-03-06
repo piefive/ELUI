@@ -1,3 +1,3 @@
-import { createEluiClassName } from 'lib';
+import { createEluiName } from 'lib';
 
-export const TYPOGRAPHY_CN = createEluiClassName('typography');
+export const TYPOGRAPHY_CN = createEluiName('typography');
