@@ -23,7 +23,7 @@ export const All = (args: TIcon) => (
       const component = `<Icon.${name} />`;
 
       return (
-        <StyledIconBox>
+        <StyledIconBox key={name}>
           <Typography
             variant="h6"
             typographyStyle={({ theme }) => ({

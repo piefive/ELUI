@@ -1,4 +1,5 @@
-import { addDecorator, addParameters, configure } from "@storybook/react";
+import { StrictMode } from 'react';
+import { addDecorator, addParameters } from "@storybook/react";
 import { DocsContainer, DocsPage } from "@storybook/addon-docs";
 
 import { sortStories } from './utils';
@@ -9,9 +10,11 @@ import { ConfigProvider } from "../src/components/ConfigProvider";
 //configure(require.context('../src', true, /\.stories\.mdx$/), module);
 
 addDecorator(storyFn => (
-    <ConfigProvider fontURL="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap">
-      {storyFn()}
-    </ConfigProvider>
+    <StrictMode>
+      <ConfigProvider fontURL="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap">
+        {storyFn()}
+      </ConfigProvider>
+    </StrictMode>
 ));
 
 

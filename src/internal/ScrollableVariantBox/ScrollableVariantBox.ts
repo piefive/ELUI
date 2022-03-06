@@ -8,3 +8,5 @@ export const ScrollableVariantBox = forwardRef<TScrollContainerRef, IScrollableV
   ({ isScrollable, children, ...rest }, ref) =>
     createElement(isScrollable ? ScrollContainer : Fragment, isScrollable ? { ref, ...rest } : null, children)
 );
+
+ScrollableVariantBox.displayName = 'ScrollableVariantBox';
