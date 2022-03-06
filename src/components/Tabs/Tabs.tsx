@@ -39,7 +39,7 @@ const TabsComponent = <TabValue extends TTabValue = TTabValue>(
 
   return (
     <ScrollableVariantBox ref={_scrollContainerRef} {...{ isScrollable }}>
-      <StyledTabsBox ref={tabsRef} className={combineClassNames(className, TABS_CN)} {...{ boxStyle }}>
+      <StyledTabsBox ref={tabsRef} role="tablist" className={combineClassNames(className, TABS_CN)} {...{ boxStyle }}>
         <TabsProvider value={ctx}>{children}</TabsProvider>
         <StyledActiveLine style={activeLinePositionStyle} {...{ activeLineStyle }} />
       </StyledTabsBox>

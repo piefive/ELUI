@@ -1,4 +1,4 @@
-import { Context, createContext, useContext } from 'react';
+import { createContext, useContext } from 'react';
 
 import type { TSegmentedControlContext } from '../types';
 
@@ -7,7 +7,4 @@ SegmentedControlContext.displayName = 'SegmentedControlProvider';
 
 export const SegmentedControlProvider = SegmentedControlContext.Provider;
 
-export const useSegmentedControlContext = <Value = unknown>() =>
-  useContext<TSegmentedControlContext<Value>>(
-    <Context<TSegmentedControlContext<Value>>>(SegmentedControlContext as unknown)
-  );
+export const useSegmentedControlContext = () => useContext(SegmentedControlContext);

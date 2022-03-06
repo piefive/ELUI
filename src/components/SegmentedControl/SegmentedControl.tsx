@@ -1,34 +1,47 @@
-import { Ref, forwardRef, useMemo, useRef } from 'react';
+import { forwardRef, useMemo, useRef } from 'react';
+import type { U } from 'ts-toolbelt';
 
-import { ScrollContainer, TScrollContainerRef } from '../ScrollContainer';
+import { FieldLabel, ScrollableVariantBox } from 'internal';
 
-import type { ISegmentedControl, ISegmentedControlComponent, TSegmentValue, TSegmentedControlContext } from './types';
+import type { TScrollContainerRef } from '../ScrollContainer';
+
+import type { ISegmentedControlComponent, TSegmentedControlContext } from './types';
 import { SegmentedControlProvider } from './hooks';
 import { Segment } from './units';
-import { StyledSegmentedControlBox } from './styled';
+import { StyledSegmentedControlBox, StyledSegmentedControlList } from './styled';
 
-const SegmentedControlComponent = <SegmentedValue extends TSegmentValue = TSegmentValue>(
-  { activeSegment, onSegmentChange, children, boxStyle }: ISegmentedControlComponent<SegmentedValue>,
-  segmentedControlRef: Ref<HTMLDivElement>
-) => {
-  const _scrollContainerRef = useRef<TScrollContainerRef>();
+const SegmentedControlComponent = forwardRef<HTMLUListElement, ISegmentedControlComponent>(
+  (
+    { label, activeSegment, onSegmentChange, children, isScrollable = true, boxStyle, listStyle },
+    segmentedControlRef
+  ) => {
+    const _scrollContainerRef = useRef<U.Nullable<TScrollContainerRef>>();
 
-  const ctx = useMemo<TSegmentedControlContext>(
-    () => ({ activeSegment, onSegmentChange, _scrollContainerRef }),
-    [activeSegment, onSegmentChange]
-  );
+    const ctx = useMemo<TSegmentedControlContext>(
+      () => ({ activeSegment, onSegmentChange, _scrollContainerRef }),
+      [activeSegment, onSegmentChange]
+    );
 
-  return (
-    <ScrollContainer ref={_scrollContainerRef}>
-      <StyledSegmentedControlBox ref={segmentedControlRef} {...{ boxStyle }}>
-        <SegmentedControlProvider value={ctx}>{children}</SegmentedControlProvider>
+    return (
+      <StyledSegmentedControlBox {...{ boxStyle, isScrollable }}>
+        {label && <FieldLabel {...{ label }} />}
+        <ScrollableVariantBox ref={_scrollContainerRef} {...{ isScrollable }}>
+          <StyledSegmentedControlList ref={segmentedControlRef} role="tablist" {...{ listStyle }}>
+            <SegmentedControlProvider value={ctx}>{children}</SegmentedControlProvider>
+          </StyledSegmentedControlList>
+        </ScrollableVariantBox>
       </StyledSegmentedControlBox>
-    </ScrollContainer>
-  );
-};
+    );
+  }
+);
 
-export const SegmentedControl = forwardRef<HTMLDivElement, ISegmentedControlComponent>(
-  SegmentedControlComponent
-) as unknown as ISegmentedControl;
+type TSegmentedControlComponent = typeof SegmentedControlComponent;
 
+export interface ISegmentControl extends TSegmentedControlComponent {
+  Segment: typeof Segment;
+}
+
+export const SegmentedControl = SegmentedControlComponent as ISegmentControl;
+
+SegmentedControl.displayName = 'SegmentedControl';
 SegmentedControl.Segment = Segment;

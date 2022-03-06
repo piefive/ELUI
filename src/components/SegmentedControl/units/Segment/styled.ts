@@ -47,19 +47,22 @@ const segmentedBoxMixin = ({ isActive, theme }: { theme: DefaultTheme; isActive:
   `;
 };
 
-export const StyledSegmentBox = styled.button<{
+export const StyledSegmentBox = styled.li<{
   isActive: boolean;
   boxStyle?: TSegmentStyle;
   segmentStyle?: TSegmentStyle;
 }>`
   display: flex;
   align-items: center;
+  position: relative;
   height: 40px;
   padding: 8px;
+  margin: 0;
   border-radius: 4px;
   border: none;
   background-color: transparent;
   cursor: pointer;
+  list-style: none;
   transition-property: background-color, color;
   transition-duration: 0.3s;
   transition-timing-function: ease-out;
@@ -79,6 +82,16 @@ export const StyledSegmentBox = styled.button<{
       ${getComponentStyle(segmentStyle, cssProps)};
     `;
   }}
+`;
+
+export const StyledSegmentRadio = styled.input`
+  position: absolute;
+  width: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  visibility: hidden;
+  left: -9999px;
 `;
 
 export const StyledLeftSlot = styled.div`
