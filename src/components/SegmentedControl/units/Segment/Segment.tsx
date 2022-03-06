@@ -21,7 +21,7 @@ export const Segment = ({ name, value, disabled = false, leftSlot, children, box
 
     if (isActiveSegment && scrollContainer) {
       const left = segmentRef.current.offsetLeft - SEGMENT_OFFSET_LEFT;
-      scrollContainer?.scrollTo(left > 0 ? left : 0, width + SEGMENT_OFFSET_LEFT).catch();
+      scrollContainer.scrollTo(left > 0 ? left : 0, width + SEGMENT_OFFSET_LEFT).catch();
     }
   }, [isActiveSegment, left, width]);
 
