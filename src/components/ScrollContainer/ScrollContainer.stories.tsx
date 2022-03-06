@@ -30,6 +30,7 @@ export const Default = (args: TScrollContainer) => {
           <ScrollContainer {...args}>
             {Array.from({ length: 45 }, (_, i) => (
               <Typography
+                key={i}
                 typographyStyle={({ theme }) => ({
                   whiteSpace: 'nowrap',
                   marginRight: 24,

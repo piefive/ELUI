@@ -1,9 +1,16 @@
+import { useRef } from 'react';
+
 import { registerPaintWorklet, useMount } from 'lib';
 
 export const usePaintWorklet = (paintWorkletsPath = './paint-worklets') => {
-  useMount(() => {
-    const enableWorklets = ['smooth-corners.js'];
+  const isLoaded = useRef(false);
 
-    for (const paintWorklet of enableWorklets) registerPaintWorklet(`${paintWorkletsPath}/${paintWorklet}`);
+  useMount(() => {
+    if (!isLoaded.current) {
+      const enableWorklets = ['smooth-corners.js'];
+
+      for (const paintWorklet of enableWorklets) registerPaintWorklet(`${paintWorkletsPath}/${paintWorklet}`);
+      isLoaded.current = true;
+    }
   });
 };

@@ -1,5 +1,7 @@
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
+import { createEluiName } from '../../lib';
 import { Typography } from '../Typography';
 
 import type { TPortal } from './types';
@@ -11,14 +13,23 @@ export default {
   args: {
     name: 'test',
   },
-  parameters: {
-    docs: {
-      inlineStories: false,
-    },
-  },
 };
 
+const useLocation = () => location;
+
 export const Default = (args: TPortal) => {
+  const location = useLocation();
+  const [isDoc, setIsDoc] = useState(false);
+
+  useEffect(() => {
+    setIsDoc(location.search.includes('docs'));
+
+    return () => {
+      const unclearPortal = document.getElementById(createEluiName(`portal-${args?.name ?? ''}`));
+      if (!location.href.includes('portal') && unclearPortal) unclearPortal.remove();
+    };
+  }, [args?.name, location]);
+
   return (
     <StyledBox>
       <Typography tag="h1" variant="h4" typographyStyle={{ display: 'block' }}>
@@ -27,11 +38,13 @@ export const Default = (args: TPortal) => {
       <Typography variant="caption">
         Portals provide a way to render children into a DOM node that exists outside the hierarchy of the DOM component.
       </Typography>
-      <Portal {...args}>
-        <StyledBox style={{ marginTop: 24 }}>
-          <Typography>Inspect this element</Typography>
-        </StyledBox>
-      </Portal>
+      {!isDoc && (
+        <Portal {...args}>
+          <StyledBox style={{ marginTop: 24 }}>
+            <Typography>Inspect this element</Typography>
+          </StyledBox>
+        </Portal>
+      )}
     </StyledBox>
   );
 };

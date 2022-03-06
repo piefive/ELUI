@@ -17,15 +17,16 @@ export const usePortal = (name: string): U.Nullable<HTMLDivElement> => {
   useEffect(() => {
     const portalName = createEluiName(`portal-${name}`);
     const instance = portalElement || document.createElement('div');
+
     const portalRootElement = document.getElementById(portalName) || createRootElement(portalName);
+    portalRootElement.appendChild(instance);
 
     if (!portalRootElement) document.body.appendChild(portalRootElement);
-
-    portalRootElement.appendChild(instance);
     setPortalElement(instance);
 
     return () => {
       instance.remove();
+      setPortalElement(null);
 
       if (!portalRootElement.childNodes.length) portalRootElement.parentElement?.removeChild(portalRootElement);
     };
