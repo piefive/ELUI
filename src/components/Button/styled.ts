@@ -1,14 +1,17 @@
 import styled, { DefaultTheme, css } from 'styled-components';
 
-import { getComponentStyle, normalizeMixin } from 'lib';
+import { getComponentStyle, getCustomAttr, normalizeMixin } from 'lib';
 
 import { Typography } from '../Typography';
 
 import type { TButtonStyle } from './types';
+import { BUTTON_ENTER_PRESSED_ATTR } from './constants';
 
 interface IStyledButton extends TButtonStyle {
   theme: DefaultTheme;
 }
+
+const PRESSED_BUTTON = getCustomAttr(BUTTON_ENTER_PRESSED_ATTR, true);
 
 const getButtonVariant = ({ theme, variant }: IStyledButton) => {
   switch (variant) {
@@ -30,7 +33,7 @@ const getButtonVariant = ({ theme, variant }: IStyledButton) => {
           border-color: ${theme.palette.primary_400};
         }
 
-        &[data-button-enter-pressed='true'],
+        &[${PRESSED_BUTTON}],
         &:active {
           background-color: ${theme.palette.primary_700};
           border-color: ${theme.palette.primary_700};
@@ -54,7 +57,7 @@ const getButtonVariant = ({ theme, variant }: IStyledButton) => {
           border-color: ${theme.palette.grey_200};
         }
 
-        &[data-button-enter-pressed='true'],
+        &[${PRESSED_BUTTON}],
         &:active {
           background-color: ${theme.palette.grey_300};
           border-color: ${theme.palette.grey_300};
@@ -78,7 +81,7 @@ const getButtonVariant = ({ theme, variant }: IStyledButton) => {
           border-color: ${theme.palette.primary_400};
         }
 
-        &[data-button-enter-pressed='true'],
+        &[${PRESSED_BUTTON}],
         &:active {
           background-color: ${theme.palette.primary_200};
           border-color: ${theme.palette.primary_800};
