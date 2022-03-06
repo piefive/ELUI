@@ -1,0 +1,1 @@
+export { ScrollableVariantBox } from './ScrollableVariantBox';

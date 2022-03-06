@@ -1,4 +1,5 @@
 export * from './is';
+export * from './next-tick';
 export { combineClassNames } from './combine-class-names';
 export { createException } from './create-exception';
 export { registerPaintWorklet } from './register-paint-worklet';
