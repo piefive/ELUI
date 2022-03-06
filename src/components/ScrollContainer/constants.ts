@@ -1,3 +1,3 @@
-import { createEluiClassName } from 'lib';
+import { createEluiName } from 'lib';
 
-export const SCROLL_CONTAINER_CN = createEluiClassName('scroll-container');
+export const SCROLL_CONTAINER_CN = createEluiName('scroll-container');

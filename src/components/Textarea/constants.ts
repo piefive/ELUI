@@ -1,3 +1,3 @@
-import { createEluiClassName } from 'lib';
+import { createEluiName } from 'lib';
 
-export const TEXTAREA_CN = createEluiClassName('textarea');
+export const TEXTAREA_CN = createEluiName('textarea');

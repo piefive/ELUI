@@ -1,3 +1,3 @@
-import { createEluiClassName } from 'lib';
+import { createEluiName } from 'lib';
 
-export const INPUT_CN = createEluiClassName('input');
+export const INPUT_CN = createEluiName('input');

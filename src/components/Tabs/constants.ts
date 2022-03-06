@@ -1,4 +1,4 @@
-import { createEluiClassName } from 'lib';
+import { createEluiName } from 'lib';
 
-export const TABS_CN = createEluiClassName('tabs');
-export const TAB_CN = createEluiClassName('tabs');
+export const TABS_CN = createEluiName('tabs');
+export const TAB_CN = createEluiName('tabs');

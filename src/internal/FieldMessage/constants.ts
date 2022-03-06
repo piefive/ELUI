@@ -1,3 +1,3 @@
-import { createEluiClassName } from 'lib';
+import { createEluiName } from 'lib';
 
-export const FIELD_MESSAGE_CN = createEluiClassName('field-message');
+export const FIELD_MESSAGE_CN = createEluiName('field-message');
