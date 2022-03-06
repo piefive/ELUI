@@ -11,11 +11,14 @@ export default {
   args: {
     name: 'test',
   },
+  parameters: {
+    docs: {
+      inlineStories: false,
+    },
+  },
 };
 
 export const Default = (args: TPortal) => {
-  const isDocs = location.search.includes('viewMode=docs');
-
   return (
     <StyledBox>
       <Typography tag="h1" variant="h4" typographyStyle={{ display: 'block' }}>
@@ -24,13 +27,11 @@ export const Default = (args: TPortal) => {
       <Typography variant="caption">
         Portals provide a way to render children into a DOM node that exists outside the hierarchy of the DOM component.
       </Typography>
-      {!isDocs && (
-        <Portal {...args}>
-          <StyledBox style={{ marginTop: 24 }}>
-            <Typography>Inspect this element</Typography>
-          </StyledBox>
-        </Portal>
-      )}
+      <Portal {...args}>
+        <StyledBox style={{ marginTop: 24 }}>
+          <Typography>Inspect this element</Typography>
+        </StyledBox>
+      </Portal>
     </StyledBox>
   );
 };
