@@ -34,7 +34,7 @@ export const Tab = <TabValue extends TTabValue = TTabValue>({
 
       if (scrollContainer) {
         const scrollOffset = offset - TAB_OFFSET_LEFT;
-        scrollContainer.scrollTo(scrollOffset > 0 ? scrollOffset : 0, width + TAB_OFFSET_LEFT);
+        scrollContainer.scrollTo(scrollOffset > 0 ? scrollOffset : 0, width + TAB_OFFSET_LEFT).catch();
       }
     }
   }, [_scrollContainerRef, isActiveTab, left, onActivePositionChange, tabRef, width]);

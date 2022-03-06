@@ -2,7 +2,7 @@ import { ForwardedRef, useImperativeHandle, useRef } from 'react';
 import { useSpring } from 'react-spring';
 import { useGesture } from '@use-gesture/react';
 
-import { isBetween, nextTickFn, useFirstMountState, useMeasure, useUpdateEffect } from 'lib';
+import { isBetween, nextAsyncTickFn, useFirstMountState, useMeasure, useUpdateEffect } from 'lib';
 
 import type { TScrollContainer, TScrollContainerRef } from '../types';
 import { checkOutOfBounds } from '../utils';
@@ -25,7 +25,7 @@ export const useScrollContainer = ({
   const contentWidthDiff = contentWidth - containerWidth;
 
   useImperativeHandle(scrollContainerRef, () => ({
-    scrollTo: nextTickFn((left: number, contentWidth?: number) => {
+    scrollTo: nextAsyncTickFn((left: number, contentWidth?: number) => {
       const { width } = containerRef.current.getBoundingClientRect();
       const current = Math.abs(x.current);
       const isInView = left > current && isBetween(left + contentWidth, current, current + width);
@@ -34,6 +34,8 @@ export const useScrollContainer = ({
         x.current = checkOutOfBounds(-left, contentRef.current.scrollWidth - width);
         state[isFirstMount ? 'set' : 'start']({ x: x.current });
       }
+
+      return isInView;
     }),
   }));
 
