@@ -19,7 +19,7 @@ export const Default = (args: ITabsComponent) => {
       <StyledBox>
         <Tabs<number> {...args} onTabChange={setValue} activeTab={value}>
           {Array.from({ length: 43 }, (_, i) => (
-            <Tabs.Tab key={i} value={i} leftSlot={<Icon.Mail />}>
+            <Tabs.Tab key={i} value={i} disabled={Boolean(i % 4)} leftSlot={<Icon.Mail />}>
               Tab {i + 1}
             </Tabs.Tab>
           ))}

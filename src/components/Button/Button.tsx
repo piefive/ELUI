@@ -3,9 +3,9 @@ import React, { forwardRef } from 'react';
 import { combineClassNames, isString } from 'lib';
 
 import type { IButton } from './types';
-import { StyledButton, StyledLeftSlot, StyledRightSlot, StyledTypography } from './styled';
-import { useButtonActive } from './hooks';
 import { BUTTON_CN } from './constants';
+import { useButtonActive } from './hooks';
+import { StyledButton, StyledLeftSlot, StyledRightSlot, StyledTypography } from './styled';
 
 export const Button = forwardRef<HTMLButtonElement, IButton>(
   (
@@ -33,7 +33,6 @@ export const Button = forwardRef<HTMLButtonElement, IButton>(
         className={combineClassNames(className, BUTTON_CN)}
         tabIndex={!disabled ? 0 : -1}
         aria-disabled={disabled}
-        data-button-enter-pressed={isButtonPressed}
         {...pressActions}
         {...{ ...rest, type, ref, variant, disabled }}
       >

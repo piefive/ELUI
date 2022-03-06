@@ -1,5 +1,8 @@
 import { useCallback, useState } from 'react';
 
+import { bindCustomAttr, getCustomAttr } from 'lib';
+
+import { BUTTON_ENTER_PRESSED_ATTR } from '../constants';
 import type { IButton } from '../types';
 
 type TUseButtonKeyPress = {
@@ -30,7 +33,10 @@ export const useButtonActive = ({ onKeyDown, onKeyUp }: TUseButtonKeyPress) => {
     [onKeyUp]
   );
 
+  const customAttr = getCustomAttr(BUTTON_ENTER_PRESSED_ATTR, isButtonPressed);
+
   return {
+    ...bindCustomAttr(customAttr),
     isButtonPressed,
     onKeyUp: onButtonUp,
     onKeyDown: onButtonDown,
