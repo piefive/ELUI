@@ -4,7 +4,7 @@ const getPath = (...p) => path.resolve(process.cwd(), ...p);
 
 module.exports = {
   staticDirs: ['../public'],
-  stories: ["../src/**/*.stories.@(tsx|mdx)"],
+  stories: ["../src/**/*.stories.@(js|jsx|ts|tsx|mdx)"],
   addons: [
     {
       name: '@storybook/addon-docs',
@@ -15,14 +15,8 @@ module.exports = {
         transcludeMarkdown: true,
       },
     },
-    '@storybook/addon-storysource',
     "@storybook/addon-links",
-    '@storybook/addon-actions',
-    '@storybook/addon-viewport',
-    '@storybook/addon-controls',
-    '@storybook/addon-toolbars',
-    '@storybook/addon-measure',
-    '@storybook/addon-outline',
+    "@storybook/addon-essentials"
   ],
   webpackFinal: async config => ({
     ...config,

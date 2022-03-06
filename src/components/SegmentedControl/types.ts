@@ -1,40 +1,26 @@
-import type { CSSProperties, ReactElement, ReactNode, Ref, RefObject } from 'react';
+import type { ChangeEventHandler, ReactNode, RefObject } from 'react';
+import type { U } from 'ts-toolbelt';
 
 import type { TStyledComponentsProps } from 'lib';
 
 import type { TScrollContainerRef } from '../ScrollContainer';
 
-import type { Segment } from './units';
-
-export type TSegmentValue = unknown;
-
-export type TSegmentedControlHandler<SegmentedValue = TSegmentValue> = (value: SegmentedValue) => void;
+export type TSegmentedControlHandler = ChangeEventHandler<HTMLInputElement>;
 
 export type TSegmentStyle = TStyledComponentsProps<{ isActive: boolean }>;
 
-export type TSegmentedControlContext<SegmentedValue = TSegmentValue> = {
-  activeSegment: SegmentedValue;
-  onSegmentChange: TSegmentedControlHandler<SegmentedValue>;
+export type TSegmentedControlContext = {
+  name?: string;
+  activeSegment: string;
+  onSegmentChange: TSegmentedControlHandler;
   segmentStyle?: TSegmentStyle;
-  _scrollContainerRef: RefObject<TScrollContainerRef>;
+  _scrollContainerRef: RefObject<U.Nullable<TScrollContainerRef>>;
 };
 
-export interface ISegmentedControlComponent<SegmentedValue = TSegmentValue>
-  extends Omit<TSegmentedControlContext<SegmentedValue>, '_scrollBoxRef'> {
+export interface ISegmentedControlComponent extends Omit<TSegmentedControlContext, '_scrollBoxRef'> {
+  label?: string;
+  isScrollable?: boolean;
+  children: ReactNode;
   boxStyle?: TStyledComponentsProps;
-  children: ReactNode;
+  listStyle?: TStyledComponentsProps;
 }
-
-export type TSegment<SegmentedValue = TSegmentValue> = {
-  value: SegmentedValue;
-  leftSlot?: ReactNode;
-  children: ReactNode;
-  disabled?: boolean;
-  boxStyle?: TSegmentStyle;
-};
-
-export type ISegmentedControl = (<SegmentedValue = TSegmentValue>(
-  p: ISegmentedControlComponent<SegmentedValue> & { ref?: Ref<HTMLDivElement> }
-) => ReactElement) & {
-  Segment: typeof Segment;
-};

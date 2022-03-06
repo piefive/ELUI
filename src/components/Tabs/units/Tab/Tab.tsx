@@ -3,11 +3,12 @@ import { equals } from 'ramda';
 
 import { combineClassNames, isPrimitiveReactNode, useMeasure } from 'lib';
 
-import type { TTab, TTabValue } from '../../types';
+import type { TTabValue } from '../../types';
 import { Typography } from '../../../Typography';
 import { TAB_CN } from '../../constants';
 import { useTabsContext } from '../../hooks';
 
+import type { TTab } from './types';
 import { StyledLeftSlot, StyledTab } from './styled';
 
 const TAB_OFFSET_LEFT = 14;
@@ -42,10 +43,12 @@ export const Tab = <TabValue extends TTabValue = TTabValue>({
   return (
     <StyledTab
       ref={tabRef}
+      role="tab"
       className={combineClassNames(className, TAB_CN)}
       isActive={isActiveTab}
-      onClick={onTabChange && !isActiveTab ? event => onTabChange(value, event) : undefined}
       tabIndex={disabled ? -1 : 0}
+      aria-selected={isActiveTab}
+      onClick={onTabChange && !isActiveTab ? event => onTabChange(value, event) : undefined}
       {...{ disabled, boxStyle, tabStyle }}
     >
       {leftSlot && <StyledLeftSlot>{leftSlot}</StyledLeftSlot>}

@@ -17,7 +17,7 @@ export const useButtonActive = ({ onKeyDown, onKeyUp }: TUseButtonKeyPress) => {
 
   const onButtonDown = useCallback(
     event => {
-      if (event.key === ENTER_KEY) setActive(true);
+      if (event.code === ENTER_KEY) setActive(true);
 
       if (onKeyDown) onKeyDown(event);
     },
@@ -26,7 +26,7 @@ export const useButtonActive = ({ onKeyDown, onKeyUp }: TUseButtonKeyPress) => {
 
   const onButtonUp = useCallback(
     event => {
-      if (event.key === ENTER_KEY) setActive(false);
+      if (event.code === ENTER_KEY) setActive(false);
 
       if (onKeyUp) onKeyUp(event);
     },

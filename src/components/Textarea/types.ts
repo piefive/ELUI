@@ -1,4 +1,4 @@
-import type { ReactNode, TextareaHTMLAttributes } from 'react';
+import type { ChangeEventHandler, ReactNode, TextareaHTMLAttributes } from 'react';
 import type { U } from 'ts-toolbelt';
 
 import type { TStyledComponentsProps } from 'lib';
@@ -15,4 +15,5 @@ export interface ITextarea extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   validateMessage?: string;
   message?: string;
   boxStyle?: TStyledComponentsProps;
+  onChange?: ChangeEventHandler<HTMLTextAreaElement>;
 }

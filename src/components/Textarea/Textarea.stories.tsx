@@ -36,6 +36,9 @@ export default {
     message: 'This is the description area',
     validateMessage: 'This is an validate message',
   },
+  parameters: {
+    actions: { argTypesRegex: '^on.*' },
+  },
 };
 
 export const Default = (args: ITextarea) => {
@@ -43,7 +46,7 @@ export const Default = (args: ITextarea) => {
   const [value, setValue] = useState<string>('');
 
   const handleChange: ChangeEventHandler<HTMLTextAreaElement> = event => {
-    args?.onChange?.(event);
+    args.onChange(event);
     setValue(event.target.value);
   };
 
