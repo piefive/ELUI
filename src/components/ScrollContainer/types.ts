@@ -10,7 +10,7 @@ export type TScrollContainer = {
   className?: string;
   dragOnly?: boolean;
   scrollAfterReachedBoundaries?: boolean;
-  scrollContainerStyle?: TStyledComponentsProps;
+  boxStyle?: TStyledComponentsProps;
   onScroll?: (x: number) => void;
   children: ReactNode;
 };
