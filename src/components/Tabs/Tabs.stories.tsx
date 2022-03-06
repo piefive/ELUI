@@ -14,18 +14,18 @@ export default {
 export const Default = (args: ITabsComponent) => {
   const [value, setValue] = useState(24);
 
+  const contents = Array.from({ length: 43 });
+
   return (
-    <>
-      <StyledBox>
-        <Tabs<number> {...args} onTabChange={setValue} activeTab={value}>
-          {Array.from({ length: 43 }, (_, i) => (
-            <Tabs.Tab key={i} value={i} disabled={Boolean(i % 4)} leftSlot={<Icon.Mail />}>
-              Tab {i + 1}
-            </Tabs.Tab>
-          ))}
-        </Tabs>
-      </StyledBox>
-    </>
+    <StyledBox>
+      <Tabs<number> {...args} onTabChange={setValue} activeTab={value}>
+        {contents.map((_, i) => (
+          <Tabs.Tab key={i} value={i} disabled={Boolean(i % 4)} leftSlot={<Icon.Mail />}>
+            Tab {i + 1}
+          </Tabs.Tab>
+        ))}
+      </Tabs>
+    </StyledBox>
   );
 };
 

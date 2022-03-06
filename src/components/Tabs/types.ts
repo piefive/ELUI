@@ -40,12 +40,3 @@ export type ITabs = (<TabValue = TTabValue>(
   displayName: string;
   Tab: typeof Tab;
 };
-
-export type TTab<TabValue = TTabValue> = {
-  className?: string;
-  value: TabValue;
-  leftSlot?: ReactNode;
-  children: ReactNode;
-  disabled?: boolean;
-  boxStyle?: TTabStyle;
-};

@@ -2,7 +2,7 @@ import { addons } from '@storybook/addons';
 import { create } from '@storybook/theming';
 
 // noinspection ES6PreferShortImport
-import { theme } from '../src/lib/styled';
+import { theme } from '../src/lib/styled/theme';
 
 const uiTheme = create({
   base: 'light',
