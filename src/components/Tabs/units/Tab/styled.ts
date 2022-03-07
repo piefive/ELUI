@@ -31,10 +31,14 @@ export const StyledTab = styled.button<{
     outline: none;
   }
 
+  &[disabled] {
+    color: ${({ theme }) => theme.palette.grey_400};
+  }
+
   ${({ isActive, theme }) =>
     !isActive &&
     css`
-      &:not(:disabled):hover {
+      &:not([disabled]):hover {
         cursor: pointer;
         background-color: ${theme.palette.grey_200};
         color: ${theme.palette.primary_700};
