@@ -1,6 +1,6 @@
 import { animated } from 'react-spring';
 
-import { combineClassNames, useAnimateHeight, useDebounce, useLastValidState } from 'lib';
+import { combineClassNames, useAnimateHeight, useDebounce, useLastValidState } from 'lib/index';
 
 import { FIELD_MESSAGE_CN } from './constants';
 import { StyledTypography } from './styled';

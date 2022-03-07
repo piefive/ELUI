@@ -1,6 +1,6 @@
 export const palette = {
-  white: '#FFF',
-  black: '#000',
+  white: '#FFFFFF',
+  black: '#000000',
   error: '#E64A19',
   success: '#388E3C',
   primary_50: '#EDE7F6',
@@ -15,7 +15,7 @@ export const palette = {
   primary_900: '#311B92',
   grey_50: '#FAFAFA',
   grey_100: '#F5F5F5',
-  grey_200: '#EEE',
+  grey_200: '#EEEEEE',
   grey_300: '#E0E0E0',
   grey_400: '#BDBDBD',
   grey_500: '#9E9E9E',

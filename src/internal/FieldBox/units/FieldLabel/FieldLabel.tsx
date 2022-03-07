@@ -1,4 +1,4 @@
-import { Typography } from 'components';
+import { Typography } from 'components/index';
 
 import type { TFieldLabel } from './types';
 import { StyledFieldLabel, StyledRequired } from './styled';
