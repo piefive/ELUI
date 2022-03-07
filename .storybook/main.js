@@ -25,6 +25,10 @@ module.exports = {
     ],
     webpackFinal: async config => ({
         ...config,
+        module: {
+            ...config.module,
+            rules: [...config.module.rules, { test: /\.txt$/, use: 'raw-loader' }]
+        },
         resolve: {
             ...config.resolve,
             modules: [...config.resolve.modules, getPath('src')],

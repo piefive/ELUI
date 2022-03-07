@@ -1,20 +1,20 @@
-import { StrictMode } from 'react';
-import { addDecorator, addParameters } from "@storybook/react";
-import { DocsContainer, DocsPage } from "@storybook/addon-docs";
+import {StrictMode} from 'react';
+import {addDecorator, addParameters} from "@storybook/react";
+import {DocsContainer, DocsPage} from "@storybook/addon-docs";
 
-import { sortStories } from './utils';
+import {sortStories} from './utils';
 
 // noinspection ES6PreferShortImport
-import { ConfigProvider } from "../src/components/ConfigProvider";
+import {ConfigProvider} from "../src/components/ConfigProvider";
 
 //configure(require.context('../src', true, /\.stories\.mdx$/), module);
 
 addDecorator(storyFn => (
-    <StrictMode>
-      <ConfigProvider fontURL="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap">
-        {storyFn()}
-      </ConfigProvider>
-    </StrictMode>
+  <StrictMode>
+    <ConfigProvider fontURL="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap">
+      {storyFn()}
+    </ConfigProvider>
+  </StrictMode>
 ));
 
 
@@ -32,6 +32,6 @@ addParameters({
     container: DocsContainer,
     page: DocsPage,
   },
-  actions: { argTypesRegex: '^on.*' },
-  controls: { hideNoControlsWarning: true },
+  actions: {argTypesRegex: '^on.*'},
+  controls: {hideNoControlsWarning: true},
 });

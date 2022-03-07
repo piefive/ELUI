@@ -3,8 +3,9 @@
     "outDir": "dist",
     "baseUrl": "src",
     "moduleResolution": "node",
-    "target": "es2017",
+    "target": "esnext",
     "importsNotUsedAsValues": "error",
+    "noImplicitAny": true,
     "declaration": true,
     "isolatedModules": true,
     "sourceMap": true,
@@ -15,7 +16,7 @@
     "jsx": "react-jsx",
     "typeRoots": ["./@types"],
     "lib": [
-      "es2017",
+      "esnext",
       "DOM"
     ]
   },

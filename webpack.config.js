@@ -19,6 +19,7 @@ module.exports = {
   externals: ['react', 'react-dom'],
   module: {
     rules: [
+      { test: /\.txt$/, use: 'raw-loader' },
       {
         test: /\.(m?js|jsx|tsx|ts)$/,
         include: getPath('src'),
