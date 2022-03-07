@@ -1,6 +1,6 @@
 import { css } from 'styled-components';
 
-import { hexToRgba, isString } from '../utils';
+import { isNumber } from '../utils';
 
 export const normalizeMixin = css`
   &,
@@ -12,14 +12,15 @@ export const normalizeMixin = css`
   font-family: ${({ theme }) => theme.fontFamily};
 `;
 
-export const smoothCornersMixin = (smoothCorners: { x?: number; y?: number }, borderRadius: string | number) => css`
-  border-radius: ${isString(borderRadius) ? `${borderRadius}px` : borderRadius};
+export const figmaSmoothCornersMixin = (borderRadius: string | number, cornerSmoothing: number) => css`
+  border-radius: ${isNumber(borderRadius) ? `${borderRadius}px` : borderRadius};
 
-  @supports (mask-image: paint(smooth-corners)) or (-webkit-mask-image: paint(smooth-corners)) {
+  @supports (mask-image: paint(figma-smooth-corners)) or (-webkit-mask-image: paint(figma-smooth-corners)) {
     border-radius: 0;
-    mask-image: paint(smooth-corners);
-    -webkit-mask-image: paint(smooth-corners);
-    --smooth-corners: ${[smoothCorners?.x ?? 0, smoothCorners?.y].filter(Boolean).join(',')};
+    --corner-radius: ${parseInt(borderRadius.toString())};
+    --corner-smoothing: ${cornerSmoothing};
+    mask-image: paint(figma-smooth-corners);
+    -webkit-mask-image: paint(figma-smooth-corners);
   }
 `;
 
