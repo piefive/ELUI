@@ -2,16 +2,15 @@ import styled, { css } from 'styled-components';
 
 import { Typography } from 'components';
 
-import { smoothCornersMixin } from '../mixins';
+import { figmaSmoothCornersMixin } from '../mixins';
 import { TStyledComponentsProps, getComponentStyle } from '../get-component-style';
 
 type TGetBorderRadius = {
-  x?: number;
-  y?: number;
   borderRadius: number;
+  cornerSmoothing: number;
 };
 
-export const SmoothCorners = ({ x, y, borderRadius }: TGetBorderRadius) => {
+export const FigmaSmoothCorners = ({ borderRadius, cornerSmoothing }: TGetBorderRadius) => {
   return (
     <>
       <StyledDoc>
@@ -19,7 +18,7 @@ export const SmoothCorners = ({ x, y, borderRadius }: TGetBorderRadius) => {
           Smooth corners
         </Typography>
         <Typography variant="caption">
-          Superellipse masks using the CSS{' '}
+          Figma smooth corners masks using the CSS{' '}
           <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/Houdini" target="_blank">
             Houdini API
           </a>
@@ -32,7 +31,7 @@ export const SmoothCorners = ({ x, y, borderRadius }: TGetBorderRadius) => {
         <StyledRow>
           <StyledTest
             styled={css`
-              ${smoothCornersMixin({ x, y }, borderRadius)};
+              ${figmaSmoothCornersMixin(borderRadius, cornerSmoothing)};
               margin-right: 20px;
             `}
           >
@@ -49,7 +48,7 @@ export const SmoothCorners = ({ x, y, borderRadius }: TGetBorderRadius) => {
         </Typography>
         <Typography variant="caption" typographyStyle={{ whiteSpace: 'pre-wrap' }}>
           {`const StyledBox = styled.div\`
-  \${smoothCornersMixin({ x: ${x ?? 0}, y: ${y ?? 0} }, ${borderRadius ?? 0})};
+  \${figmaSmoothCornersMixin(${borderRadius}, ${cornerSmoothing})};
 \`;`}
         </Typography>
       </StyledDoc>
@@ -85,10 +84,9 @@ const StyledTest = styled.div<{ styled?: TStyledComponentsProps }>`
 
 export default {
   title: 'Utils/Mixins',
-  component: SmoothCorners,
+  component: FigmaSmoothCorners,
   args: {
-    x: 10,
-    borderRadius: 10,
-    y: null,
+    borderRadius: 24,
+    cornerSmoothing: 0.6,
   },
 };

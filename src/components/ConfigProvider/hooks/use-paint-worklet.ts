@@ -7,10 +7,10 @@ export const usePaintWorklet = (paintWorkletsPath = './paint-worklets') => {
 
   useMount(() => {
     if (!isLoaded.current) {
-      const enableWorklets = ['smooth-corners.js'];
+      const enableWorklets = ['figma-smooth-corners.js'];
 
-      for (const paintWorklet of enableWorklets) registerPaintWorklet(`${paintWorkletsPath}/${paintWorklet}`);
-      isLoaded.current = true;
+      for (const paintWorklet of enableWorklets)
+        registerPaintWorklet(`${paintWorkletsPath}/${paintWorklet}`).then(() => (isLoaded.current = true));
     }
   });
 };
