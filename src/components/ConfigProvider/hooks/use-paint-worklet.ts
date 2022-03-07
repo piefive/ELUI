@@ -1,16 +1,21 @@
-import { useRef } from 'react';
+import { useLayoutEffect, useRef } from 'react';
 
-import { registerPaintWorklet, useMount } from 'lib';
+import { registerPaintWorklet } from 'lib';
 
-export const usePaintWorklet = (paintWorkletsPath = './paint-worklets') => {
-  const isLoaded = useRef(false);
+import figmaSmoothCorners from '../worklets/figma-smooth-corners.txt';
 
-  useMount(() => {
-    if (!isLoaded.current) {
-      const enableWorklets = ['figma-smooth-corners.js'];
+export const usePaintWorklet = (paintWorklets: string[]) => {
+  const loadedWorklets = useRef([]);
+  const worklets = useRef([
+    ...(paintWorklets?.map(worklet => ({ worklet, type: 'link' })) ?? []),
+    { worklet: figmaSmoothCorners, type: 'js' },
+  ]);
 
-      for (const paintWorklet of enableWorklets)
-        registerPaintWorklet(`${paintWorkletsPath}/${paintWorklet}`).then(() => (isLoaded.current = true));
-    }
+  useLayoutEffect(() => {
+    for (const { worklet, type } of worklets.current)
+      if (!loadedWorklets.current.includes(worklet))
+        registerPaintWorklet(worklet, type as 'link' | 'js').then(
+          () => (loadedWorklets.current = [...loadedWorklets.current, worklet])
+        );
   });
 };
