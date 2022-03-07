@@ -1,10 +1,10 @@
 import { includes } from 'ramda';
-import { Children, ReactNode, isValidElement } from 'react';
+import { Children, ReactNode } from 'react';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type TAnyValue = any;
 
-export const isClient = () => !isUndefined(window);
+export const isClient = () => typeof window !== 'undefined';
 
 export const isString = (value: unknown): value is string => typeof value === 'string';
 
