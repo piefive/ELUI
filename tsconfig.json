@@ -1,9 +1,15 @@
 {
   "compilerOptions": {
     "outDir": "dist",
-    "baseUrl": "src",
+    "module": "commonjs",
+    "baseUrl": "./src",
+    "paths": {
+      "components/*": ["./components/*"],
+      "lib/*": ["./lib/*"],
+      "internal/*": ["./internal/*"]
+    },
     "moduleResolution": "node",
-    "target": "esnext",
+    "target": "es5",
     "importsNotUsedAsValues": "error",
     "noImplicitAny": true,
     "declaration": true,
@@ -15,10 +21,7 @@
     "forceConsistentCasingInFileNames": true,
     "jsx": "react-jsx",
     "typeRoots": ["./@types"],
-    "lib": [
-      "esnext",
-      "DOM"
-    ]
+    "lib": ["dom", "es2015", "es2017", "esnext"],
   },
   "exclude": ["**/__tests__/**", "**/*.test.ts"]
 }

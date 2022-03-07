@@ -22,8 +22,8 @@ export type TTabsContext<TabValue = TTabValue> = {
   activeTab?: TabValue;
   onTabChange?: TTabHandler<TabValue>;
   tabStyle?: TTabStyle;
-  onActivePositionChange: (position: TActiveTabPosition) => void;
-  _scrollContainerRef: RefObject<U.Nullable<TScrollContainerRef>>;
+  onActivePositionChange?: (position: TActiveTabPosition) => void;
+  _scrollContainerRef?: RefObject<U.Nullable<TScrollContainerRef>>;
 };
 
 export interface ITabsComponent<TabValue = TTabValue> extends Omit<TTabsContext<TabValue>, '_scrollBoxRef'> {
