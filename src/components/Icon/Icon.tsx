@@ -51,4 +51,5 @@ interface IIcon extends TIconComponent {
 export const Icon = IconComponent as IIcon;
 Icon.displayName = 'Icon';
 
-for (const NamedIcon in Icons) Icon[NamedIcon] = (Icons as unknown)[NamedIcon];
+// eslint-disable-next-line
+for (const NamedIcon in Icons) (Icon as any)[NamedIcon] = (Icons as any)[NamedIcon];

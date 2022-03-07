@@ -6,7 +6,7 @@ export const combineClassNames = (...args: Array<TClassName | Record<string, boo
   args
     .reduce<string[]>((acc, curr) => {
       if (isObject(curr)) {
-        for (const key in curr) if (curr[key]) acc.push(key);
+        for (const key in curr) if (curr[key as keyof typeof curr]) acc.push(key);
       } else {
         if (curr) acc.push(<string>curr);
       }

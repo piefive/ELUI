@@ -1,21 +1,16 @@
-import { useLayoutEffect, useRef } from 'react';
+import { useRef } from 'react';
 
-import { registerPaintWorklet } from 'lib';
-
-import figmaSmoothCorners from '../worklets/figma-smooth-corners.txt';
+import { registerPaintWorklet, useIsomorphicLayoutEffect } from 'lib';
 
 export const usePaintWorklet = (paintWorklets: string[]) => {
   const loadedWorklets = useRef([]);
-  const worklets = useRef([
-    ...(paintWorklets?.map(worklet => ({ worklet, type: 'link' })) ?? []),
-    { worklet: figmaSmoothCorners, type: 'js' },
-  ]);
 
-  useLayoutEffect(() => {
-    for (const { worklet, type } of worklets.current)
-      if (!loadedWorklets.current.includes(worklet))
-        registerPaintWorklet(worklet, type as 'link' | 'js').then(
-          () => (loadedWorklets.current = [...loadedWorklets.current, worklet])
-        );
+  useIsomorphicLayoutEffect(() => {
+    if (paintWorklets)
+      for (const worklet of paintWorklets)
+        if (!loadedWorklets.current.includes(worklet))
+          registerPaintWorklet(worklet, 'link').then(
+            () => (loadedWorklets.current = [...loadedWorklets.current, worklet])
+          );
   });
 };
