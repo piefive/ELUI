@@ -1,4 +1,4 @@
-import type { TStyledComponentsProps } from 'lib';
+import type { TStyledComponentsProps } from 'lib/index';
 
 export type TFieldMessage = {
   className?: string;

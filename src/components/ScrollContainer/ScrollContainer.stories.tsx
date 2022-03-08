@@ -18,13 +18,16 @@ export default {
 
 export const Default = (args: TScrollContainer) => {
   return (
-    <StyledBox>
-      <Typography tag="h1" variant="h4" typographyStyle={{ display: 'block' }}>
-        ScrollContainer
-      </Typography>
-      <Typography variant="caption">
-        Portals provide a way to render children into a DOM node that exists outside the hierarchy of the DOM component.
-      </Typography>
+    <>
+      <StyledBox>
+        <Typography tag="h1" variant="h4" typographyStyle={{ display: 'block' }}>
+          ScrollContainer
+        </Typography>
+        <Typography variant="caption">
+          Portals provide a way to render children into a DOM node that exists outside the hierarchy of the DOM
+          component.
+        </Typography>
+      </StyledBox>
       <StyledBox style={{ marginTop: 24 }}>
         <StyledContent>
           <ScrollContainer {...args}>
@@ -44,7 +47,7 @@ export const Default = (args: TScrollContainer) => {
           </ScrollContainer>
         </StyledContent>
       </StyledBox>
-    </StyledBox>
+    </>
   );
 };
 

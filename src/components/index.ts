@@ -6,3 +6,4 @@ export * from './Icon';
 export * from './SegmentedControl';
 export * from './ScrollContainer';
 export * from './Tabs';
+export * from './CheckboxGroup';

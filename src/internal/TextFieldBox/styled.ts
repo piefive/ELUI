@@ -1,25 +1,12 @@
 import styled, { DefaultTheme, css } from 'styled-components';
 import type { U } from 'ts-toolbelt';
 
-import { TStyledComponentsProps, getComponentStyle, normalizeMixin } from 'lib';
-
-import { FieldMessage } from '../FieldMessage';
-
 type TField = {
   theme: DefaultTheme;
   validate: U.Nullable<boolean>;
   isFocused: boolean;
   isDisabled: boolean;
 };
-
-export const StyledTextFieldBox = styled.div<{ boxStyle?: TStyledComponentsProps }>`
-  ${normalizeMixin};
-
-  width: 100%;
-  padding-bottom: 24px;
-
-  ${({ theme, boxStyle }) => getComponentStyle(boxStyle, { theme })}
-`;
 
 const boxShadowSize = '0 0 0 4px';
 
@@ -106,8 +93,4 @@ export const StyledLeftSlot = styled.div`
   display: flex;
   align-items: center;
   margin-right: 16px;
-`;
-
-export const StyledValidateMessage = styled(FieldMessage)<{ validate: boolean }>`
-  color: ${({ theme, validate }) => (validate ? theme.palette.success : theme.palette.error)};
 `;

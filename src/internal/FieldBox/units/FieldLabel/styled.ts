@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { Typography } from 'components';
+import { Typography } from 'components/index';
 
 export const StyledFieldLabel = styled.label`
   display: flex;
