@@ -6,4 +6,6 @@ export * from './Icon';
 export * from './SegmentedControl';
 export * from './ScrollContainer';
 export * from './Tabs';
+export * from './Portal';
 export * from './CheckboxGroup';
+export * from './RadioGroup';

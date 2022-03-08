@@ -64,6 +64,7 @@ const checkboxInputMixin = ({ theme, isChecked, isDisabled, variant }: TStyledCh
       cursor: pointer;
 
       .${CHECKBOX_INPUT_CN} {
+        border-color: ${theme.palette.primary_400};
         box-shadow: ${BOX_SHADOW_PROP} ${theme.palette.primary_100};
       }
     }
