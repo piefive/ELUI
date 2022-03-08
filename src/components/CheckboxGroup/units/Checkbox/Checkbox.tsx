@@ -13,7 +13,20 @@ import { StyledCheckboxBox } from './styled';
 
 export const Checkbox = forwardRef<HTMLInputElement, ICheckbox>(
   (
-    { variant, label, className, validate, validateMessage, message, boxStyle, onChange, checked, disabled, ...rest },
+    {
+      variant,
+      label,
+      className,
+      validate,
+      validateMessage,
+      message,
+      boxStyle,
+      onChange,
+      checked,
+      disabled,
+      name,
+      ...rest
+    },
     checkboxRef
   ) => {
     const ctx = useCheckboxContext();
@@ -22,7 +35,8 @@ export const Checkbox = forwardRef<HTMLInputElement, ICheckbox>(
     const isGroup = Boolean(ctx);
 
     const checkboxProps: Partial<ICheckboxInput> = {
-      checked: ctx?.checkedValues ? includes(String(value), ctx.checkedValues) : checked,
+      name: isGroup ? ctx.name : name,
+      checked: isGroup ? includes(String(value), ctx?.checkedValues ?? []) : checked,
       onChange: ctx?.onChange ?? onChange,
       disabled: ctx?.disabled ?? disabled,
     };
