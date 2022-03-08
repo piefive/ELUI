@@ -1,7 +1,8 @@
 import { ChangeEventHandler, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import type { ICheckbox, TCheckboxChecked } from './types';
+import type { ICheckbox, TCheckboxChecked } from '../../types';
+
 import { Checkbox } from './Checkbox';
 
 export default {
@@ -20,7 +21,6 @@ export default {
   args: {
     variant: 'primary',
     label: 'Checkbox label',
-    description: 'Description',
     checked: false,
     disabled: false,
     message: 'Description',

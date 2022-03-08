@@ -8,4 +8,6 @@ export interface ISelectionFieldBox extends Omit<TFieldBox, 'isRequired' | 'onLa
   variant?: TSelectionFieldVariant;
   children: ReactNode;
   boxClassName?: string;
+  isChecked?: boolean;
+  isDisabled?: boolean;
 }

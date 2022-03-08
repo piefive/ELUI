@@ -1,21 +1,22 @@
 import styled, { DefaultTheme, css } from 'styled-components';
 
-import { SelectionFieldBox } from 'internal';
+import { SelectionFieldBox, TSelectionFieldVariant } from 'internal/SelectionFieldBox';
 
-import { CHECKBOX_INPUT_CN } from './constants';
+import { CHECKBOX_INPUT_CN } from '../../constants';
 
 type TStyledCheckedBox = {
+  variant?: TSelectionFieldVariant;
   isChecked: boolean;
   isDisabled: boolean;
 };
 
 const BOX_SHADOW_PROP = '0 0 0 4px';
 
-const checkboxInputMixin = ({ theme, isChecked, isDisabled }: TStyledCheckedBox & { theme: DefaultTheme }) => {
+const checkboxInputMixin = ({ theme, isChecked, isDisabled, variant }: TStyledCheckedBox & { theme: DefaultTheme }) => {
   if (isDisabled)
     return css`
       .${CHECKBOX_INPUT_CN} {
-        background-color: ${theme.palette[isChecked ? 'grey_200' : 'white']};
+        background-color: ${variant === 'primary' && isChecked ? theme.palette.grey_200 : theme.palette.white};
         color: ${theme.palette[isChecked ? 'grey_400' : 'white']};
         border-color: ${theme.palette.grey_200};
       }

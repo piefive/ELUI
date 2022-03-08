@@ -8,20 +8,29 @@ import { StyledDescription, StyledSelectionBox, StyledSelectionContent } from '.
 export const SelectionFieldBox = ({
   className,
   boxClassName,
-  variant,
+  variant = 'primary',
   label,
   message,
   children,
+  isChecked,
+  isDisabled,
   ...rest
 }: ISelectionFieldBox) => {
+  const hasContent = Boolean(label || message);
   return (
     <FieldBox className={boxClassName} {...rest}>
-      <StyledSelectionBox {...{ className }}>
+      <StyledSelectionBox {...{ className, variant, isChecked, isDisabled }}>
         {children}
-        <StyledSelectionContent>
-          <Typography variant="b1">{label}</Typography>
-          <StyledDescription variant="b2">{message}</StyledDescription>
-        </StyledSelectionContent>
+        {hasContent && (
+          <StyledSelectionContent>
+            <Typography variant="b1" typographyStyle={{ color: 'inherit' }}>
+              {label}
+            </Typography>
+            <StyledDescription variant="b2" {...{ isDisabled }}>
+              {message}
+            </StyledDescription>
+          </StyledSelectionContent>
+        )}
       </StyledSelectionBox>
     </FieldBox>
   );

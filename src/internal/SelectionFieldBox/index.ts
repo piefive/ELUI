@@ -1,2 +1,2 @@
 export { SelectionFieldBox } from './SelectionFieldBox';
-export type { ISelectionFieldBox } from './types';
+export type { ISelectionFieldBox, TSelectionFieldVariant } from './types';
