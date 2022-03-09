@@ -1,0 +1,1 @@
+export { ChipCheckedIcon } from './ChipCheckedIcon';

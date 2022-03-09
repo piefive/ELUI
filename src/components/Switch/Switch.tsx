@@ -1,5 +1,5 @@
 import { MouseEvent, forwardRef } from 'react';
-import { animated, config, useSpring } from 'react-spring';
+import { animated, useSpring } from 'react-spring';
 
 import { combineClassNames, useFirstMountState } from 'lib';
 

@@ -33,11 +33,8 @@ export const useButtonActive = ({ onKeyDown, onKeyUp }: TUseButtonKeyPress) => {
     [onKeyUp]
   );
 
-  const customAttr = getCustomAttr(BUTTON_ENTER_PRESSED_ATTR, isButtonPressed);
-
   return {
-    ...bindCustomAttr(customAttr),
-    isButtonPressed,
+    ...bindCustomAttr(getCustomAttr(BUTTON_ENTER_PRESSED_ATTR, isButtonPressed)),
     onKeyUp: onButtonUp,
     onKeyDown: onButtonDown,
   };

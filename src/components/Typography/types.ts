@@ -22,7 +22,7 @@ type TBaseTypography = {
   className?: string;
   children?: ReactNode;
   onClick?: (event: MouseEvent) => void;
-  color?: keyof DefaultTheme['palette'];
+  color?: keyof DefaultTheme['palette'] | 'inherit';
   typographyStyle?: TStyledComponentsProps;
 };
 
