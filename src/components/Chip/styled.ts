@@ -1,15 +1,17 @@
 import styled, { DefaultTheme, css } from 'styled-components';
 
-import { normalizeMixin } from 'lib';
+import { getComponentStyle, normalizeMixin } from 'lib';
 import { Button } from 'components/Button';
 
-import type { TChipScheme, TChipVariant } from './types';
+import type { TChipScheme, TChipStyle, TChipVariant } from './types';
 
 type TStyledChip = {
   variant: TChipVariant;
   scheme: TChipScheme;
   checked: boolean;
+  isDeletable?: boolean;
   onClick?: () => void;
+  boxStyle?: TChipStyle;
 };
 
 const BOX_SHADOW_PROP = '0 0 0 4px';
@@ -89,7 +91,7 @@ export const StyledChip = styled.div<TStyledChip>`
 
   position: relative;
   width: fit-content;
-  padding: 4px 4px 4px 8px;
+  padding: 4px ${({ isDeletable }) => (isDeletable ? 4 : 8)}px 4px 8px;
   border-radius: 8px;
   border: 2px solid transparent;
   transition-property: border-color, background-color, color, box-shadow;
@@ -102,6 +104,8 @@ export const StyledChip = styled.div<TStyledChip>`
   }
 
   ${chipVariantMixin};
+
+  ${({ theme, checked, boxStyle }) => getComponentStyle(boxStyle, { theme, checked })}
 `;
 
 export const StyledChipContent = styled.div`
@@ -110,12 +114,19 @@ export const StyledChipContent = styled.div`
   justify-content: center;
 `;
 
+export const StyledLeftSlot = styled.div`
+  display: flex;
+  align-items: center;
+  margin-right: 8px;
+`;
+
 export const StyledDeleteButton = styled(Button)<{ isWhite: boolean }>`
   margin-left: 4px;
   padding: 0;
   border: 0;
   background-color: transparent;
   color: inherit;
+  transition-duration: 0s;
 
   &:not(:disabled):hover {
     background-color: ${({ theme, isWhite }) => (isWhite ? theme.palette.white : theme.palette.primary_700)};

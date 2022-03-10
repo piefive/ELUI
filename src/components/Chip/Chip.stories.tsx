@@ -2,6 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 
 import { useUpdateEffect } from 'lib';
+import { Icon } from 'components/Icon';
 
 import type { IChipDefault, IChipInput, TChipHandler } from './types';
 import { Chip } from './Chip';
@@ -15,7 +16,9 @@ export default {
   },
   argTypes: {
     onChip: { control: { type: null } },
+    onDelete: { control: { type: null } },
     ref: { control: { type: null } },
+    leftSlot: { control: { type: null } },
   },
 };
 
@@ -38,11 +41,14 @@ export const Input = (arg: IChipInput) => {
 
   return (
     <StyledBox>
-      <Chip variant="input" {...arg} {...{ checked, onChip, onDelete }}>
+      <Chip variant="input" {...arg} leftSlot={<Icon.Info size={16} />} {...{ checked, onChip, onDelete }}>
         {arg.children}
       </Chip>
     </StyledBox>
   );
+};
+Input.argTypes = {
+  scheme: { control: { type: null } },
 };
 
 export const Default = (arg: IChipDefault) => {

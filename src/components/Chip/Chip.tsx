@@ -1,14 +1,14 @@
 import { forwardRef } from 'react';
 import type { Ref } from 'react';
 
-import { ChipCheckedIcon } from 'components/Chip/units';
 import { combineClassNames, createEventFn } from 'lib';
 import { Typography } from 'components/Typography';
 import { Icon } from 'components/Icon';
 
 import type { IChipDefault, IChipInput, TChip, TChipForwardRef, TChipValue } from './types';
 import { CHIP_CN } from './constants';
-import { StyledChip, StyledChipContent, StyledDeleteButton } from './styled';
+import { ChipCheckedIcon } from './units';
+import { StyledChip, StyledChipContent, StyledDeleteButton, StyledLeftSlot } from './styled';
 
 const PRESSED_KEYS = ['Enter', 'Space'];
 
@@ -26,6 +26,8 @@ const ChipComponent = <Value extends TChipValue = TChipValue>(
       ref={chipRef}
       className={combineClassNames(className, CHIP_CN)}
       tabIndex={!disabled ? 0 : -1}
+      isDeletable={Boolean(onDelete)}
+      {...(variant === 'input' ? { ['aria-checked']: checked } : null)}
       onClick={!disabled && onChip ? () => onChip({ value, checked }) : undefined}
       onKeyUp={
         !disabled && onChip
@@ -36,6 +38,7 @@ const ChipComponent = <Value extends TChipValue = TChipValue>(
     >
       <StyledChipContent>
         {withCheckedIcon && <ChipCheckedIcon {...{ checked }} />}
+        {leftSlot && <StyledLeftSlot>{leftSlot}</StyledLeftSlot>}
         <Typography variant="b1" color="inherit">
           {children}
         </Typography>

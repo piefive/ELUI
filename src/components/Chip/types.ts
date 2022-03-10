@@ -1,5 +1,7 @@
 import type { ReactElement, ReactNode, Ref } from 'react';
 
+import type { TStyledComponentsProps } from 'lib/styled';
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type TChipValue = any;
 
@@ -14,12 +16,15 @@ export type TChipHandlerArgs<Value = TChipValue> = {
 
 export type TChipHandler<Value = TChipValue> = ({ value, checked }: TChipHandlerArgs<Value>) => void;
 
+export type TChipStyle = TStyledComponentsProps<{ checked: boolean }>;
+
 type TChipProps<Value extends TChipValue = TChipValue> = {
   className?: string;
   leftSlot?: ReactNode;
   children?: ReactNode;
   value?: Value;
   onChip?: TChipHandler<Value>;
+  boxStyle?: TStyledComponentsProps;
 };
 
 export interface IChipDefault<Value extends TChipValue = TChipValue> extends TChipProps<Value> {
