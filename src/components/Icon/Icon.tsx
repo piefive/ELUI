@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 
-import { combineClassNames } from 'lib';
+import { bindAria, combineClassNames } from 'lib';
 
 import type { TIcon } from './types';
 import * as Icons from './units';
@@ -16,7 +16,7 @@ export const IconComponent = forwardRef<SVGSVGElement, TIcon>(
         className={combineClassNames(className, ICON_CN)}
         size={size ?? 24}
         {...rest}
-        aria-hidden
+        {...bindAria({ hidden: true })}
       >
         {children}
       </StyledSvg>

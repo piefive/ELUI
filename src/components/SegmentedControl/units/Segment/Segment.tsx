@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 
-import { isPrimitiveReactNode, useMeasure, useUpdateEffect } from 'lib';
+import { bindAria, isPrimitiveReactNode, useMeasure, useUpdateEffect } from 'lib';
 
 import { useSegmentedControlContext } from '../../hooks';
 
@@ -30,17 +30,16 @@ export const Segment = ({ name, value, disabled = false, leftSlot, children, box
       ref={segmentRef}
       role="tab"
       isActive={isActiveSegment}
-      aria-selected={isActiveSegment}
       onClick={!disabled ? () => radioRef.current?.click() : undefined}
+      {...bindAria({ selected: isActiveSegment })}
       {...{ boxStyle, segmentStyle, disabled }}
     >
       <StyledSegmentRadio
         ref={radioRef}
         tabIndex={-1}
         type="radio"
-        checked={isActiveSegment}
-        aria-hidden={true}
         onChange={onSegmentChange}
+        {...bindAria({ checked: isActiveSegment, hidden: true })}
         {...{ value, name, disabled }}
       />
       {leftSlot && <StyledLeftSlot>{leftSlot}</StyledLeftSlot>}

@@ -2,6 +2,7 @@ export * from './is';
 export * from './bind-custom-attr';
 export * from './next-tick';
 export * from './create-event-fn';
+export * from './aria';
 export { combineClassNames } from './combine-class-names';
 export { createException } from './create-exception';
 export { registerPaintWorklet } from './register-paint-worklet';
