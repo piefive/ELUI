@@ -9,3 +9,4 @@ export * from './Tabs';
 export * from './Portal';
 export * from './CheckboxGroup';
 export * from './RadioGroup';
+export * from './Chip';

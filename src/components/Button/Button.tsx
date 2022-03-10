@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import { forwardRef } from 'react';
 
 import { combineClassNames, isString } from 'lib';
 
@@ -23,10 +23,7 @@ export const Button = forwardRef<HTMLButtonElement, IButton>(
     },
     ref
   ) => {
-    const { isButtonPressed, ...pressActions } = useButtonActive({
-      onKeyUp,
-      onKeyDown,
-    });
+    const pressActions = useButtonActive({ onKeyUp, onKeyDown });
 
     return (
       <StyledButton
