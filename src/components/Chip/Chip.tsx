@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 import type { Ref } from 'react';
 
-import { combineClassNames, createEventFn } from 'lib';
+import { bindAria, combineClassNames, createEventFn } from 'lib';
 import { Typography } from 'components/Typography';
 import { Icon } from 'components/Icon';
 
@@ -27,7 +27,7 @@ const ChipComponent = <Value extends TChipValue = TChipValue>(
       className={combineClassNames(className, CHIP_CN)}
       tabIndex={!disabled ? 0 : -1}
       isDeletable={Boolean(onDelete)}
-      {...(variant === 'input' ? { ['aria-checked']: checked } : null)}
+      {...bindAria(variant === 'input' ? { checked, disabled } : null)}
       onClick={!disabled && onChip ? () => onChip({ value, checked }) : undefined}
       onKeyUp={
         !disabled && onChip
@@ -46,7 +46,8 @@ const ChipComponent = <Value extends TChipValue = TChipValue>(
           <StyledDeleteButton
             variant="custom"
             isWhite={checked}
-            onClick={createEventFn(() => onDelete({ value, checked }), { isStopPropagation: true })}
+            onClick={!disabled && createEventFn(() => onDelete({ value, checked }), { isStopPropagation: true })}
+            {...{ disabled }}
           >
             <Icon.CrossSm />
           </StyledDeleteButton>

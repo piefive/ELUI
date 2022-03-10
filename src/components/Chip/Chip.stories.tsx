@@ -47,6 +47,9 @@ export const Input = (arg: IChipInput) => {
     </StyledBox>
   );
 };
+Input.args = {
+  disabled: false,
+};
 Input.argTypes = {
   scheme: { control: { type: null } },
 };

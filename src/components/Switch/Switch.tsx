@@ -1,7 +1,7 @@
 import { MouseEvent, forwardRef } from 'react';
 import { animated, useSpring } from 'react-spring';
 
-import { combineClassNames, useFirstMountState } from 'lib';
+import { bindAria, combineClassNames, useFirstMountState } from 'lib';
 
 import type { TSwitch } from './types';
 import { SWITCH_CN, SWITCH_OFFSET, SWITCH_TOGGLE_CN, SWITCH_WIDTH, TOGGLE_WIDTH } from './constants';
@@ -45,10 +45,8 @@ export const Switch = forwardRef<HTMLButtonElement, TSwitch>(
         role="switch"
         className={combineClassNames(className, SWITCH_CN)}
         tabIndex={isDisabled ? -1 : 0}
-        aria-checked={checked}
-        aria-disabled={isDisabled}
-        aria-busy={isLoading}
         onClick={handleChange}
+        {...bindAria({ checked, disabled: isDisabled, busy: isLoading })}
         {...{ disabled, checked, isLoading, boxStyle }}
       >
         {uncheckedSlot}

@@ -1,6 +1,6 @@
 import styled, { DefaultTheme, css } from 'styled-components';
 
-import { TStyledComponentsProps, getComponentStyle, hexToRgba, normalizeMixin } from 'lib';
+import { TStyledComponentsProps, getAria, getComponentStyle, hexToRgba, normalizeMixin } from 'lib';
 
 import { SWITCH_OFFSET, SWITCH_WIDTH, TOGGLE_WIDTH } from './constants';
 import type { TStyledToggleProps } from './types';
@@ -112,7 +112,7 @@ export const StyledSwitch = styled.button<TStyledSwitch>`
     outline: none;
   }
 
-  &:not(:disabled):not([aria-busy='true']):active {
+  &:not(:disabled):not([${getAria('aria-busy', true)}]):active {
     ${StyledToggle}::after {
       left: ${({ checked }) => (checked ? -8 : 8)}px;
     }

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { equals } from 'ramda';
 
-import { combineClassNames, isPrimitiveReactNode, useMeasure } from 'lib';
+import { bindAria, combineClassNames, isPrimitiveReactNode, useMeasure } from 'lib';
 
 import type { TTabValue } from '../../types';
 import { Typography } from '../../../Typography';
@@ -47,7 +47,7 @@ export const Tab = <TabValue extends TTabValue = TTabValue>({
       className={combineClassNames(className, TAB_CN)}
       isActive={isActiveTab}
       tabIndex={disabled ? -1 : 0}
-      aria-selected={isActiveTab}
+      {...bindAria({ selected: isActiveTab })}
       onClick={onTabChange && !isActiveTab ? event => onTabChange(value, event) : undefined}
       {...{ disabled, boxStyle, tabStyle }}
     >

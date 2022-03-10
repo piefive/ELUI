@@ -1,17 +1,16 @@
 import styled, { DefaultTheme, css } from 'styled-components';
 
-import { getComponentStyle, getCustomAttr, normalizeMixin } from 'lib';
+import { getAria, getComponentStyle, normalizeMixin } from 'lib';
 
 import { Typography } from '../Typography';
 
 import type { TButtonStyle } from './types';
-import { BUTTON_ENTER_PRESSED_ATTR } from './constants';
 
 interface IStyledButton extends TButtonStyle {
   theme: DefaultTheme;
 }
 
-const PRESSED_BUTTON = getCustomAttr(BUTTON_ENTER_PRESSED_ATTR, true);
+const PRESSED_BUTTON = getAria('aria-disabled', true);
 
 const getButtonVariant = ({ theme, variant }: IStyledButton) => {
   switch (variant) {
