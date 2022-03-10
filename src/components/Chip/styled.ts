@@ -40,6 +40,14 @@ const chipVariantMixin = ({ theme, variant, checked, scheme }: TStyledChip & { t
           border-color: ${theme.palette.primary_800};
           box-shadow: none;
         }
+
+        &[disabled] {
+          cursor: not-allowed;
+          background-color: ${theme.palette.grey_200};
+          border-color: ${theme.palette.grey_200};
+          color: ${theme.palette.grey_400};
+          box-shadow: none;
+        }
       `;
 
     return css`
@@ -59,6 +67,14 @@ const chipVariantMixin = ({ theme, variant, checked, scheme }: TStyledChip & { t
       &:active {
         background-color: ${theme.palette.primary_100};
         border-color: ${theme.palette.primary_700};
+        box-shadow: none;
+      }
+
+      &[disabled] {
+        cursor: not-allowed;
+        background-color: ${theme.palette.white};
+        border-color: ${theme.palette.grey_200};
+        color: ${theme.palette.grey_400};
         box-shadow: none;
       }
     `;
