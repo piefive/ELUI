@@ -18,7 +18,7 @@ const DEFAULT_OFFSET: TPopoverOptions['offset'] = [0, 10];
 export const usePopover = <T extends HTMLElement = HTMLElement>({
   disabled,
   forceUpdateTarget,
-  placement = 'bottom-end',
+  placement = 'bottom-start',
   outsideRefs,
   onClose,
   checkTargetWidth = false,
@@ -78,7 +78,7 @@ export const usePopover = <T extends HTMLElement = HTMLElement>({
       ref: setPopperRef,
       style: {
         ...styles.popper,
-        width: checkTargetWidth ? targetElement?.clientWidth ?? 0 : 'auto',
+        width: checkTargetWidth ? targetElement?.clientWidth ?? 0 : 280,
       },
       ...attributes.popper,
     },

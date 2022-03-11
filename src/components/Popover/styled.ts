@@ -15,6 +15,7 @@ export const StyledPopoverTarget = styled.span<{ isOpen: boolean; targetStyle?: 
 export const StyledPopover = styled.div<{ isPopoverOpen: boolean; popoverStyle?: TStyledComponentsProps }>`
   ${normalizeMixin};
 
+  width: inherit;
   min-height: 50px;
   padding: 2px 0;
   border-radius: 8px;
@@ -43,6 +44,42 @@ export const StyledAnimateContainer = styled(animated.div)<{
 
   &[data-popper-placement='bottom-start'] {
     transform-origin: top left;
+  }
+
+  &[data-popper-placement='bottom-end'] {
+    transform-origin: top right;
+  }
+
+  &[data-popper-placement='right'] {
+    transform-origin: left;
+  }
+
+  &[data-popper-placement='right-start'] {
+    transform-origin: left top;
+  }
+
+  &[data-popper-placement='right-end'] {
+    transform-origin: left bottom;
+  }
+
+  &[data-popper-placement='left'] {
+    transform-origin: right;
+  }
+
+  &[data-popper-placement='left-start'] {
+    transform-origin: right top;
+  }
+
+  &[data-popper-placement='left-end'] {
+    transform-origin: right bottom;
+  }
+
+  &[data-popper-placement='top-start'] {
+    transform-origin: bottom left;
+  }
+
+  &[data-popper-placement='top-end'] {
+    transform-origin: bottom right;
   }
 
   ${({ styled, theme }) => getComponentStyle(styled, { theme })}
