@@ -10,3 +10,4 @@ export * from './Portal';
 export * from './CheckboxGroup';
 export * from './RadioGroup';
 export * from './Chip';
+export * from './Popover';

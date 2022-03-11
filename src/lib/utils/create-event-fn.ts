@@ -11,7 +11,7 @@ export const DEFAULT_OPTIONS: TEventFnOptions = {
 };
 
 export const createEventFn =
-  <Event extends SyntheticEvent = SyntheticEvent>(fn: (event: Event) => unknown, options?: TEventFnOptions) =>
+  <Event extends SyntheticEvent = SyntheticEvent>(fn?: (event: Event) => unknown, options?: TEventFnOptions) =>
   (event: Event) => {
     const { isPreventDefault, isStopPropagation } = { ...DEFAULT_OPTIONS, ...(options ?? null) };
 
@@ -19,5 +19,5 @@ export const createEventFn =
 
     if (isStopPropagation) event.stopPropagation();
 
-    fn(event);
+    fn?.(event);
   };
