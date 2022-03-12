@@ -21,7 +21,6 @@ type TPopoverChildren<T extends HTMLElement = HTMLElement> = (popoverOptions: IP
 
 export type TPopoverOptions = {
   disabled?: boolean;
-  isPopoverVisible?: boolean;
   forceUpdateTarget?: unknown;
   placement?: Placement;
   offset?: OffsetsFunction | [U.Nullable<number>, U.Nullable<number>];
@@ -39,4 +38,5 @@ export type TPopover<T extends HTMLElement = HTMLElement> = TPopoverOptions & {
   animateContainerStyle?: TStyledComponentsProps;
   animate?: boolean;
   isPortal?: boolean;
+  isPopoverVisible?: boolean;
 };
