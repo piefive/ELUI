@@ -5,21 +5,16 @@ export type TMenuValue = any;
 
 export type TMenuHandler<Value extends TMenuValue = TMenuValue> = (value: Value) => void;
 
-export type TMenuItemContext = {
-  onClick: () => void;
-  children: ReactNode;
-};
-
 export type TMenuItem<Value extends TMenuValue = TMenuValue> = {
   className?: string;
-  value: Value;
+  value?: Value;
   leftSlot?: ReactNode | 'empty';
   rightSlot?: ReactNode;
   children: ReactNode;
-  context?: ReactNode;
   withSeparator?: boolean;
   disabled?: boolean;
   checked?: boolean;
+  onClick?: () => void;
 };
 
 export type TMenuContext<Value extends TMenuValue = TMenuValue> = {

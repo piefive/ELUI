@@ -29,9 +29,9 @@ export const Popover = <T extends HTMLElement = HTMLDivElement>({
   const { ref, style, ...popperProps } = popper;
 
   const transitionStyle = useTransition(isPopoverOpen, {
-    from: { y: -5, scale: 0 },
-    enter: { y: 0, scale: 1 },
-    leave: { y: -5, scale: 0 },
+    from: { scale: 0 },
+    enter: { scale: 1 },
+    leave: { scale: 0 },
     config: config.stiff,
     immediate: !animate,
   });

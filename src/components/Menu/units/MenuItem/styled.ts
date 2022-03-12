@@ -1,5 +1,7 @@
 import styled, { DefaultTheme, css } from 'styled-components';
 
+import { normalizeMixin } from 'lib';
+
 type TStyledMenuItem = {
   isChecked: boolean;
 };
@@ -19,12 +21,21 @@ const menuItemMixin = ({ isChecked, theme }: TStyledMenuItem & { theme: DefaultT
   `;
 };
 
-export const StyledMenuItem = styled.li<TStyledMenuItem>`
+export const StyledMenuItemBox = styled.li`
+  ${normalizeMixin};
+
+  width: 100%;
+  min-height: 44px;
+  padding: 2px 4px;
+  list-style: none;
+`;
+
+export const StyledMenuItem = styled.div<TStyledMenuItem>`
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  min-height: 44px;
+  height: 100%;
   padding: 12px 16px;
   border-radius: 6px;
   transition-property: background-color, color;
@@ -53,4 +64,12 @@ export const StyledMenuItemLeftSlotEmpty = styled.div`
 export const StyledMenuItemRightContent = styled.div`
   display: flex;
   align-items: center;
+  white-space: nowrap;
+`;
+
+export const StyledMenuItemSeparator = styled.div`
+  width: 100%;
+  height: 1px;
+  margin: 4px 0;
+  background-color: ${({ theme }) => theme.palette.grey_300};
 `;
