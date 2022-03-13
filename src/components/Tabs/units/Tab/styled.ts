@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { getComponentStyle } from 'lib';
+import { getComponentStyle, normalizeMixin } from 'lib';
 
 import type { TTabStyle } from '../../types';
 
@@ -9,6 +9,8 @@ export const StyledTab = styled.button<{
   boxStyle?: TTabStyle;
   segmentStyle?: TTabStyle;
 }>`
+  ${normalizeMixin};
+
   display: flex;
   align-items: center;
   justify-content: center;
