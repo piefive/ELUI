@@ -1,15 +1,18 @@
-type TEventArgs = [target: Element | Document, event: Omit<keyof DocumentEventMap, number>, listener: EventListener];
+type TEventArgs<
+  Target = Element | Document | MediaQueryList,
+  Event = Target extends MediaQueryList ? keyof MediaQueryListEventMap : keyof DocumentEventMap
+> = [target: Target, event: Omit<Event, number>, listener: EventListener];
 
 export const on = (...args: TEventArgs) => {
   const [target, event, listener] = args;
 
-  target.addEventListener(<keyof DocumentEventMap>event, listener);
+  target.addEventListener(<string>event, listener);
 };
 
 export const off = (...args: TEventArgs) => {
   const [target, event, listener] = args;
 
-  target.removeEventListener(<keyof DocumentEventMap>event, listener);
+  target.removeEventListener(<string>event, listener);
 };
 
 export const createListener = (...args: TEventArgs) => ({

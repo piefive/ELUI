@@ -1,11 +1,10 @@
-import { equals } from 'ramda';
 import { useState } from 'react';
 import styled from 'styled-components';
 
+import { isArray, useUpdateEffect } from 'lib';
+import { useMediaContext } from 'components/ConfigProvider';
 import { Popover } from 'components/Popover';
 import { Typography } from 'components/Typography';
-import { isArray } from 'lib/utils';
-import { useUpdateEffect } from 'lib/hooks';
 import { Icon } from 'components/Icon';
 
 import type { IMenu } from './types';
@@ -26,6 +25,8 @@ export default {
 
 export const Default = (arg: IMenu) => {
   const [value, setValue] = useState<number[] | number>(arg.multiple ? [] : undefined);
+
+  console.log(useMediaContext());
 
   const handleChange = (value: number) => {
     arg.onChange(value);
