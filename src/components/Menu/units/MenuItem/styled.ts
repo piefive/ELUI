@@ -4,9 +4,17 @@ import { normalizeMixin } from 'lib';
 
 type TStyledMenuItem = {
   isChecked: boolean;
+  disabled: boolean;
 };
 
-const menuItemMixin = ({ isChecked, theme }: TStyledMenuItem & { theme: DefaultTheme }) => {
+const menuItemMixin = ({ isChecked, disabled, theme }: TStyledMenuItem & { theme: DefaultTheme }) => {
+  if (disabled)
+    return css`
+      background-color: ${theme.palette.white};
+      color: ${theme.palette.grey_200};
+      cursor: not-allowed;
+    `;
+
   if (isChecked)
     return css`
       background-color: ${theme.palette.primary_100};

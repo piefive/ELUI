@@ -50,7 +50,7 @@ export const Default = (arg: IMenu) => {
         <Menu.Item leftSlot="empty" value={2} rightSlot={<Typography>2</Typography>}>
           item
         </Menu.Item>
-        <Menu.Item leftSlot={<Icon.Mail />} value={3} rightSlot={<Typography>3</Typography>}>
+        <Menu.Item leftSlot={<Icon.Mail />} value={3} rightSlot={<Typography>3</Typography>} disabled>
           item
         </Menu.Item>
         <Menu.Item leftSlot={<Icon.Mail />} value={4} rightSlot={<Typography>4</Typography>} withSeparator>

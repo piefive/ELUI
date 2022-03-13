@@ -25,7 +25,7 @@ export const MenuItem = <Value extends TMenuValue = TMenuValue>({
   rightSlot,
   value,
   checked,
-  disabled,
+  disabled = false,
   withSeparator,
   onClick,
 }: TMenuItem<Value>) => {
@@ -35,7 +35,7 @@ export const MenuItem = <Value extends TMenuValue = TMenuValue>({
   const isChecked = checked ?? activeValues.some(activeValue => equals(activeValue, value));
   const isChangeable = Boolean(!isNil(value) && onChange);
 
-  const handleChange = isChangeable ? () => onChange(value) : undefined;
+  const handleChange = isChangeable && !disabled ? () => onChange(value) : undefined;
 
   return (
     <>
@@ -51,13 +51,18 @@ export const MenuItem = <Value extends TMenuValue = TMenuValue>({
                 {leftSlot === 'empty' ? <StyledMenuItemLeftSlotEmpty /> : leftSlot}
               </StyledMenuItemLeftSlot>
             )}
-            {isPrimitiveReactNode(children) ? <Typography>{children}</Typography> : children}
+            {isPrimitiveReactNode(children) ? <Typography color="inherit">{children}</Typography> : children}
           </StyledMenuItemLeftContent>
           {isRightSlotRender && (
             <StyledMenuItemRightContent>
               {rightSlot}
               {multiple && isChangeable && (
-                <Checkbox checked={isChecked} onChange={handleChange} boxStyle={{ padding: 0, marginLeft: 24 }} />
+                <Checkbox
+                  checked={isChecked}
+                  onChange={handleChange}
+                  boxStyle={{ padding: 0, marginLeft: 24 }}
+                  {...{ disabled }}
+                />
               )}
             </StyledMenuItemRightContent>
           )}
