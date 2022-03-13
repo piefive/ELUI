@@ -17,14 +17,7 @@ type TMediaContext = {
   isDesktop: boolean;
 };
 
-const INITIAL_MEDIA_CONTEXT: TMediaContext = {
-  isDesktop: true,
-  isTablet: false,
-  isLaptop: false,
-  isMobile: false,
-};
-
-const MediaContext = createContext<TMediaContext>(INITIAL_MEDIA_CONTEXT);
+const MediaContext = createContext<TMediaContext>(null);
 
 export const MediaProvider = ({ children, defaultMedia }: TMediaProvider) => {
   const { media } = useTheme();
