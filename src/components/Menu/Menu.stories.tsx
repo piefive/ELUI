@@ -2,7 +2,6 @@ import { useState } from 'react';
 import styled from 'styled-components';
 
 import { isArray, useUpdateEffect } from 'lib';
-import { useMediaContext } from 'components/ConfigProvider';
 import { Popover } from 'components/Popover';
 import { Typography } from 'components/Typography';
 import { Icon } from 'components/Icon';
@@ -25,8 +24,6 @@ export default {
 
 export const Default = (arg: IMenu) => {
   const [value, setValue] = useState<number[] | number>(arg.multiple ? [] : undefined);
-
-  console.log(useMediaContext());
 
   const handleChange = (value: number) => {
     arg.onChange(value);
