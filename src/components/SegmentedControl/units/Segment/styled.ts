@@ -1,8 +1,8 @@
 import styled, { DefaultTheme, css } from 'styled-components';
 
-import { getComponentStyle } from 'lib';
+import { getComponentStyle, normalizeMixin } from 'lib';
+import { Typography } from 'components/Typography';
 
-import { Typography } from '../../../Typography';
 import type { TSegmentStyle } from '../../types';
 
 const segmentedBoxMixin = ({ isActive, theme }: { theme: DefaultTheme; isActive: boolean }) => {
@@ -52,6 +52,8 @@ export const StyledSegmentBox = styled.li<{
   boxStyle?: TSegmentStyle;
   segmentStyle?: TSegmentStyle;
 }>`
+  ${normalizeMixin};
+
   display: flex;
   align-items: center;
   position: relative;

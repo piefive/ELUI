@@ -106,7 +106,7 @@ export const StyledTypography = styled.div<IStyledTypography>`
 
   margin: 0;
   padding: 0;
-  color: ${({ color, theme }) => (color === 'inherit' ? color : theme.palette[color ?? 'grey_900'])};
+  color: ${({ color, theme }) => (color === 'inherit' || !color ? 'inherit' : theme.palette[color])};
 
   ${getTypographyVariant};
 
