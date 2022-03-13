@@ -14,3 +14,4 @@ export { useMeasure } from './use-measure';
 export { useAnimateHeight } from './use-animate-height';
 export { useControlledFocus } from './use-controlled-focus';
 export { useClickOutside } from './use-click-outside';
+export { useMedia } from './use-media';
