@@ -15,6 +15,10 @@ type TMediaContext = {
   isTablet: boolean;
   isLaptop: boolean;
   isDesktop: boolean;
+  isAfterTablet: boolean;
+  isAfterLaptop: boolean;
+  isBeforeLaptop: boolean;
+  isBeforeDesktop: boolean;
 };
 
 const MediaContext = createContext<TMediaContext>(null);
@@ -30,21 +34,26 @@ export const MediaProvider = ({ children, defaultMedia }: TMediaProvider) => {
   );
 
   const isLaptop = useMedia(
-    `(min-width: ${media.laptop}) and max-width: ${parseInt(media.desktop) - 1}px)`,
+    `(min-width: ${media.laptop}) and (max-width: ${parseInt(media.desktop) - 1}px)`,
     defaultMedia === 'laptop'
   );
 
-  const context = useMemo<TMediaContext>(
-    () => ({
-      isDesktop: !isMobile && !isTablet && !isLaptop,
+  const ctx = useMemo<TMediaContext>(() => {
+    const isDesktop = !isMobile && !isTablet && !isLaptop;
+
+    return {
       isMobile,
       isTablet,
       isLaptop,
-    }),
-    [isLaptop, isMobile, isTablet]
-  );
+      isDesktop,
+      isAfterTablet: isTablet || isLaptop || isDesktop,
+      isAfterLaptop: isLaptop || isDesktop,
+      isBeforeLaptop: isMobile || isTablet,
+      isBeforeDesktop: isMobile || isTablet || isLaptop,
+    };
+  }, [isLaptop, isMobile, isTablet]);
 
-  return createElement(MediaContext.Provider, { value: context }, children);
+  return createElement(MediaContext.Provider, { value: ctx }, children);
 };
 
 export const useMediaContext = () => useContext<TMediaContext>(MediaContext);
