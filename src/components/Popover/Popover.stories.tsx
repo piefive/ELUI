@@ -8,9 +8,12 @@ export default {
   component: Popover,
   title: 'ui/Popover',
   argTypes: {
-    popover: { control: 'text', defaultValue: 'in popover' },
-    popoverStyle: { defaultValue: {} },
-    targetStyle: { defaultValue: { width: 'fit-content' } },
+    popover: { control: 'text' },
+  },
+  args: {
+    popoverStyle: {},
+    targetStyle: { width: 'fit-content' },
+    popover: 'in popover',
   },
 };
 
