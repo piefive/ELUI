@@ -7,7 +7,7 @@ import { Input } from './Input';
 import type { IInput } from './types';
 
 export default {
-  title: 'ui/Input/Base',
+  title: 'ui/Input',
   component: Input,
   argTypes: {
     value: { control: 'text' },
@@ -18,7 +18,7 @@ export default {
   args: {
     label: 'Label',
     type: 'text',
-    value: '+7(431)232-11-11',
+    value: '',
     isRequired: true,
     isFocused: false,
     disabled: false,
@@ -29,7 +29,7 @@ export default {
   },
 };
 
-export const Default = (args: IInput) => {
+export const Base = (args: IInput) => {
   const { value: controlsValue } = args;
   const [value, setValue] = useState<string | number>('');
 
@@ -44,19 +44,33 @@ export const Default = (args: IInput) => {
 
   return (
     <StyledBox>
-      <Input
-        {...args}
-        leftSlot={<Icon.Search />}
-        rightSlot={<Icon.Mail />}
-        value={value}
-        onChange={handleChange}
-        maskOptions={{ mask: '+{7}(000)000-00-00', lazy: false }}
-      />
+      <Input {...args} leftSlot={<Icon.Search />} rightSlot={<Icon.Mail />} value={value} onChange={handleChange} />
     </StyledBox>
   );
 };
-Default.argTypes = {
+Base.argTypes = {
   maskOptions: { control: { type: null } },
+};
+
+export const Masked = (args: IInput) => {
+  const [value, setValue] = useState<string | number>('');
+
+  const handleChange: ChangeEventHandler<HTMLInputElement> = event => {
+    args?.onChange?.(event);
+    setValue(event.target.value);
+  };
+
+  return (
+    <StyledBox>
+      <Input {...args} leftSlot={<Icon.Search />} rightSlot={<Icon.Mail />} value={value} onChange={handleChange} />
+    </StyledBox>
+  );
+};
+Masked.argTypes = {
+  value: { control: { type: null } },
+};
+Masked.args = {
+  maskOptions: { mask: '+{7}(000)000-00-00', lazy: false },
 };
 
 const StyledBox = styled.div`

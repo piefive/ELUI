@@ -2,7 +2,7 @@ import { MutableRefObject, memo, useCallback, useEffect, useRef, useState } from
 import { useIMask } from 'react-imask';
 import { equals } from 'ramda';
 
-import { dispatchEvent, mergeRefs } from 'lib';
+import { dispatchEvent, mergeRefs, useFirstMountState } from 'lib';
 
 import { StyledInput } from '../../styled';
 
@@ -10,6 +10,7 @@ import type { IMaskInput } from './types';
 import { StyledMaskInput } from './styled';
 
 export const MaskInput = memo(({ maskOptions, inputRef, ...rest }: IMaskInput) => {
+  const isFirstMount = useFirstMountState();
   const ref = useRef<HTMLInputElement>();
   const [opts] = useState(maskOptions);
   const { value: inputValue } = rest;
@@ -18,7 +19,7 @@ export const MaskInput = memo(({ maskOptions, inputRef, ...rest }: IMaskInput) =
     dispatchEvent({ event: 'input', element: ref.current, property: 'value', args: value });
   }, []);
 
-  const { ref: innerRef, maskRef } = useIMask(opts, { onAccept: updateInput });
+  const { ref: innerRef, maskRef } = useIMask(opts, { onAccept: !isFirstMount ? updateInput : undefined });
 
   useEffect(() => {
     maskRef.current.value = inputValue.toString();
