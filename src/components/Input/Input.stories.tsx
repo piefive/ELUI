@@ -10,24 +10,15 @@ export default {
   title: 'ui/Input/Base',
   component: Input,
   argTypes: {
-    value: {
-      control: 'text',
-    },
-    leftSlot: {
-      control: { type: null },
-    },
-    rightSlot: {
-      control: { type: null },
-    },
-    validate: {
-      options: [true, false, null],
-      control: { type: 'radio' },
-    },
+    value: { control: 'text' },
+    leftSlot: { control: { type: null } },
+    rightSlot: { control: { type: null } },
+    validate: { options: [true, false, null], control: { type: 'radio' } },
   },
   args: {
     label: 'Label',
     type: 'text',
-    value: '',
+    value: '+7(431)232-11-11',
     isRequired: true,
     isFocused: false,
     disabled: false,
@@ -53,9 +44,19 @@ export const Default = (args: IInput) => {
 
   return (
     <StyledBox>
-      <Input {...args} leftSlot={<Icon.Search />} rightSlot={<Icon.Mail />} value={value} onChange={handleChange} />
+      <Input
+        {...args}
+        leftSlot={<Icon.Search />}
+        rightSlot={<Icon.Mail />}
+        value={value}
+        onChange={handleChange}
+        maskOptions={{ mask: '+{7}(000)000-00-00', lazy: false }}
+      />
     </StyledBox>
   );
+};
+Default.argTypes = {
+  maskOptions: { control: { type: null } },
 };
 
 const StyledBox = styled.div`

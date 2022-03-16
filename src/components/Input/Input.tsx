@@ -1,5 +1,6 @@
 import { forwardRef } from 'react';
 
+import { MaskInput } from 'components/Input/units';
 import { TextFieldBox } from 'internal';
 import { combineClassNames, useControlledFocus, useForkForwardedRef } from 'lib';
 
@@ -26,12 +27,15 @@ export const Input = forwardRef<HTMLInputElement, IInput>(
       rightSlot,
       isClearable = true,
       isFocused,
+      maskOptions,
       ...rest
     },
     inputRef
   ) => {
     const [setRef, ref] = useForkForwardedRef<HTMLInputElement>(inputRef);
     const { isFocused: isInputFocused, ...focusState } = useControlledFocus({ onFocus, onBlur, isFocused, ref });
+
+    const inputProps = { ...rest, ...focusState, type, disabled, value };
 
     return (
       <TextFieldBox<HTMLInputElement>
@@ -42,7 +46,11 @@ export const Input = forwardRef<HTMLInputElement, IInput>(
         isFocused={isInputFocused}
         {...{ label, isRequired, validate, leftSlot, rightSlot, validateMessage, message, boxStyle }}
       >
-        <StyledInput ref={setRef} {...rest} {...focusState} {...{ type, disabled, value }} />
+        {maskOptions ? (
+          <MaskInput inputRef={setRef} {...{ maskOptions, ...inputProps }} />
+        ) : (
+          <StyledInput ref={setRef} {...inputProps} />
+        )}
       </TextFieldBox>
     );
   }
