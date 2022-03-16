@@ -11,3 +11,4 @@ export { hexToRgba } from './hex-to-rgba';
 export { mergeRefs } from './merge-refs';
 export { createEluiName } from './create-elui-name';
 export { noop } from './noop';
+export { dispatchEvent } from './dispatch-event';

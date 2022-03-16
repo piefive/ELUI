@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 
+import { dispatchEvent } from 'lib';
 import { Icon } from 'components';
 
 import { StyledContent, StyledRightSlot } from './styled';
@@ -22,16 +23,12 @@ const Clearable = <Element extends HTMLInputElement | HTMLTextAreaElement>({
   fieldRef,
 }: Pick<TTextFieldRightSlot<Element>, 'fieldRef'>) => {
   const onClear = useCallback(() => {
-    const element = fieldRef.current;
-
-    const valueSetter = Object.getOwnPropertyDescriptor(element, 'value').set;
-    const prototype = Object.getPrototypeOf(element);
-    const prototypeValueSetter = Object.getOwnPropertyDescriptor(prototype, 'value').set;
-
-    if (valueSetter && valueSetter !== prototypeValueSetter) prototypeValueSetter.call(element, '');
-    else valueSetter.call(element, '');
-
-    element.dispatchEvent(new Event('input', { bubbles: true }));
+    dispatchEvent({
+      event: 'input',
+      element: fieldRef.current,
+      property: 'value',
+      args: '',
+    });
   }, [fieldRef]);
 
   return <Icon.CrossSm onClick={onClear} />;
