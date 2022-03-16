@@ -1,10 +1,11 @@
 import { ChangeEventHandler, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
+import { useUpdateEffect } from 'lib/hooks';
 import { Icon } from 'components/Icon';
 
 import { Input } from './Input';
-import type { TInput } from './types';
+import type { IInputFieldWithMask, TInput } from './types';
 
 export default {
   title: 'ui/Input',
@@ -62,7 +63,14 @@ export const Masked = (args: TInput) => {
 
   return (
     <StyledBox>
-      <Input {...args} leftSlot={<Icon.Search />} rightSlot={<Icon.Mail />} value={value} onChange={handleChange} />
+      <Input
+        key={JSON.stringify((args as IInputFieldWithMask).maskOptions)}
+        {...args}
+        leftSlot={<Icon.Search />}
+        rightSlot={<Icon.Mail />}
+        value={value}
+        onChange={handleChange}
+      />
     </StyledBox>
   );
 };
