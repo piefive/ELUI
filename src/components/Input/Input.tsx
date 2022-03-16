@@ -1,14 +1,14 @@
 import { forwardRef } from 'react';
 
-import { MaskInput } from 'components/Input/units';
 import { TextFieldBox } from 'internal';
-import { combineClassNames, useControlledFocus, useForkForwardedRef } from 'lib';
+import { combineClassNames, isFn, useControlledFocus, useForkForwardedRef } from 'lib';
 
-import type { IInput } from './types';
+import type { IInputFieldWithMask, IInputFieldWithoutMask, TInput } from './types';
 import { INPUT_CN } from './constants';
+import { MaskInput } from './units';
 import { StyledInput } from './styled';
 
-export const Input = forwardRef<HTMLInputElement, IInput>(
+export const Input = forwardRef<HTMLInputElement, TInput>(
   (
     {
       className,
@@ -27,7 +27,8 @@ export const Input = forwardRef<HTMLInputElement, IInput>(
       rightSlot,
       isClearable = true,
       isFocused,
-      maskOptions,
+      onComplete,
+      onChange,
       ...rest
     },
     inputRef
@@ -35,7 +36,8 @@ export const Input = forwardRef<HTMLInputElement, IInput>(
     const [setRef, ref] = useForkForwardedRef<HTMLInputElement>(inputRef);
     const { isFocused: isInputFocused, ...focusState } = useControlledFocus({ onFocus, onBlur, isFocused, ref });
 
-    const inputProps = { ...rest, ...focusState, type, disabled, value };
+    const { maskOptions, ...props } = rest as IInputFieldWithMask;
+    const inputProps = { ...props, ...focusState, type, disabled, value };
 
     return (
       <TextFieldBox<HTMLInputElement>
@@ -47,9 +49,20 @@ export const Input = forwardRef<HTMLInputElement, IInput>(
         {...{ label, isRequired, validate, leftSlot, rightSlot, validateMessage, message, boxStyle }}
       >
         {maskOptions ? (
-          <MaskInput inputRef={setRef} {...{ maskOptions, ...inputProps }} />
+          <MaskInput inputRef={setRef} {...{ maskOptions, onComplete, onChange, ...inputProps }} />
         ) : (
-          <StyledInput ref={setRef} {...inputProps} />
+          <StyledInput
+            ref={setRef}
+            {...inputProps}
+            onChange={
+              onComplete || onChange
+                ? event => {
+                    onChange?.(event);
+                    if (isFn<IInputFieldWithoutMask['onComplete']>(onComplete)) onComplete(event.currentTarget.value);
+                  }
+                : undefined
+            }
+          />
         )}
       </TextFieldBox>
     );

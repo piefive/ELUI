@@ -9,7 +9,7 @@ import { StyledInput } from '../../styled';
 import type { IMaskInput } from './types';
 import { StyledMaskInput } from './styled';
 
-export const MaskInput = memo(({ maskOptions, inputRef, ...rest }: IMaskInput) => {
+export const MaskInput = memo(({ maskOptions, inputRef, onComplete, ...rest }: IMaskInput) => {
   const isFirstMount = useFirstMountState();
   const ref = useRef<HTMLInputElement>();
   const [opts] = useState(maskOptions);
@@ -19,7 +19,7 @@ export const MaskInput = memo(({ maskOptions, inputRef, ...rest }: IMaskInput) =
     dispatchEvent({ event: 'input', element: ref.current, property: 'value', args: value });
   }, []);
 
-  const { ref: innerRef, maskRef } = useIMask(opts, { onAccept: !isFirstMount ? updateInput : undefined });
+  const { ref: innerRef, maskRef } = useIMask(opts, { onAccept: !isFirstMount ? updateInput : undefined, onComplete });
 
   useEffect(() => {
     maskRef.current.value = inputValue.toString();

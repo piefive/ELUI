@@ -4,14 +4,24 @@ import type { IMask } from 'react-imask';
 
 import type { TStyledComponentsProps } from 'lib';
 
-export interface IInputField extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
+interface IBaseInputField extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
   value?: string | number;
   type?: 'text' | 'number' | 'password' | 'email' | 'tel';
   onChange?: ChangeEventHandler<HTMLInputElement>;
-  maskOptions?: IMask.AnyMaskedOptions;
 }
 
-export interface IInput extends IInputField {
+export interface IInputFieldWithoutMask extends IBaseInputField {
+  onComplete?: (value: string) => void;
+}
+
+export interface IInputFieldWithMask extends IBaseInputField {
+  onComplete?: (value: string, iMask: IMask.InputMask<IMask.AnyMaskedOptions>) => void;
+  maskOptions: IMask.AnyMaskedOptions;
+}
+
+type TInputField = IInputFieldWithMask | IInputFieldWithoutMask;
+
+export type TInput = {
   label?: string;
   message?: string;
   validate?: U.Nullable<boolean>;
@@ -22,4 +32,4 @@ export interface IInput extends IInputField {
   isClearable?: boolean;
   isRequired?: boolean;
   isFocused?: boolean;
-}
+} & TInputField;

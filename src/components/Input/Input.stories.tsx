@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Icon } from 'components/Icon';
 
 import { Input } from './Input';
-import type { IInput } from './types';
+import type { TInput } from './types';
 
 export default {
   title: 'ui/Input',
@@ -29,7 +29,7 @@ export default {
   },
 };
 
-export const Base = (args: IInput) => {
+export const Base = (args: TInput) => {
   const { value: controlsValue } = args;
   const [value, setValue] = useState<string | number>('');
 
@@ -52,7 +52,7 @@ Base.argTypes = {
   maskOptions: { control: { type: null } },
 };
 
-export const Masked = (args: IInput) => {
+export const Masked = (args: TInput) => {
   const [value, setValue] = useState<string | number>('');
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = event => {
