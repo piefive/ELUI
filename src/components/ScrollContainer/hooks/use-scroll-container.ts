@@ -2,7 +2,7 @@ import { ForwardedRef, useImperativeHandle, useRef } from 'react';
 import { useSpring } from 'react-spring';
 import { useGesture } from '@use-gesture/react';
 
-import { isBetween, nextAsyncTickFn, useFirstMountState, useMeasure, useUpdateEffect } from 'lib';
+import { isBetween, nextTickFn, useMeasure, useTimeoutValue, useUpdateEffect } from 'lib';
 
 import type { TScrollContainer, TScrollContainerRef } from '../types';
 import { checkOutOfBounds } from '../utils';
@@ -17,7 +17,7 @@ export const useScrollContainer = ({
   scrollContainerRef,
   dragOnly,
 }: IScrollContainer) => {
-  const isFirstMount = useFirstMountState();
+  const [isAnimatedSetter] = useTimeoutValue(false, true, 500);
   const [containerRef, { width: containerWidth }] = useMeasure();
   const [contentRef, { scrollWidth: contentWidth }] = useMeasure();
   const x = useRef(0);
@@ -25,17 +25,15 @@ export const useScrollContainer = ({
   const contentWidthDiff = contentWidth - containerWidth;
 
   useImperativeHandle(scrollContainerRef, () => ({
-    scrollTo: nextAsyncTickFn((left: number, contentWidth?: number) => {
+    scrollTo: nextTickFn((left: number, contentWidth?: number) => {
       const { width } = containerRef.current.getBoundingClientRect();
       const current = Math.abs(x.current);
       const isInView = left > current && isBetween(left + contentWidth, current, current + width);
 
       if (!isInView) {
         x.current = checkOutOfBounds(-left, contentRef.current.scrollWidth - width);
-        state[isFirstMount ? 'set' : 'start']({ x: x.current });
+        state[isAnimatedSetter ? 'start' : 'set']({ x: x.current });
       }
-
-      return isInView;
     }),
   }));
 
@@ -46,7 +44,7 @@ export const useScrollContainer = ({
           event.preventDefault();
           x.current = checkOutOfBounds(x.current + deltaX, contentWidthDiff);
           state.start({ x: x.current });
-          if (onScroll) onScroll(x.current);
+          if (onScroll) onScroll(Math.abs(x.current));
         }
       },
       onWheel: ({ event, delta: [, deltaY] }) => {
@@ -60,7 +58,7 @@ export const useScrollContainer = ({
             event.preventDefault();
           }
           state.start({ x: x.current });
-          if (onScroll) onScroll(x.current);
+          if (onScroll) onScroll(Math.abs(x.current));
         }
       },
     },
