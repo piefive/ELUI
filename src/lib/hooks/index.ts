@@ -9,6 +9,7 @@ export { useFirstMountState } from './use-first-mount-state';
 export { useMountedState } from './use-mounted-state';
 export { useRafState } from './use-raf-state';
 export { useLastValidState } from './use-last-valid-state';
+export { useTimeoutValue } from './use-timeout-value';
 export { useWindowSize } from './use-window-size';
 export { useMeasure } from './use-measure';
 export { useAnimateHeight } from './use-animate-height';
