@@ -2,7 +2,7 @@ import { ForwardedRef, useImperativeHandle, useRef } from 'react';
 import { useSpring } from 'react-spring';
 import { useGesture } from '@use-gesture/react';
 
-import { isBetween, nextTickFn, useMeasure, useTimeoutValue, useUpdateEffect } from 'lib';
+import { isBetween, nextTickFn, useMeasure, useMount, useUpdateEffect } from 'lib';
 
 import type { TScrollContainer, TScrollContainerRef } from '../types';
 import { checkOutOfBounds } from '../utils';
@@ -17,7 +17,7 @@ export const useScrollContainer = ({
   scrollContainerRef,
   dragOnly,
 }: IScrollContainer) => {
-  const [isAnimatedSetter] = useTimeoutValue(false, true, 500);
+  const isAnimatedSetter = useRef(false);
   const [containerRef, { width: containerWidth }] = useMeasure();
   const [contentRef, { scrollWidth: contentWidth }] = useMeasure();
   const x = useRef(0);
@@ -32,7 +32,7 @@ export const useScrollContainer = ({
 
       if (!isInView) {
         x.current = checkOutOfBounds(-left, contentRef.current.scrollWidth - width);
-        state[isAnimatedSetter ? 'start' : 'set']({ x: x.current });
+        state[isAnimatedSetter.current ? 'start' : 'set']({ x: x.current });
       }
     }),
   }));
@@ -73,6 +73,8 @@ export const useScrollContainer = ({
     x.current = contentWidthDiff ? checkOutOfBounds(x.current, contentWidthDiff) : 0;
     state.set({ x: x.current });
   }, [contentWidth, containerWidth, state.set]);
+
+  useMount(() => setTimeout(() => (isAnimatedSetter.current = true), 500));
 
   return {
     containerRef,
