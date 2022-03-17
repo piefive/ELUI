@@ -21,7 +21,7 @@ export const Segment = ({ name, value, disabled = false, leftSlot, children, box
 
     if (isActiveSegment && scrollContainer) {
       const left = segmentRef.current.offsetLeft - SEGMENT_OFFSET_LEFT;
-      scrollContainer?.scrollTo(left > 0 ? left : 0, width + SEGMENT_OFFSET_LEFT).catch();
+      scrollContainer?.scrollTo(left > 0 ? left : 0, width + SEGMENT_OFFSET_LEFT);
     }
   }, [isActiveSegment, left, width]);
 
@@ -30,7 +30,7 @@ export const Segment = ({ name, value, disabled = false, leftSlot, children, box
       ref={segmentRef}
       role="tab"
       isActive={isActiveSegment}
-      onClick={!disabled ? () => radioRef.current?.click() : undefined}
+      onClick={!disabled ? () => radioRef.current.click() : undefined}
       {...bindAria({ selected: isActiveSegment })}
       {...{ boxStyle, segmentStyle, disabled }}
     >
@@ -38,6 +38,7 @@ export const Segment = ({ name, value, disabled = false, leftSlot, children, box
         ref={radioRef}
         tabIndex={-1}
         type="radio"
+        checked={isActiveSegment}
         onChange={onSegmentChange}
         {...bindAria({ checked: isActiveSegment, hidden: true })}
         {...{ value, name, disabled }}
