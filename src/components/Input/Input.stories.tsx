@@ -53,6 +53,33 @@ Base.argTypes = {
   maskOptions: { control: { type: null } },
 };
 
+export const Password = (args: TInput) => {
+  const { value: controlsValue } = args;
+  const [value, setValue] = useState<string | number>('');
+
+  const handleChange: ChangeEventHandler<HTMLInputElement> = event => {
+    args?.onChange?.(event);
+    setValue(event.target.value);
+  };
+
+  useEffect(() => {
+    setValue(controlsValue);
+  }, [controlsValue]);
+
+  return (
+    <StyledBox>
+      <Input {...args} value={value} onChange={handleChange} />
+    </StyledBox>
+  );
+};
+Password.argTypes = {
+  type: { control: { type: null } },
+  maskOptions: { control: { type: null } },
+};
+Password.args = {
+  type: 'password',
+};
+
 export const Masked = (args: TInput) => {
   const [value, setValue] = useState<string | number>('');
 

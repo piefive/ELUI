@@ -17,3 +17,5 @@ export * from './Clipboard';
 export * from './Download';
 export * from './UploadCloud';
 export * from './Grid';
+export * from './Eye';
+export * from './EyeOff';

@@ -46,6 +46,8 @@ interface IIcon extends TIconComponent {
   Download: typeof Icons.Download;
   UploadCloud: typeof Icons.UploadCloud;
   Grid: typeof Icons.Grid;
+  Eye: typeof Icons.Eye;
+  EyeOff: typeof Icons.EyeOff;
 }
 
 export const Icon = IconComponent as IIcon;
