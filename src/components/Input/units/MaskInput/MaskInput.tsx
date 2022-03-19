@@ -14,7 +14,7 @@ export const MaskInput = memo(
     const isFirstMount = useFirstMountState();
     const ref = useRef<HTMLInputElement>();
     const [opts] = useState(maskOptions);
-    const { value: inputValue } = rest;
+    const { value: inputValue, type } = rest;
 
     const updateInput = useCallback((value: string) => {
       dispatchEvent({ event: 'input', element: ref.current, property: 'value', args: value });
@@ -32,7 +32,7 @@ export const MaskInput = memo(
 
     return (
       <>
-        <StyledInput ref={innerRef as MutableRefObject<HTMLInputElement>} {...{ onBlur, onFocus, placeholder }} />
+        <StyledInput ref={innerRef as MutableRefObject<HTMLInputElement>} {...{ onBlur, onFocus, placeholder, type }} />
         <StyledMaskInput ref={mergeRefs(inputRef, ref)} {...rest} />
       </>
     );
