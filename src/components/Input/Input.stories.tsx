@@ -1,7 +1,6 @@
 import { ChangeEventHandler, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import { useUpdateEffect } from 'lib/hooks';
 import { Icon } from 'components/Icon';
 
 import { Input } from './Input';
