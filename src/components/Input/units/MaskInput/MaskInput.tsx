@@ -2,7 +2,7 @@ import { MutableRefObject, memo, useCallback, useEffect, useRef, useState } from
 import { useIMask } from 'react-imask';
 import { equals } from 'ramda';
 
-import { dispatchEvent, mergeRefs, useFirstMountState } from 'lib';
+import { createEventFn, createListener, dispatchEvent, mergeRefs, useFirstMountState, useMount } from 'lib';
 
 import { StyledInput } from '../../styled';
 
@@ -30,10 +30,17 @@ export const MaskInput = memo(
       maskRef.current.updateValue();
     }, [inputValue, maskRef]);
 
+    useMount(() => {
+      const maskInput = innerRef.current as HTMLInputElement;
+      const listener = createListener(ref.current, 'focus', () => maskInput?.focus());
+      listener.on();
+      return () => listener.off();
+    });
+
     return (
       <>
         <StyledInput ref={innerRef as MutableRefObject<HTMLInputElement>} {...{ onBlur, onFocus, placeholder, type }} />
-        <StyledMaskInput ref={mergeRefs(inputRef, ref)} {...rest} />
+        <StyledMaskInput ref={mergeRefs(inputRef, ref)} tabIndex={-1} {...rest} />
       </>
     );
   },

@@ -7,6 +7,7 @@ import { FieldMessage } from './units';
 export const StyledFieldBox = styled.div<{ boxStyle?: TStyledComponentsProps }>`
   ${normalizeMixin};
 
+  position: relative;
   width: 100%;
   padding-bottom: 24px;
 
