@@ -7,7 +7,7 @@ export const StyledSliderSlider = styled.div`
   background-color: ${({ theme }) => theme.palette.primary_700};
 `;
 
-export const StyledRangeSliderBox = styled.div`
+export const StyledRail = styled.div`
   position: relative;
   width: 100%;
   height: 48px;
