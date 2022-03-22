@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 
-import { combineClassNames, useForkForwardedRef } from 'lib';
+import { bindAria, combineClassNames, useForkForwardedRef } from 'lib';
 import { FieldBox } from 'internal';
 
 import type { IRangeInput } from './types';
@@ -11,11 +11,23 @@ import { StyledInput, StyledRail, StyledTrack } from './styled';
 
 export const RangeInput = forwardRef<HTMLInputElement, IRangeInput>(
   (
-    { className, validate = null, validateMessage, message, label, isRequired, boxStyle, min = 0, max = 100, ...rest },
+    {
+      className,
+      validate = null,
+      validateMessage,
+      message,
+      label,
+      isRequired,
+      boxStyle,
+      min = 0,
+      max = 100,
+      value,
+      ...rest
+    },
     rangeInputRef
   ) => {
     const [setRef, innerRef] = useForkForwardedRef(rangeInputRef);
-    const ratio = useRatio(min, max, rest.value);
+    const ratio = useRatio(min, max, Number(value));
 
     return (
       <FieldBox
@@ -27,7 +39,12 @@ export const RangeInput = forwardRef<HTMLInputElement, IRangeInput>(
             <RangeSlider />
           </StyledTrack>
         </StyledRail>
-        <StyledInput ref={setRef} {...rest} />
+        <StyledInput
+          ref={setRef}
+          {...{ value }}
+          {...bindAria({ valuemin: min, valuemax: max, valuenow: Number(value) || min })}
+          {...rest}
+        />
       </FieldBox>
     );
   }
