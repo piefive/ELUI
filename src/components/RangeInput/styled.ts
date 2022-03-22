@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledSliderSlider = styled.div`
+export const StyledTrack = styled.div`
   position: relative;
   height: 100%;
   border-radius: 8px;

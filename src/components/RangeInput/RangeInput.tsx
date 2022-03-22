@@ -1,19 +1,20 @@
 import { forwardRef } from 'react';
 
-import { combineClassNames } from 'lib';
+import { combineClassNames, useForkForwardedRef } from 'lib';
 import { FieldBox } from 'internal';
 
 import type { IRangeInput } from './types';
 import { RANGE_INPUT_CN } from './constants';
 import { useRatio } from './hooks';
 import { RangeSlider } from './units';
-import { StyledInput, StyledRail, StyledSliderSlider } from './styled';
+import { StyledInput, StyledRail, StyledTrack } from './styled';
 
 export const RangeInput = forwardRef<HTMLInputElement, IRangeInput>(
   (
     { className, validate = null, validateMessage, message, label, isRequired, boxStyle, min = 0, max = 100, ...rest },
     rangeInputRef
   ) => {
+    const [setRef, innerRef] = useForkForwardedRef(rangeInputRef);
     const ratio = useRatio(min, max, rest.value);
 
     return (
@@ -22,11 +23,11 @@ export const RangeInput = forwardRef<HTMLInputElement, IRangeInput>(
         {...{ label, isRequired, validate, validateMessage, message, boxStyle }}
       >
         <StyledRail>
-          <StyledSliderSlider style={{ width: `${ratio * 100}%` }}>
+          <StyledTrack style={{ width: `${ratio * 100}%` }}>
             <RangeSlider />
-          </StyledSliderSlider>
+          </StyledTrack>
         </StyledRail>
-        <StyledInput ref={rangeInputRef} {...rest} />
+        <StyledInput ref={setRef} {...rest} />
       </FieldBox>
     );
   }
