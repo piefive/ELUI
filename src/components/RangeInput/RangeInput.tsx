@@ -6,7 +6,7 @@ import { FieldBox } from 'internal';
 import type { IRangeInput } from './types';
 import { RANGE_INPUT_CN } from './constants';
 import { useRatio } from './hooks';
-import { RangeSlider } from './units';
+import { Thumb } from './units';
 import { StyledInput, StyledRail, StyledTrack } from './styled';
 
 export const RangeInput = forwardRef<HTMLInputElement, IRangeInput>(
@@ -36,7 +36,7 @@ export const RangeInput = forwardRef<HTMLInputElement, IRangeInput>(
       >
         <StyledRail>
           <StyledTrack style={{ width: `${ratio * 100}%` }}>
-            <RangeSlider />
+            <Thumb />
           </StyledTrack>
         </StyledRail>
         <StyledInput
