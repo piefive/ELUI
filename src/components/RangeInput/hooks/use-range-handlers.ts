@@ -1,4 +1,4 @@
-import { MouseEvent, RefObject, SyntheticEvent, useCallback } from 'react';
+import { KeyboardEvent, MouseEvent, RefObject, SyntheticEvent, useCallback } from 'react';
 import { clamp } from 'ramda';
 
 import { dispatchEvent } from 'lib';
@@ -12,10 +12,17 @@ export type TThumb = {
   value: number;
 };
 
+const LEFT_ARROW_CODE = 'ArrowLeft';
+
+const RIGHT_ARROW_CODE = 'ArrowRight';
+
 export const useRangeHandlers = ({ innerRef, trackRef, thumbRef, max, min, value }: TThumb) => {
   const setInputValue = useCallback(
-    value => dispatchEvent({ event: 'input', element: innerRef.current, property: 'value', args: value }),
-    [innerRef]
+    value => {
+      dispatchEvent({ event: 'input', element: innerRef.current, property: 'value', args: value });
+      thumbRef.current.focus();
+    },
+    [innerRef, thumbRef]
   );
 
   const handleChangeTrack = useCallback(
@@ -29,10 +36,9 @@ export const useRangeHandlers = ({ innerRef, trackRef, thumbRef, max, min, value
 
   const handleClickRail = useCallback(
     (event: MouseEvent<HTMLDivElement>) => {
-      thumbRef.current.focus();
       handleChangeTrack(event.pageX);
     },
-    [handleChangeTrack, thumbRef]
+    [handleChangeTrack]
   );
 
   const handleIncrement = useCallback(
@@ -51,10 +57,19 @@ export const useRangeHandlers = ({ innerRef, trackRef, thumbRef, max, min, value
     [max, min, setInputValue, value]
   );
 
+  const handleKeyDown = useCallback(
+    (event: KeyboardEvent<HTMLDivElement>) => {
+      if (event.key === LEFT_ARROW_CODE) handleDecrement(event);
+      if (event.key === RIGHT_ARROW_CODE) handleIncrement(event);
+    },
+    [handleIncrement, handleDecrement]
+  );
+
   return {
     handleChangeTrack,
     handleClickRail,
     handleIncrement,
     handleDecrement,
+    handleKeyDown,
   };
 };

@@ -53,8 +53,10 @@ export const RangeInput = forwardRef<HTMLInputElement, IRangeInput>(
                 onClick={handlers.handleDecrement}
                 iconStyle={({ theme }) => ({ color: theme.palette.white })}
               />
-              <StyledThumb ref={thumbRef} {...bindThumb()}>
-                <Typography color="inherit">{value}</Typography>
+              <StyledThumb ref={thumbRef} {...bindThumb()} tabIndex={0} onKeyDown={handlers.handleKeyDown}>
+                <Typography color="inherit" typographyStyle={{ userSelect: 'none' }}>
+                  {value}
+                </Typography>
               </StyledThumb>
               <Icon.ChevronRight onClick={handlers.handleIncrement} />
             </StyledThumbBox>

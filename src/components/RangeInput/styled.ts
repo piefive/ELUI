@@ -46,7 +46,10 @@ export const StyledThumb = styled.div`
   margin: 0 4px;
   border-radius: 4px;
   cursor: pointer;
-  user-select: none;
   touch-action: none;
   background-color: ${({ theme }) => theme.palette.white};
+
+  &:focus {
+    outline: none;
+  }
 `;
