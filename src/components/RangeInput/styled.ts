@@ -43,7 +43,7 @@ export const StyledThumb = styled.div`
   height: calc(100% - 8px);
   min-width: 40px;
   padding: 8px;
-  margin: 4px;
+  margin: 0 4px;
   border-radius: 4px;
   cursor: pointer;
   user-select: none;

@@ -21,7 +21,7 @@ export default {
   },
 };
 
-export const Base = (args: IRangeInput) => {
+export const Default = (args: IRangeInput) => {
   const { value: controlsValue } = args;
   const [value, setValue] = useState<string | number>('');
 

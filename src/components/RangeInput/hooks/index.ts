@@ -1,2 +1,2 @@
 export { useRatio } from './use-ratio';
-export { useRangeInput } from './use-range-input';
+export { useRangeHandlers } from './use-range-handlers';
