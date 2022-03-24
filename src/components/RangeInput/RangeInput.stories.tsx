@@ -15,7 +15,7 @@ export default {
     label: 'Label',
     value: 50,
     min: 0,
-    max: 200,
+    max: 99,
     message: 'This is the description area',
     validateMessage: 'This is an validate message',
   },

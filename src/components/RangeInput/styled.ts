@@ -2,11 +2,12 @@ import styled from 'styled-components';
 
 import { ICON_CN } from 'components/Icon';
 
-const ICON_RIGHT_SIZE = 24;
+import { RANGE_CHEVRON_ICON_SIZE } from './constants';
 
 export const StyledTrack = styled.div`
   position: relative;
   height: 100%;
+  min-width: ${RANGE_CHEVRON_ICON_SIZE * 2}px;
   border-radius: 8px;
   transition: background-color 0.3s ease-out;
   background-color: ${({ theme }) => theme.palette.primary_700};
@@ -18,7 +19,7 @@ export const StyledThumbBox = styled.div`
   align-items: center;
   width: fit-content;
   height: 100%;
-  right: -${ICON_RIGHT_SIZE}px;
+  right: -${RANGE_CHEVRON_ICON_SIZE}px;
 `;
 
 export const StyledThumb = styled.div`
@@ -26,14 +27,16 @@ export const StyledThumb = styled.div`
   align-items: center;
   justify-content: center;
   height: calc(100% - 8px);
-  min-width: 40px;
+  width: 40px;
+  max-width: 40px;
   padding: 8px;
   margin: 0 4px;
   border-radius: 4px;
   cursor: pointer;
   touch-action: none;
+  overflow: hidden;
   background-color: ${({ theme }) => theme.palette.white};
-  transition-property: width, box-shadow;
+  transition-property: box-shadow;
   transition-timing-function: ease-out;
   transition-duration: 0.3s;
 `;

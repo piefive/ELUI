@@ -1,3 +1,4 @@
+import { clamp } from 'ramda';
 import { forwardRef, useRef } from 'react';
 import { useDrag } from '@use-gesture/react';
 
@@ -54,7 +55,7 @@ export const RangeInput = forwardRef<HTMLInputElement, IRangeInput>(
               />
               <StyledThumb {...bindThumb()}>
                 <Typography color="inherit" typographyStyle={{ userSelect: 'none' }}>
-                  {value}
+                  {validValue}
                 </Typography>
               </StyledThumb>
               <Icon.ChevronRight onClick={handlers.handleIncrement} />
