@@ -14,4 +14,5 @@ export interface IRangeInput
   max?: number;
   value?: string | number;
   onChange?: ChangeEventHandler<HTMLInputElement>;
+  disabled?: boolean;
 }

@@ -1,4 +1,3 @@
-import { clamp } from 'ramda';
 import { forwardRef, useRef } from 'react';
 import { useDrag } from '@use-gesture/react';
 
@@ -25,8 +24,9 @@ export const RangeInput = forwardRef<HTMLInputElement, IRangeInput>(
       isRequired,
       boxStyle,
       min = 0,
-      max = 100,
+      max = 99,
       value,
+      disabled = false,
       ...rest
     },
     rangeInputRef
@@ -39,18 +39,24 @@ export const RangeInput = forwardRef<HTMLInputElement, IRangeInput>(
     const handlers = useRangeHandlers({ innerRef, railRef, min, max, value: validValue });
     const ratio = useRatio(min, max, validValue);
 
-    const bindThumb = useDrag(({ xy: [x], down }) => down && handlers.handleChangeTrack(x), { axis: 'x' });
+    const bindThumb = useDrag(({ xy: [x], down }) => down && !disabled && handlers.handleChangeTrack(x), { axis: 'x' });
 
     return (
       <FieldBox
         className={combineClassNames(className, RANGE_INPUT_CN)}
         {...{ label, isRequired, validate, validateMessage, message, boxStyle }}
       >
-        <StyledRail ref={railRef} tabIndex={0} onClick={handlers.handleClickRail} onKeyDown={handlers.handleKeyDown}>
+        <StyledRail
+          ref={railRef}
+          tabIndex={0}
+          onClick={!disabled ? handlers.handleClickRail : undefined}
+          onKeyDown={!disabled ? handlers.handleKeyDown : undefined}
+          {...bindAria({ disabled })}
+        >
           <StyledTrack style={{ width: `${ratio * 100}%` }}>
             <StyledThumbBox onClick={preventedEventFn}>
               <Icon.ChevronLeft
-                onClick={handlers.handleDecrement}
+                onClick={!disabled ? handlers.handleDecrement : undefined}
                 iconStyle={({ theme }) => ({ color: theme.palette.white })}
               />
               <StyledThumb {...bindThumb()}>
@@ -58,14 +64,14 @@ export const RangeInput = forwardRef<HTMLInputElement, IRangeInput>(
                   {validValue}
                 </Typography>
               </StyledThumb>
-              <Icon.ChevronRight onClick={handlers.handleIncrement} />
+              <Icon.ChevronRight onClick={!disabled ? handlers.handleIncrement : undefined} />
             </StyledThumbBox>
           </StyledTrack>
         </StyledRail>
         <StyledInput
           ref={setRef}
-          {...{ value }}
-          {...bindAria({ valuemin: min, valuemax: max, valuenow: validValue })}
+          {...{ value, disabled }}
+          {...bindAria({ valuemin: min, valuemax: max, valuenow: validValue, disabled })}
           {...rest}
         />
       </FieldBox>

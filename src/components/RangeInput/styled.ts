@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+import { getAria } from 'lib';
 import { ICON_CN } from 'components/Icon';
 
 import { RANGE_CHEVRON_ICON_SIZE } from './constants';
@@ -50,16 +51,30 @@ export const StyledRail = styled.div`
   background-color: ${({ theme }) => theme.palette.grey_200};
 
   .${ICON_CN} {
+    cursor: default;
     opacity: 0;
   }
 
-  &:hover {
+  &[${getAria('aria-disabled', true)}] {
+    cursor: not-allowed;
+
+    ${StyledTrack} {
+      background-color: ${({ theme }) => theme.palette.primary_50};
+    }
+
+    ${StyledThumb} {
+      cursor: not-allowed;
+      color: ${({ theme }) => theme.palette.primary_50};
+    }
+  }
+
+  &:not([${getAria('aria-disabled', true)}]):hover {
     ${StyledTrack} {
       background-color: ${({ theme }) => theme.palette.primary_400};
     }
   }
 
-  &:focus {
+  &:not([${getAria('aria-disabled', true)}]):focus {
     outline: none;
 
     ${StyledTrack} {
@@ -71,6 +86,7 @@ export const StyledRail = styled.div`
     }
 
     .${ICON_CN} {
+      cursor: pointer;
       opacity: 1;
     }
   }
