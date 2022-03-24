@@ -31,12 +31,11 @@ export const RangeInput = forwardRef<HTMLInputElement, IRangeInput>(
     rangeInputRef
   ) => {
     const [setRef, innerRef] = useForkForwardedRef(rangeInputRef);
-    const trackRef = useRef<HTMLDivElement>(null);
-    const thumbRef = useRef<HTMLDivElement>(null);
+    const railRef = useRef<HTMLDivElement>(null);
 
     const validValue = Number(value) || min;
 
-    const handlers = useRangeHandlers({ innerRef, trackRef, thumbRef, min, max, value: validValue });
+    const handlers = useRangeHandlers({ innerRef, railRef, min, max, value: validValue });
     const ratio = useRatio(min, max, validValue);
 
     const bindThumb = useDrag(({ xy: [x], down }) => down && handlers.handleChangeTrack(x), { axis: 'x' });
@@ -46,14 +45,14 @@ export const RangeInput = forwardRef<HTMLInputElement, IRangeInput>(
         className={combineClassNames(className, RANGE_INPUT_CN)}
         {...{ label, isRequired, validate, validateMessage, message, boxStyle }}
       >
-        <StyledRail onClick={handlers.handleClickRail}>
-          <StyledTrack ref={trackRef} style={{ width: `${ratio * 100}%` }}>
+        <StyledRail ref={railRef} tabIndex={0} onClick={handlers.handleClickRail} onKeyDown={handlers.handleKeyDown}>
+          <StyledTrack style={{ width: `${ratio * 100}%` }}>
             <StyledThumbBox onClick={preventedEventFn}>
               <Icon.ChevronLeft
                 onClick={handlers.handleDecrement}
                 iconStyle={({ theme }) => ({ color: theme.palette.white })}
               />
-              <StyledThumb ref={thumbRef} {...bindThumb()} tabIndex={0} onKeyDown={handlers.handleKeyDown}>
+              <StyledThumb {...bindThumb()}>
                 <Typography color="inherit" typographyStyle={{ userSelect: 'none' }}>
                   {value}
                 </Typography>

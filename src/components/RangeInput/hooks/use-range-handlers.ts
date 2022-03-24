@@ -5,8 +5,7 @@ import { dispatchEvent } from 'lib';
 
 export type TThumb = {
   innerRef: RefObject<HTMLInputElement>;
-  trackRef: RefObject<HTMLDivElement>;
-  thumbRef: RefObject<HTMLDivElement>;
+  railRef: RefObject<HTMLDivElement>;
   min: number;
   max: number;
   value: number;
@@ -16,22 +15,22 @@ const LEFT_ARROW_CODE = 'ArrowLeft';
 
 const RIGHT_ARROW_CODE = 'ArrowRight';
 
-export const useRangeHandlers = ({ innerRef, trackRef, thumbRef, max, min, value }: TThumb) => {
+export const useRangeHandlers = ({ innerRef, railRef, max, min, value }: TThumb) => {
   const setInputValue = useCallback(
     value => {
       dispatchEvent({ event: 'input', element: innerRef.current, property: 'value', args: value });
-      thumbRef.current.focus();
+      railRef.current.focus();
     },
-    [innerRef, thumbRef]
+    [innerRef, railRef]
   );
 
   const handleChangeTrack = useCallback(
     (x: number) => {
-      const { left, width } = trackRef.current.getBoundingClientRect();
+      const { left, width } = railRef.current.getBoundingClientRect();
       const value = clamp(0, 1, (x - left) / width) * (max - min) + min;
       setInputValue(Math.round(value));
     },
-    [trackRef, max, min, setInputValue]
+    [railRef, max, min, setInputValue]
   );
 
   const handleClickRail = useCallback(
