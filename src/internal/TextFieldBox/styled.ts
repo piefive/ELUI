@@ -78,6 +78,7 @@ export const StyledField = styled.div<TField>`
   display: flex;
   align-items: flex-start;
   width: 100%;
+  min-height: 48px;
   padding: 12px 16px;
   border-radius: 8px;
   overflow: hidden;
