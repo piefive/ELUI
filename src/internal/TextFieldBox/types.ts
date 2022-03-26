@@ -1,11 +1,12 @@
-import type { MutableRefObject, ReactNode } from 'react';
+import type { MutableRefObject, ReactNode, Ref } from 'react';
 import type { U } from 'ts-toolbelt';
 
 import type { TFieldBox } from '../FieldBox';
 
 export interface ITextFieldBox<Element extends HTMLElement = HTMLElement> extends TFieldBox {
   fieldRef?: MutableRefObject<U.Nullable<Element>>;
-  containerRef?: MutableRefObject<U.Nullable<HTMLDivElement>>;
+  containerRef?: Ref<U.Nullable<HTMLDivElement>>;
+  boxRef?: Ref<U.Nullable<HTMLDivElement>>;
   isFocused?: boolean;
   isDisabled?: boolean;
   isClearable?: boolean;

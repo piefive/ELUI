@@ -6,7 +6,7 @@ import { Icon } from 'components';
 import { StyledContent, StyledRightSlot } from './styled';
 import type { TTextFieldRightSlot } from './types';
 
-export const TextFieldRightSlot = <Element extends HTMLInputElement | HTMLTextAreaElement>({
+export const TextFieldRightSlot = <Element extends HTMLElement>({
   rightSlot,
   isClearable,
   ...rest
@@ -19,9 +19,7 @@ export const TextFieldRightSlot = <Element extends HTMLInputElement | HTMLTextAr
   );
 };
 
-const Clearable = <Element extends HTMLInputElement | HTMLTextAreaElement>({
-  fieldRef,
-}: Pick<TTextFieldRightSlot<Element>, 'fieldRef'>) => {
+const Clearable = <Element extends HTMLElement>({ fieldRef }: Pick<TTextFieldRightSlot<Element>, 'fieldRef'>) => {
   const onClear = useCallback(() => {
     dispatchEvent({
       event: 'input',

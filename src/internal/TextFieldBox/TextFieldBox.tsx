@@ -4,8 +4,9 @@ import type { ITextFieldBox } from './types';
 import { TextFieldRightSlot } from './units';
 import { StyledField, StyledLeftSlot } from './styled';
 
-export const TextFieldBox = <Element extends HTMLInputElement | HTMLTextAreaElement>({
+export const TextFieldBox = <Element extends HTMLElement>({
   fieldRef = null,
+  boxRef,
   containerRef,
   isClearable = false,
   isDisabled = false,
@@ -21,7 +22,7 @@ export const TextFieldBox = <Element extends HTMLInputElement | HTMLTextAreaElem
   const onFieldFocus = () => fieldRef?.current.focus();
 
   return (
-    <FieldBox onLabelClick={onFieldFocus} {...rest}>
+    <FieldBox ref={boxRef} onLabelClick={onFieldFocus} {...rest}>
       <StyledField ref={containerRef} onClick={onFieldFocus} {...{ validate, isFocused, isDisabled }}>
         {leftSlot && <StyledLeftSlot>{leftSlot}</StyledLeftSlot>}
         {children}
