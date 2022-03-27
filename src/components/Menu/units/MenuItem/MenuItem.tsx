@@ -29,10 +29,10 @@ export const MenuItem = <Value extends TMenuValue = TMenuValue>({
   withSeparator,
   onClick,
 }: TMenuItem<Value>) => {
-  const { activeValues, onChange, multiple } = useMenuContext<Value>();
+  const { activeValue, onChange, multiple } = useMenuContext<Value>();
 
   const isRightSlotRender = Boolean(rightSlot || multiple);
-  const isChecked = checked ?? activeValues.some(activeValue => equals(activeValue, value));
+  const isChecked = checked ?? activeValue.some(activeValue => equals(activeValue, value));
   const isChangeable = Boolean(!isNil(value) && onChange);
 
   const handleChange = isChangeable && !disabled ? () => onChange(value) : undefined;

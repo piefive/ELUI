@@ -1,34 +1,30 @@
-import { useMemo } from 'react';
-
-import { Popover } from 'components/Popover';
 import { combineClassNames, mergeRefs } from 'lib';
 import { TextFieldBox } from 'internal';
+import { Popover } from 'components/Popover';
+import { Menu, TMenuItem } from 'components/Menu';
 
-import type { ISelect, TSelectContext, TSelectValue } from './types';
+import type { ISelect } from './types';
 import { SELECT_CN } from './constants';
-import { SelectProvider, useSelect } from './hooks';
-import { getActiveOption } from './utils';
-import { Option } from './units';
+import { useSelect } from './hooks';
 
-const SelectComponent = <SelectValue extends TSelectValue = TSelectValue>({
+const SelectComponent = <SelectValue extends TMenuItem = TMenuItem>({
   className,
   children,
-  activeValue,
-  onChange,
   disabled,
+  label,
+  isRequired,
+  validate,
+  validateMessage,
+  message,
+  boxStyle,
   ...rest
 }: ISelect<SelectValue>) => {
   const { selectRef, containerRef, boxRef, popoverRef } = useSelect();
 
-  const ctx = useMemo<TSelectContext<SelectValue>>(
-    () => ({ activeValue: getActiveOption(activeValue), onChange }),
-    [activeValue, onChange]
-  );
-
   return (
     <Popover
       ref={popoverRef}
-      popover={<SelectProvider value={ctx}>{children}</SelectProvider>}
+      popover={<Menu<SelectValue> {...rest}>{children}</Menu>}
       placement="bottom"
       offset={[0, 14]}
       outsideRefs={[boxRef]}
@@ -43,7 +39,7 @@ const SelectComponent = <SelectValue extends TSelectValue = TSelectValue>({
           onLabelClick={onToggle}
           isFocused={isPopoverOpen}
           isDisabled={disabled}
-          {...rest}
+          {...{ label, isRequired, validate, validateMessage, message, boxStyle }}
         >
           asd
         </TextFieldBox>
@@ -55,9 +51,9 @@ const SelectComponent = <SelectValue extends TSelectValue = TSelectValue>({
 type TSelectComponent = typeof SelectComponent;
 
 export interface ISelectComponent extends TSelectComponent {
-  Option: typeof Option;
+  Option: typeof Menu.Item;
 }
 
 export const Select = SelectComponent as ISelectComponent;
 
-Select.Option = Option;
+Select.Option = Menu.Item;

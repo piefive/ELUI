@@ -18,13 +18,13 @@ export type TMenuItem<Value extends TMenuValue = TMenuValue> = {
 };
 
 export type TMenuContext<Value extends TMenuValue = TMenuValue> = {
-  activeValues: Value[];
+  activeValue: Value[];
   onChange?: TMenuHandler<Value>;
   multiple?: boolean;
 };
 
-export interface IMenu<Value extends TMenuValue = TMenuValue> extends Omit<TMenuContext<Value>, 'activeValues'> {
+export interface IMenu<Value extends TMenuValue = TMenuValue> extends Omit<TMenuContext<Value>, 'activeValue'> {
   className?: string;
-  activeValues?: Value[] | Value;
+  activeValue?: Value[] | Value;
   children: ReactNode;
 }

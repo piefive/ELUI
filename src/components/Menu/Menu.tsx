@@ -1,23 +1,24 @@
-import { ReactElement, useMemo } from 'react';
+import { useMemo } from 'react';
 
-import { combineClassNames, isArray } from 'lib';
+import { combineClassNames } from 'lib';
 
 import type { IMenu, TMenuContext, TMenuValue } from './types';
 import { MENU_CN } from './constants';
+import { getActiveItem } from './utils';
 import { MenuProvider } from './hooks';
 import { MenuItem } from './units';
 import { StyledMenu } from './styled';
 
-export const MenuComponent = <Value extends TMenuValue = TMenuValue>({
+const MenuComponent = <Value extends TMenuValue = TMenuValue>({
   className,
   children,
-  activeValues,
+  activeValue,
   multiple,
   onChange,
 }: IMenu<Value>) => {
   const ctx = useMemo<TMenuContext<Value>>(
-    () => ({ activeValues: isArray(activeValues) ? activeValues : [activeValues].filter(Boolean), multiple, onChange }),
-    [activeValues, multiple, onChange]
+    () => ({ activeValue: getActiveItem(activeValue), multiple, onChange }),
+    [activeValue, multiple, onChange]
   );
 
   return (
@@ -27,8 +28,12 @@ export const MenuComponent = <Value extends TMenuValue = TMenuValue>({
   );
 };
 
-type TMenu = (<Value extends TMenuValue = TMenuValue>(props: IMenu<Value>) => ReactElement) & { Item: typeof MenuItem };
+type TMenuComponent = typeof MenuComponent;
 
-export const Menu = MenuComponent as TMenu;
+export interface IMenuComponent extends TMenuComponent {
+  Item: typeof MenuItem;
+}
+
+export const Menu = MenuComponent as IMenuComponent;
 
 Menu.Item = MenuItem;

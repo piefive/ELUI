@@ -7,11 +7,11 @@ import { Typography } from 'components/Typography';
 import { Icon } from 'components/Icon';
 
 import type { IMenu } from './types';
-import { Menu, MenuComponent } from './Menu';
+import { Menu } from './Menu';
 
 export default {
   title: 'ui/Menu',
-  component: MenuComponent,
+  component: Menu,
   argTypes: {
     onChange: { control: { type: null } },
     activeValues: { control: { type: null } },

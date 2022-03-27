@@ -19,7 +19,13 @@ export default {
 export const Default = (args: ISelect) => {
   return (
     <StyledBox>
-      <Select {...args} />
+      <Select {...args} activeValue={1}>
+        <Select.Option>13</Select.Option>
+        <Select.Option>13</Select.Option>
+        <Select.Option>13</Select.Option>
+        <Select.Option>13</Select.Option>
+        <Select.Option>13</Select.Option>
+      </Select>
     </StyledBox>
   );
 };
