@@ -1,13 +1,16 @@
-import { combineClassNames, mergeRefs } from 'lib';
+import { memo } from 'react';
+import { equals } from 'ramda';
+
+import { combineClassNames, mergeRefs, usePropsFromChildren } from 'lib';
 import { TextFieldBox } from 'internal';
 import { Popover } from 'components/Popover';
-import { Menu, TMenuItem } from 'components/Menu';
+import { Menu, TMenuItem, TMenuValue } from 'components/Menu';
 
 import type { ISelect } from './types';
 import { SELECT_CN } from './constants';
 import { useSelect } from './hooks';
 
-const SelectComponent = <SelectValue extends TMenuItem = TMenuItem>({
+const SelectComponent = <SelectValue extends TMenuValue = TMenuValue>({
   className,
   children,
   disabled,
@@ -20,6 +23,7 @@ const SelectComponent = <SelectValue extends TMenuItem = TMenuItem>({
   ...rest
 }: ISelect<SelectValue>) => {
   const { selectRef, containerRef, boxRef, popoverRef } = useSelect();
+  const options = usePropsFromChildren<TMenuItem<SelectValue>>(children, Menu.Item);
 
   return (
     <Popover
@@ -52,8 +56,9 @@ type TSelectComponent = typeof SelectComponent;
 
 export interface ISelectComponent extends TSelectComponent {
   Option: typeof Menu.Item;
+  displayName: string;
 }
 
-export const Select = SelectComponent as ISelectComponent;
-
+export const Select = memo(SelectComponent, equals) as unknown as ISelectComponent;
+Select.displayName = 'Select';
 Select.Option = Menu.Item;
