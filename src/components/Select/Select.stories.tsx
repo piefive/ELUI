@@ -4,7 +4,7 @@ import { Select } from './Select';
 import type { ISelect } from './types';
 
 export default {
-  title: 'ui/Select',
+  title: 'ui/_unstable_Select',
   component: Select,
   argTypes: {
     validate: { options: [true, false, null], control: { type: 'radio' } },
