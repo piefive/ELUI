@@ -140,9 +140,10 @@ export const StyledDeleteButton = styled(Button)<{ isWhite: boolean }>`
   margin-left: 4px;
   padding: 0;
   border: 0;
+  border-radius: 4px;
+  transition-duration: 0s;
   background-color: transparent;
   color: inherit;
-  transition-duration: 0s;
 
   &:not(:disabled):hover {
     background-color: ${({ theme, isWhite }) => (isWhite ? theme.palette.white : theme.palette.primary_700)};
