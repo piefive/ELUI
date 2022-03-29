@@ -1,7 +1,11 @@
 import styled from 'styled-components';
+import { useState } from 'react';
 
-import { Select } from './Select';
+import { reverseArrayValue, toString } from 'lib';
+
 import type { ISelect } from './types';
+import { SELECT_CN } from './constants';
+import { Select } from './Select';
 
 export default {
   title: 'ui/_unstable_Select',
@@ -17,17 +21,38 @@ export default {
 };
 
 export const Default = (args: ISelect) => {
+  const [value, setValue] = useState<string>('1');
+
   return (
     <StyledBox>
-      <Select {...args} activeValue={1}>
-        <Select.Option>13</Select.Option>
-        <Select.Option>13</Select.Option>
-        <Select.Option>13</Select.Option>
-        <Select.Option>13</Select.Option>
-        <Select.Option>13</Select.Option>
+      <Select<string> {...args} onChange={value => setValue(value)} activeValue={value}>
+        {Array.from({ length: 4 }, (_, i) => (
+          <Select.Option value={toString(i)}>Item {i + 1}</Select.Option>
+        ))}
       </Select>
     </StyledBox>
   );
+};
+
+export const Multiple = (args: ISelect) => {
+  const [values, setValues] = useState<string[]>(['1', '2']);
+
+  return (
+    <StyledBox>
+      <Select<string>
+        {...args}
+        onChange={value => setValues(old => reverseArrayValue(old, value))}
+        activeValue={values}
+      >
+        {Array.from({ length: 20 }, (_, i) => (
+          <Select.Option value={toString(i)}>Item {i + 1}</Select.Option>
+        ))}
+      </Select>
+    </StyledBox>
+  );
+};
+Multiple.args = {
+  multiple: true,
 };
 
 const StyledBox = styled.div`
@@ -39,4 +64,8 @@ const StyledBox = styled.div`
   border-radius: 8px;
   background-color: ${({ theme }) => theme.palette.white};
   box-shadow: 0 0 8px ${({ theme }) => theme.palette.grey_300};
+
+  .${SELECT_CN} {
+    max-width: 500px;
+  }
 `;

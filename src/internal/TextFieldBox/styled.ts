@@ -1,11 +1,15 @@
 import styled, { DefaultTheme, css } from 'styled-components';
 import type { U } from 'ts-toolbelt';
 
+import type { TStyledComponentsProps } from 'lib';
+import { getComponentStyle } from 'lib';
+
 type TField = {
   theme: DefaultTheme;
   validate: U.Nullable<boolean>;
   isFocused: boolean;
   isDisabled: boolean;
+  fieldStyle?: TStyledComponentsProps;
 };
 
 const boxShadowSize = '0 0 0 4px';
@@ -87,6 +91,8 @@ export const StyledField = styled.div<TField>`
   transition-timing-function: ease-out;
 
   ${fieldMixin};
+
+  ${({ theme, fieldStyle }) => getComponentStyle(fieldStyle, { theme })}
 `;
 
 export const StyledLeftSlot = styled.div`

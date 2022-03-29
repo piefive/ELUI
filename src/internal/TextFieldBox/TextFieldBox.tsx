@@ -14,6 +14,7 @@ export const TextFieldBox = <Element extends HTMLElement>({
   children,
   leftSlot,
   rightSlot,
+  fieldStyle,
   ...rest
 }: ITextFieldBox<Element>) => {
   const { validate } = rest;
@@ -23,7 +24,7 @@ export const TextFieldBox = <Element extends HTMLElement>({
 
   return (
     <FieldBox ref={boxRef} onLabelClick={onFieldFocus} {...rest}>
-      <StyledField ref={containerRef} onClick={onFieldFocus} {...{ validate, isFocused, isDisabled }}>
+      <StyledField ref={containerRef} onClick={onFieldFocus} {...{ validate, isFocused, isDisabled, fieldStyle }}>
         {leftSlot && <StyledLeftSlot>{leftSlot}</StyledLeftSlot>}
         {children}
         {isRightSlotRender && <TextFieldRightSlot {...{ fieldRef, rightSlot, isClearable }} />}

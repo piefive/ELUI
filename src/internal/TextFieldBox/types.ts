@@ -1,6 +1,8 @@
 import type { MutableRefObject, ReactNode, Ref } from 'react';
 import type { U } from 'ts-toolbelt';
 
+import type { TStyledComponentsProps } from 'lib';
+
 import type { TFieldBox } from '../FieldBox';
 
 export interface ITextFieldBox<Element extends HTMLElement = HTMLElement> extends TFieldBox {
@@ -13,4 +15,5 @@ export interface ITextFieldBox<Element extends HTMLElement = HTMLElement> extend
   leftSlot?: ReactNode;
   rightSlot?: ReactNode;
   children: ReactNode;
+  fieldStyle?: TStyledComponentsProps;
 }

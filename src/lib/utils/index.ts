@@ -1,4 +1,5 @@
 export * from './is';
+export * from './to';
 export * from './next-tick';
 export * from './create-event-fn';
 export * from './create-listener';
@@ -13,3 +14,4 @@ export { createEluiName } from './create-elui-name';
 export { noop } from './noop';
 export { dispatchEvent } from './dispatch-event';
 export { cast } from './cast';
+export { reverseArrayValue } from './reverse-array-value';

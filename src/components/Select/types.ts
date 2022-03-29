@@ -1,7 +1,7 @@
-import type { ReactNode } from 'react';
+import type { FC, ReactNode } from 'react';
 
 import type { ITextFieldBox } from 'internal';
-import type { TMenuContext, TMenuValue } from 'components/Menu';
+import type { TMenuContext, TMenuItem, TMenuValue } from 'components/Menu';
 
 type TSelectBox = Pick<
   ITextFieldBox,
@@ -12,4 +12,5 @@ export interface ISelect<SelectValue = TMenuValue> extends TSelectBox, Omit<TMen
   activeValue?: SelectValue | SelectValue[];
   children: ReactNode;
   disabled?: boolean;
+  optionComponent?: FC<TMenuItem>;
 }
