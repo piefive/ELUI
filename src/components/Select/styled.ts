@@ -9,9 +9,8 @@ export const StyledOptions = styled.div`
   ${scrollBarMixin}
 `;
 
-export const fieldStyleMixin = (withValues: boolean) =>
-  withValues
-    ? css`
-        padding: 6px 6px;
-      `
-    : undefined;
+export const fieldMixin = css`
+  &:not([disabled]) {
+    cursor: pointer;
+  }
+`;

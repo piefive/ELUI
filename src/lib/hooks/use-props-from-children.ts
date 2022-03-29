@@ -10,7 +10,6 @@ export const usePropsFromChildren = <Props extends Record<string, unknown>>(
     () =>
       Children.toArray(children).reduce<Props[]>((acc, reactNode) => {
         const isReactElement = isObject<ReactElement>(reactNode) && reactNode?.type === component;
-        console.log('render');
 
         if (isReactElement) acc.push(cast<Component<Props>>(reactNode).props);
 

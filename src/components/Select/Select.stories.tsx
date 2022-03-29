@@ -27,7 +27,9 @@ export const Default = (args: ISelect) => {
     <StyledBox>
       <Select<string> {...args} onChange={value => setValue(value)} activeValue={value}>
         {Array.from({ length: 4 }, (_, i) => (
-          <Select.Option value={toString(i)}>Item {i + 1}</Select.Option>
+          <Select.Option key={i} value={toString(i)}>
+            Item {i + 1}
+          </Select.Option>
         ))}
       </Select>
     </StyledBox>
@@ -41,11 +43,14 @@ export const Multiple = (args: ISelect) => {
     <StyledBox>
       <Select<string>
         {...args}
-        onChange={value => setValues(old => reverseArrayValue(old, value))}
+        onChange={value => setValues(reverseArrayValue(values, value))}
         activeValue={values}
+        onClear={value => setValues(value ? reverseArrayValue(values, value) : [])}
       >
         {Array.from({ length: 20 }, (_, i) => (
-          <Select.Option value={toString(i)}>Item {i + 1}</Select.Option>
+          <Select.Option key={i} value={toString(i)}>
+            Item {i + 1}
+          </Select.Option>
         ))}
       </Select>
     </StyledBox>

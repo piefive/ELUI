@@ -1,13 +1,13 @@
-import { combineClassNames, mergeRefs, usePropsFromChildren } from 'lib';
-import { TextFieldBox } from 'internal';
+import { combineClassNames, isArrayEmpty, mergeRefs, usePropsFromChildren } from 'lib';
 import { Popover } from 'components/Popover';
 import { Menu, TMenuItem, TMenuValue } from 'components/Menu';
+import { TextFieldBox } from 'internal';
 
 import type { ISelect } from './types';
 import { SELECT_CN } from './constants';
 import { useSelect, useSelectActiveValue } from './hooks';
 import { SelectValue } from './units';
-import { StyledOptions, fieldStyleMixin } from './styled';
+import { StyledOptions, fieldMixin } from './styled';
 
 const SelectComponent = <SelectValue extends TMenuValue = TMenuValue>({
   className,
@@ -20,11 +20,16 @@ const SelectComponent = <SelectValue extends TMenuValue = TMenuValue>({
   message,
   boxStyle,
   optionComponent = Menu.Item,
+  onClear,
   ...rest
 }: ISelect<SelectValue>) => {
-  const { selectRef, containerRef, boxRef, popoverRef } = useSelect();
+  const { onChange, activeValue, multiple } = rest;
+
+  const { selectRef, containerRef, boxRef, popoverRef } = useSelect<SelectValue>({ onClear, onChange });
   const options = usePropsFromChildren<TMenuItem<SelectValue>>(children, optionComponent);
-  const activeValues = useSelectActiveValue<SelectValue>(options, rest.activeValue);
+  const activeValues = useSelectActiveValue<SelectValue>(options, activeValue);
+
+  const isValuesEmpty = isArrayEmpty(activeValues);
 
   return (
     <Popover
@@ -49,10 +54,11 @@ const SelectComponent = <SelectValue extends TMenuValue = TMenuValue>({
           onLabelClick={onToggle}
           isFocused={isPopoverOpen}
           isDisabled={disabled}
-          fieldStyle={fieldStyleMixin(rest.multiple && !!activeValues.length)}
+          isClearable={onClear && !isValuesEmpty}
+          fieldStyle={fieldMixin}
           {...{ label, isRequired, validate, validateMessage, message, boxStyle }}
         >
-          {!!activeValues.length && <SelectValue<SelectValue> values={activeValues} isMultiple={rest.multiple} />}
+          <SelectValue<SelectValue> values={activeValues} isMultiple={multiple} {...{ onClear }} />
         </TextFieldBox>
       )}
     </Popover>

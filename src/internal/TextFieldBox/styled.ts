@@ -95,6 +95,11 @@ export const StyledField = styled.div<TField>`
   ${({ theme, fieldStyle }) => getComponentStyle(fieldStyle, { theme })}
 `;
 
+export const StyledContent = styled.div`
+  display: flex;
+  flex: 1;
+`;
+
 export const StyledLeftSlot = styled.div`
   position: relative;
   display: flex;

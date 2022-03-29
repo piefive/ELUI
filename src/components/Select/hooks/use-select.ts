@@ -1,8 +1,14 @@
 import { useImperativeHandle, useRef } from 'react';
 
 import { usePopoverRef } from 'components/Popover';
+import type { TMenuValue } from 'components/Menu';
 
-export const useSelect = () => {
+import type { ISelect } from '../types';
+
+export const useSelect = <SelectValue extends TMenuValue = TMenuValue>({
+  onChange,
+  onClear,
+}: Pick<ISelect<SelectValue>, 'onChange' | 'onClear'>) => {
   const popoverRef = usePopoverRef();
   const selectRef = useRef<HTMLElement>(null);
   const boxRef = useRef<HTMLDivElement>(null);
@@ -10,11 +16,23 @@ export const useSelect = () => {
 
   useImperativeHandle(
     selectRef,
-    () => ({
-      ...containerRef.current,
-      focus: () => popoverRef.current.setOpen(true),
-    }),
-    [popoverRef]
+    () => {
+      const ref = {
+        ...containerRef.current,
+        focus: () => popoverRef.current.setOpen(true),
+        dispatchEvent: () => true,
+      };
+
+      Object.defineProperty(ref, 'value', {
+        set(value: SelectValue | string) {
+          if (value === '') onClear?.();
+          else onChange(<SelectValue>value);
+        },
+      });
+
+      return ref;
+    },
+    [onChange, onClear, popoverRef]
   );
 
   return { selectRef, containerRef, popoverRef, boxRef };

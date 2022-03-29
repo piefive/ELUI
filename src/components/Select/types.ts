@@ -13,4 +13,5 @@ export interface ISelect<SelectValue = TMenuValue> extends TSelectBox, Omit<TMen
   children: ReactNode;
   disabled?: boolean;
   optionComponent?: FC<TMenuItem>;
+  onClear?: (value?: SelectValue) => void;
 }

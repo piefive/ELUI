@@ -1,5 +1,5 @@
 import type { TMenuValue } from 'components/Menu';
-import { Chip } from 'components/Chip';
+import { Chip, TChipHandler } from 'components/Chip';
 import { Typography } from 'components/Typography';
 
 import type { TSelectValue } from './types';
@@ -8,17 +8,21 @@ import { StyledChips } from './styled';
 export const SelectValue = <SelectValue extends TMenuValue = TMenuValue>({
   values,
   isMultiple,
+  onClear,
 }: TSelectValue<SelectValue>) => {
-  if (isMultiple)
+  if (isMultiple) {
+    const onDelete: TChipHandler = onClear ? ({ value }) => onClear(value) : undefined;
+
     return (
       <StyledChips>
-        {values.map(({ value, children }) => (
-          <Chip checked {...{ value }}>
+        {values.map(({ value, children }, i) => (
+          <Chip<SelectValue> key={`${i}_${value}`} {...{ value, onDelete }} checked>
             {children}
           </Chip>
         ))}
       </StyledChips>
     );
+  }
 
-  return <Typography>{values[0].children}</Typography>;
+  return <Typography>{values[0]?.children}</Typography>;
 };
