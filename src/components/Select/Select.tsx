@@ -19,14 +19,13 @@ const SelectComponent = <SelectValue extends TMenuValue = TMenuValue>({
   validateMessage,
   message,
   boxStyle,
-  optionComponent = Menu.Item,
   onClear,
   ...rest
 }: ISelect<SelectValue>) => {
   const { onChange, activeValue, multiple } = rest;
 
   const { selectRef, containerRef, boxRef, popoverRef } = useSelect<SelectValue>({ onClear, onChange });
-  const options = usePropsFromChildren<TMenuItem<SelectValue>>(children, optionComponent);
+  const options = usePropsFromChildren<TMenuItem<SelectValue>>(children, Menu.Item);
   const activeValues = useSelectActiveValue<SelectValue>(options, activeValue);
 
   const isValuesEmpty = isArrayEmpty(activeValues);
