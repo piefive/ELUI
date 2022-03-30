@@ -14,6 +14,7 @@ export default {
     validate: { options: [true, false, null], control: { type: 'radio' } },
   },
   args: {
+    placeholder: 'Placeholder',
     label: 'Label',
     message: 'This is the description area',
     validateMessage: 'This is an validate message',
@@ -25,7 +26,7 @@ export const Default = (args: ISelect) => {
 
   return (
     <StyledBox>
-      <Select<string> {...args} onChange={value => setValue(value)} activeValue={value}>
+      <Select<string> {...args} onChange={value => setValue(value)} onClear={() => setValue('')} activeValue={value}>
         {Array.from({ length: 4 }, (_, i) => (
           <Select.Option key={i} value={toString(i)}>
             Item {i + 1}

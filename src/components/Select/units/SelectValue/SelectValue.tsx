@@ -9,6 +9,7 @@ export const SelectValue = <SelectValue extends TMenuValue = TMenuValue>({
   values,
   isMultiple,
   onClear,
+  children,
 }: TSelectValue<SelectValue>) => {
   if (isMultiple) {
     const onDelete: TChipHandler = onClear ? ({ value }) => onClear(value) : undefined;
@@ -20,9 +21,10 @@ export const SelectValue = <SelectValue extends TMenuValue = TMenuValue>({
             {children}
           </Chip>
         ))}
+        {children}
       </StyledChips>
     );
   }
 
-  return <Typography>{values[0]?.children}</Typography>;
+  return <>{children || <Typography>{values[0]?.children}</Typography>}</>;
 };

@@ -1,7 +1,7 @@
 import { useImperativeHandle, useRef } from 'react';
 
-import { usePopoverRef } from 'components/Popover';
 import type { TMenuValue } from 'components/Menu';
+import { usePopoverRef } from 'components/Popover';
 
 import type { ISelect } from '../types';
 
@@ -17,11 +17,10 @@ export const useSelect = <SelectValue extends TMenuValue = TMenuValue>({
   useImperativeHandle(
     selectRef,
     () => {
-      const ref = {
-        ...containerRef.current,
-        focus: () => popoverRef.current.setOpen(true),
-        dispatchEvent: () => true,
-      };
+      const ref = { ...containerRef.current };
+
+      ref.focus = () => popoverRef.current.setOpen(true);
+      ref.dispatchEvent = () => true;
 
       Object.defineProperty(ref, 'value', {
         set(value: SelectValue | string) {

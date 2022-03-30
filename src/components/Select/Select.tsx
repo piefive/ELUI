@@ -1,13 +1,13 @@
 import { combineClassNames, isArrayEmpty, mergeRefs, usePropsFromChildren } from 'lib';
+import { TextFieldBox } from 'internal';
 import { Popover } from 'components/Popover';
 import { Menu, TMenuItem, TMenuValue } from 'components/Menu';
-import { TextFieldBox } from 'internal';
 
 import type { ISelect } from './types';
 import { SELECT_CN } from './constants';
 import { useSelect, useSelectActiveValue } from './hooks';
-import { SelectValue } from './units';
-import { StyledOptions, fieldMixin } from './styled';
+import { SelectSearch, SelectValue } from './units';
+import { StyledOptions, StyledPlaceholder, fieldMixin } from './styled';
 
 const SelectComponent = <SelectValue extends TMenuValue = TMenuValue>({
   className,
@@ -20,15 +20,19 @@ const SelectComponent = <SelectValue extends TMenuValue = TMenuValue>({
   message,
   boxStyle,
   onClear,
+  placeholder,
+  onSearch,
+  searchFallback,
   ...rest
 }: ISelect<SelectValue>) => {
   const { onChange, activeValue, multiple } = rest;
 
-  const { selectRef, containerRef, boxRef, popoverRef } = useSelect<SelectValue>({ onClear, onChange });
+  const select = useSelect<SelectValue>({ onClear, onChange });
   const options = usePropsFromChildren<TMenuItem<SelectValue>>(children, Menu.Item);
   const activeValues = useSelectActiveValue<SelectValue>(options, activeValue);
 
   const isValuesEmpty = isArrayEmpty(activeValues);
+  const { selectRef, containerRef, boxRef, popoverRef } = select;
 
   return (
     <Popover
@@ -57,7 +61,10 @@ const SelectComponent = <SelectValue extends TMenuValue = TMenuValue>({
           fieldStyle={fieldMixin}
           {...{ label, isRequired, validate, validateMessage, message, boxStyle }}
         >
-          <SelectValue<SelectValue> values={activeValues} isMultiple={multiple} {...{ onClear }} />
+          {isValuesEmpty && !!placeholder && <StyledPlaceholder>{placeholder}</StyledPlaceholder>}
+          <SelectValue<SelectValue> values={activeValues} isMultiple={multiple} {...{ onClear }}>
+            {isPopoverOpen && onSearch && <SelectSearch fallback={searchFallback} handleSearch={onSearch} />}
+          </SelectValue>
         </TextFieldBox>
       )}
     </Popover>

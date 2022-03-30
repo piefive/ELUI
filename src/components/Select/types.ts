@@ -8,9 +8,14 @@ type TSelectBox = Pick<
   'className' | 'label' | 'message' | 'validate' | 'validateMessage' | 'boxStyle' | 'isRequired'
 >;
 
+export type TSearchHandler = (value: string) => void;
+
 export interface ISelect<SelectValue = TMenuValue> extends TSelectBox, Omit<TMenuContext<SelectValue>, 'activeValue'> {
   activeValue?: SelectValue | SelectValue[];
   children: ReactNode;
   disabled?: boolean;
   onClear?: (value?: SelectValue) => void;
+  onSearch?: TSearchHandler;
+  searchFallback?: string;
+  placeholder?: string;
 }
