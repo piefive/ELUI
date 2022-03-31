@@ -1,6 +1,7 @@
-import styled from 'styled-components';
 import { useState } from 'react';
+import styled from 'styled-components';
 
+import { Icon } from 'components/Icon';
 import { reverseArrayValue, toString } from 'lib';
 
 import type { ISelect } from './types';
@@ -26,9 +27,15 @@ export const Default = (args: ISelect) => {
 
   return (
     <StyledBox>
-      <Select<string> {...args} onChange={value => setValue(value)} onClear={() => setValue('')} activeValue={value}>
+      <Select<string>
+        {...args}
+        onChange={value => setValue(value)}
+        onClear={() => setValue('')}
+        activeValue={value}
+        leftSlot={values => values[0]?.leftSlot}
+      >
         {Array.from({ length: 4 }, (_, i) => (
-          <Select.Option key={i} value={toString(i)}>
+          <Select.Option key={i} leftSlot={<Icon.Mail />} value={toString(i)}>
             Item {i + 1}
           </Select.Option>
         ))}
@@ -40,6 +47,8 @@ export const Default = (args: ISelect) => {
 export const Multiple = (args: ISelect) => {
   const [values, setValues] = useState<string[]>([]);
 
+  const items = Array.from({ length: 20 }, (_, i) => toString(i));
+
   return (
     <StyledBox>
       <Select<string>
@@ -48,9 +57,16 @@ export const Multiple = (args: ISelect) => {
         activeValue={values}
         onClear={value => setValues(value ? reverseArrayValue(values, value) : [])}
       >
-        {Array.from({ length: 20 }, (_, i) => (
-          <Select.Option key={i} value={toString(i)}>
-            Item {i + 1}
+        <Select.Option
+          leftSlot={<Icon.Grid />}
+          checked={values.length === items.length}
+          onClick={() => setValues(items)}
+        >
+          All
+        </Select.Option>
+        {items.map(i => (
+          <Select.Option key={i} leftSlot={<Icon.Mail />} value={toString(i)}>
+            Item {Number(i) + 1}
           </Select.Option>
         ))}
       </Select>

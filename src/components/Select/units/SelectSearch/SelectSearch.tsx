@@ -7,6 +7,7 @@ import type { TSelectSearch } from './types';
 import { StyledHiddenText, StyledSearch, StyledSearchInput } from './styled';
 
 const MIN_SEARCH_WIDTH = 22;
+const WIDTH_OFFSET_RIGHT = 50;
 
 export const SelectSearch = ({ handleSearch, onClear, getMaxWidth, fallback = '' }: TSelectSearch) => {
   const [searchValue, setSearchValue] = useState(fallback);
@@ -16,7 +17,7 @@ export const SelectSearch = ({ handleSearch, onClear, getMaxWidth, fallback = ''
   const [searchTextRef, { scrollWidth }] = useMeasure(false, isPopoverOpen);
 
   const width = scrollWidth + MIN_SEARCH_WIDTH;
-  const maxWidth = getMaxWidth() - MIN_SEARCH_WIDTH * 2;
+  const maxWidth = getMaxWidth() - WIDTH_OFFSET_RIGHT;
 
   const handleChangeSearch = (value: string) => {
     setSearchValue(value);

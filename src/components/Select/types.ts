@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 
 import type { ITextFieldBox } from 'internal';
-import type { TMenuContext, TMenuValue } from 'components/Menu';
+import type { TMenuContext, TMenuItem, TMenuValue } from 'components/Menu';
 
 type TSelectBox = Pick<
   ITextFieldBox,
@@ -9,6 +9,8 @@ type TSelectBox = Pick<
 >;
 
 export type TSearchHandler = (value: string) => void;
+
+export type TRenderLeftSlot<SelectValue = TMenuValue> = (values: TMenuItem<SelectValue>[]) => ReactNode;
 
 export interface ISelect<SelectValue = TMenuValue> extends TSelectBox, Omit<TMenuContext<SelectValue>, 'activeValue'> {
   activeValue?: SelectValue | SelectValue[];
@@ -19,4 +21,5 @@ export interface ISelect<SelectValue = TMenuValue> extends TSelectBox, Omit<TMen
   searchFallback?: string;
   placeholder?: string;
   withChevron?: boolean;
+  leftSlot?: TRenderLeftSlot<SelectValue> | ReactNode;
 }

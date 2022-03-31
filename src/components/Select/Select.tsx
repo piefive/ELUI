@@ -1,4 +1,4 @@
-import { combineClassNames, isArrayEmpty, mergeRefs, usePropsFromChildren } from 'lib';
+import { combineClassNames, isArrayEmpty, isFn, mergeRefs, usePropsFromChildren } from 'lib';
 import { TextFieldBox } from 'internal';
 import { Popover } from 'components/Popover';
 import { Menu, TMenuItem, TMenuValue } from 'components/Menu';
@@ -24,6 +24,7 @@ const SelectComponent = <SelectValue extends TMenuValue = TMenuValue>({
   onSearch,
   searchFallback,
   withChevron = true,
+  leftSlot,
   ...rest
 }: ISelect<SelectValue>) => {
   const { onChange, activeValue, multiple } = rest;
@@ -63,6 +64,7 @@ const SelectComponent = <SelectValue extends TMenuValue = TMenuValue>({
             isClearable={onClear && !isValuesEmpty}
             rightSlot={withChevron && <SelectChevron />}
             fieldStyle={fieldMixin}
+            leftSlot={isFn(leftSlot) ? leftSlot(activeValues) : leftSlot}
             {...{ ...bindSelect, label, isRequired, validate, validateMessage, message, boxStyle }}
           >
             {!isSearchable && isValuesEmpty && !!placeholder && <StyledPlaceholder>{placeholder}</StyledPlaceholder>}
