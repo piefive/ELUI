@@ -44,19 +44,20 @@ export const scrollBarMixin = css`
       background-color: transparent;
     }
 
-    ::-webkit-scrollbar-thumb {
+    ::-webkit-scrollbar-thumb:vertical {
       border-radius: 4px 0 0 4px;
       background-color: transparent;
     }
 
-    ::-webkit-scrollbar-button:single-button {
+    ::-webkit-scrollbar-button:vertical {
+      display: block;
       height: 8px;
       background-color: transparent;
       border-color: transparent;
     }
 
     &:hover {
-      ::-webkit-scrollbar-thumb {
+      ::-webkit-scrollbar-thumb:vertical {
         background: ${({ theme }) => theme.palette.grey_400};
       }
     }
