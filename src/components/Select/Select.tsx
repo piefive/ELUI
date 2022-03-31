@@ -6,8 +6,8 @@ import { Menu, TMenuItem, TMenuValue } from 'components/Menu';
 import type { ISelect } from './types';
 import { SELECT_CN } from './constants';
 import { useSelect, useSelectActiveValue } from './hooks';
-import { SelectChevron, SelectSearch, SelectValue } from './units';
-import { StyledOptions, StyledPlaceholder, fieldMixin } from './styled';
+import { SelectChevron, SelectOptions, SelectSearch, SelectValue } from './units';
+import { StyledPlaceholder, fieldMixin } from './styled';
 
 const SelectComponent = <SelectValue extends TMenuValue = TMenuValue>({
   className,
@@ -42,13 +42,9 @@ const SelectComponent = <SelectValue extends TMenuValue = TMenuValue>({
       placement="bottom"
       offset={[0, 14]}
       outsideRefs={[boxRef]}
+      popover={<SelectOptions {...rest}>{children}</SelectOptions>}
       forceUpdateTarget={activeValues}
       checkTargetWidth
-      popover={
-        <StyledOptions>
-          <Menu<SelectValue> {...rest}>{children}</Menu>
-        </StyledOptions>
-      }
     >
       {({ ref, onToggle, isPopoverOpen }) => {
         const isSearchable = isPopoverOpen && onSearch;

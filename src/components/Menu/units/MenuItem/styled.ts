@@ -1,6 +1,6 @@
 import styled, { DefaultTheme, css } from 'styled-components';
 
-import { normalizeMixin } from 'lib';
+import { getAria, normalizeMixin } from 'lib';
 
 type TStyledMenuItem = {
   isChecked: boolean;
@@ -29,15 +29,6 @@ const menuItemMixin = ({ isChecked, disabled, theme }: TStyledMenuItem & { theme
   `;
 };
 
-export const StyledMenuItemBox = styled.li`
-  ${normalizeMixin};
-
-  width: 100%;
-  min-height: 44px;
-  padding: 2px 4px;
-  list-style: none;
-`;
-
 export const StyledMenuItem = styled.div<TStyledMenuItem>`
   display: flex;
   align-items: center;
@@ -52,6 +43,25 @@ export const StyledMenuItem = styled.div<TStyledMenuItem>`
   cursor: pointer;
 
   ${menuItemMixin};
+`;
+
+export const StyledMenuItemBox = styled.li`
+  ${normalizeMixin};
+
+  width: 100%;
+  min-height: 44px;
+  padding: 2px 4px;
+  list-style: none;
+
+  &:focus {
+    outline: none;
+
+    &:not([${getAria('aria-disabled', true)}]) {
+      ${StyledMenuItem} {
+        background-color: ${({ theme }) => theme.palette.grey_200};
+      }
+    }
+  }
 `;
 
 export const StyledMenuItemLeftContent = styled.div`

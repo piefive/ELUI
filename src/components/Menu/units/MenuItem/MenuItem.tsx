@@ -1,6 +1,6 @@
 import { equals, isNil } from 'ramda';
 
-import { combineClassNames, isPrimitiveReactNode } from 'lib';
+import { bindAria, combineClassNames, isPrimitiveReactNode } from 'lib';
 import { Checkbox } from 'components/CheckboxGroup';
 import { Typography } from 'components/Typography';
 
@@ -37,14 +37,23 @@ export const MenuItem = <Value extends TMenuValue = TMenuValue>({
 
   const handleChange = isChangeable && !disabled ? () => onChange(value) : undefined;
 
+  const handleClickItem =
+    handleChange || onClick
+      ? () => {
+          handleChange?.();
+          onClick?.();
+        }
+      : undefined;
+
   return (
     <>
       {withSeparator && <StyledMenuItemSeparator />}
-      <StyledMenuItemBox className={combineClassNames(className, MENU_ITEM_CN)}>
-        <StyledMenuItem
-          onClick={handleChange || onClick ? () => [handleChange, onClick].forEach(fn => fn?.()) : undefined}
-          {...{ isChecked, disabled }}
-        >
+      <StyledMenuItemBox
+        className={combineClassNames(className, MENU_ITEM_CN)}
+        tabIndex={disabled || isChecked ? -1 : 0}
+        {...bindAria({ checked: isChecked, disabled })}
+      >
+        <StyledMenuItem onClick={handleClickItem} {...{ isChecked, disabled }}>
           <StyledMenuItemLeftContent>
             {leftSlot && (
               <StyledMenuItemLeftSlot>

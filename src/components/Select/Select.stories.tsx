@@ -23,7 +23,7 @@ export default {
 };
 
 export const Default = (args: ISelect) => {
-  const [value, setValue] = useState<string>('1');
+  const [value, setValue] = useState<string>();
 
   return (
     <StyledBox>

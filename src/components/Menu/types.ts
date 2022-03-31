@@ -1,4 +1,6 @@
-import type { ReactNode } from 'react';
+import type { ReactElement, ReactNode, Ref } from 'react';
+
+import type { MenuItem } from './units';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type TMenuValue = any;
@@ -28,3 +30,10 @@ export interface IMenu<Value extends TMenuValue = TMenuValue> extends Omit<TMenu
   activeValue?: Value[] | Value;
   children: ReactNode;
 }
+
+export type TMenuForwardRef = (<Value extends TMenuValue = TMenuValue>(
+  props: IMenu<Value> & { ref?: Ref<HTMLUListElement> }
+) => ReactElement) & {
+  displayName: string;
+  Item: typeof MenuItem;
+};
