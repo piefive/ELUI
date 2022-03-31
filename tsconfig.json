@@ -21,7 +21,7 @@
     "forceConsistentCasingInFileNames": true,
     "jsx": "react-jsx",
     "typeRoots": ["./@types"],
-    "lib": ["dom", "es2015", "es2017", "esnext"],
+    "lib": ["dom", "es2020", "esnext"],
   },
   "exclude": ["**/__tests__/**", "**/*.test.ts"]
 }

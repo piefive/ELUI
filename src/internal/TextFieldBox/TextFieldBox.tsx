@@ -8,6 +8,8 @@ export const TextFieldBox = <Element extends HTMLElement>({
   fieldRef = null,
   boxRef,
   containerRef,
+  leftSlotRef,
+  rightSlotRef,
   isClearable = false,
   isDisabled = false,
   isFocused = false,
@@ -18,6 +20,7 @@ export const TextFieldBox = <Element extends HTMLElement>({
   ...rest
 }: ITextFieldBox<Element>) => {
   const { validate } = rest;
+
   const isRightSlotRender = Boolean(isClearable || rightSlot);
 
   const onFieldFocus = () => fieldRef?.current.focus();
@@ -25,9 +28,9 @@ export const TextFieldBox = <Element extends HTMLElement>({
   return (
     <FieldBox ref={boxRef} onLabelClick={onFieldFocus} {...rest}>
       <StyledField ref={containerRef} onClick={onFieldFocus} {...{ validate, isFocused, isDisabled, fieldStyle }}>
-        {leftSlot && <StyledLeftSlot>{leftSlot}</StyledLeftSlot>}
+        {leftSlot && <StyledLeftSlot ref={leftSlotRef}>{leftSlot}</StyledLeftSlot>}
         <StyledContent>{children}</StyledContent>
-        {isRightSlotRender && <TextFieldRightSlot {...{ fieldRef, rightSlot, isClearable }} />}
+        {isRightSlotRender && <TextFieldRightSlot innerRef={rightSlotRef} {...{ fieldRef, rightSlot, isClearable }} />}
       </StyledField>
     </FieldBox>
   );

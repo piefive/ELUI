@@ -18,4 +18,5 @@ export interface ISelect<SelectValue = TMenuValue> extends TSelectBox, Omit<TMen
   onSearch?: TSearchHandler;
   searchFallback?: string;
   placeholder?: string;
+  withChevron?: boolean;
 }

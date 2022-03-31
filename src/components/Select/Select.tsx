@@ -6,7 +6,7 @@ import { Menu, TMenuItem, TMenuValue } from 'components/Menu';
 import type { ISelect } from './types';
 import { SELECT_CN } from './constants';
 import { useSelect, useSelectActiveValue } from './hooks';
-import { SelectSearch, SelectValue } from './units';
+import { SelectChevron, SelectSearch, SelectValue } from './units';
 import { StyledOptions, StyledPlaceholder, fieldMixin } from './styled';
 
 const SelectComponent = <SelectValue extends TMenuValue = TMenuValue>({
@@ -23,16 +23,17 @@ const SelectComponent = <SelectValue extends TMenuValue = TMenuValue>({
   placeholder,
   onSearch,
   searchFallback,
+  withChevron = true,
   ...rest
 }: ISelect<SelectValue>) => {
   const { onChange, activeValue, multiple } = rest;
 
-  const select = useSelect<SelectValue>({ onClear, onChange });
   const options = usePropsFromChildren<TMenuItem<SelectValue>>(children, Menu.Item);
   const activeValues = useSelectActiveValue<SelectValue>(options, activeValue);
+  const select = useSelect<SelectValue>({ onClear, onChange, activeValues });
 
   const isValuesEmpty = isArrayEmpty(activeValues);
-  const { selectRef, containerRef, boxRef, popoverRef } = select;
+  const { handleClearLast, getMaxContentWidth, containerRef, boxRef, popoverRef, ...bindSelect } = select;
 
   return (
     <Popover
@@ -48,25 +49,36 @@ const SelectComponent = <SelectValue extends TMenuValue = TMenuValue>({
         </StyledOptions>
       }
     >
-      {({ ref, onToggle, isPopoverOpen }) => (
-        <TextFieldBox
-          boxRef={boxRef}
-          fieldRef={selectRef}
-          containerRef={mergeRefs(ref, containerRef)}
-          className={combineClassNames(className, SELECT_CN)}
-          onLabelClick={onToggle}
-          isFocused={isPopoverOpen}
-          isDisabled={disabled}
-          isClearable={onClear && !isValuesEmpty}
-          fieldStyle={fieldMixin}
-          {...{ label, isRequired, validate, validateMessage, message, boxStyle }}
-        >
-          {isValuesEmpty && !!placeholder && <StyledPlaceholder>{placeholder}</StyledPlaceholder>}
-          <SelectValue<SelectValue> values={activeValues} isMultiple={multiple} {...{ onClear }}>
-            {isPopoverOpen && onSearch && <SelectSearch fallback={searchFallback} handleSearch={onSearch} />}
-          </SelectValue>
-        </TextFieldBox>
-      )}
+      {({ ref, onToggle, isPopoverOpen }) => {
+        const isSearchable = isPopoverOpen && onSearch;
+
+        return (
+          <TextFieldBox
+            boxRef={boxRef}
+            containerRef={mergeRefs(ref, containerRef)}
+            className={combineClassNames(className, SELECT_CN)}
+            onLabelClick={onToggle}
+            isFocused={isPopoverOpen}
+            isDisabled={disabled}
+            isClearable={onClear && !isValuesEmpty}
+            rightSlot={withChevron && <SelectChevron />}
+            fieldStyle={fieldMixin}
+            {...{ ...bindSelect, label, isRequired, validate, validateMessage, message, boxStyle }}
+          >
+            {!isSearchable && isValuesEmpty && !!placeholder && <StyledPlaceholder>{placeholder}</StyledPlaceholder>}
+            <SelectValue<SelectValue> values={activeValues} isMultiple={multiple} {...{ onClear }}>
+              {isSearchable && (
+                <SelectSearch
+                  fallback={searchFallback}
+                  getMaxWidth={getMaxContentWidth}
+                  onClear={multiple ? handleClearLast : undefined}
+                  handleSearch={onSearch}
+                />
+              )}
+            </SelectValue>
+          </TextFieldBox>
+        );
+      }}
     </Popover>
   );
 };

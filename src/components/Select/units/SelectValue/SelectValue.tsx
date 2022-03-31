@@ -1,6 +1,7 @@
 import type { TMenuValue } from 'components/Menu';
 import { Chip, TChipHandler } from 'components/Chip';
 import { Typography } from 'components/Typography';
+import { isArrayEmpty } from 'lib';
 
 import type { TSelectValue } from './types';
 import { StyledChips } from './styled';
@@ -15,7 +16,7 @@ export const SelectValue = <SelectValue extends TMenuValue = TMenuValue>({
     const onDelete: TChipHandler = onClear ? ({ value }) => onClear(value) : undefined;
 
     return (
-      <StyledChips>
+      <StyledChips isEmpty={isArrayEmpty(values)}>
         {values.map(({ value, children }, i) => (
           <Chip<SelectValue> key={`${i}_${value}`} {...{ value, onDelete }} checked>
             {children}

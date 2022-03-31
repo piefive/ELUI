@@ -9,10 +9,11 @@ import type { TTextFieldRightSlot } from './types';
 export const TextFieldRightSlot = <Element extends HTMLElement>({
   rightSlot,
   isClearable,
+  innerRef,
   ...rest
 }: TTextFieldRightSlot<Element>) => {
   return (
-    <StyledRightSlot>
+    <StyledRightSlot ref={innerRef}>
       {isClearable && <Clearable<Element> {...rest} />}
       {rightSlot && <StyledContent withMargin={isClearable}>{rightSlot}</StyledContent>}
     </StyledRightSlot>

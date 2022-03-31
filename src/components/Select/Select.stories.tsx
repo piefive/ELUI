@@ -38,7 +38,7 @@ export const Default = (args: ISelect) => {
 };
 
 export const Multiple = (args: ISelect) => {
-  const [values, setValues] = useState<string[]>(['1', '2']);
+  const [values, setValues] = useState<string[]>([]);
 
   return (
     <StyledBox>

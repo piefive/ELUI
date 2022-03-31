@@ -5,13 +5,13 @@ import { Typography } from 'components/Typography';
 
 export const StyledSearch = styled.div`
   position: relative;
-  max-width: 70%;
 `;
 
 export const StyledSearchInput = styled.input`
   ${normalizeMixin};
 
   max-width: 100%;
+  height: 100%;
   z-index: 1;
   border: 0;
   background-color: transparent;

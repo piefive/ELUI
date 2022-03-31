@@ -27,8 +27,9 @@ const PopoverComponent = <T extends HTMLElement = HTMLDivElement>(
   }: TPopover<T>,
   popoverRef: Ref<TPopoverContext>
 ) => {
-  const { popper, isPopoverOpen, setOpen, onToggle, targetRef } = usePopover<T>({ onClose, ...popoverOptions });
+  const instance = usePopover<T>({ onClose, ...popoverOptions });
 
+  const { popper, isPopoverOpen, setOpen, onToggle, forceUpdate, targetRef } = instance;
   const { ref, style, ...popperProps } = popper;
 
   const transitionStyle = useTransition(isPopoverOpen, {
@@ -39,7 +40,10 @@ const PopoverComponent = <T extends HTMLElement = HTMLDivElement>(
     immediate: !animate,
   });
 
-  const ctx = useMemo(() => ({ isPopoverOpen, onToggle, setOpen }), [isPopoverOpen, onToggle, setOpen]);
+  const ctx = useMemo(
+    () => ({ isPopoverOpen, onToggle, setOpen, forceUpdate }),
+    [forceUpdate, isPopoverOpen, onToggle, setOpen]
+  );
 
   useImperativeHandle(popoverRef, () => ctx, [ctx]);
 

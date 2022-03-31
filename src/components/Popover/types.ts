@@ -11,6 +11,7 @@ export type TPopoverContext = {
   isPopoverOpen: boolean;
   onToggle: () => void;
   setOpen: Dispatch<SetStateAction<boolean>>;
+  forceUpdate: () => void;
 };
 
 interface IPopoverOptions<T extends HTMLElement> extends TPopoverContext {

@@ -70,6 +70,7 @@ export const usePopover = <T extends HTMLElement = HTMLElement>({
   }, [windowWidth]);
 
   return {
+    forceUpdate,
     isPopoverOpen,
     setOpen,
     onToggle: handleToggle,

@@ -9,6 +9,8 @@ export interface ITextFieldBox<Element extends HTMLElement = HTMLElement> extend
   fieldRef?: MutableRefObject<U.Nullable<Element>>;
   containerRef?: Ref<U.Nullable<HTMLDivElement>>;
   boxRef?: Ref<U.Nullable<HTMLDivElement>>;
+  leftSlotRef?: Ref<U.Nullable<HTMLDivElement>>;
+  rightSlotRef?: Ref<U.Nullable<HTMLDivElement>>;
   isFocused?: boolean;
   isDisabled?: boolean;
   isClearable?: boolean;

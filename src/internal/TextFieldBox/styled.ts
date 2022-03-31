@@ -96,8 +96,11 @@ export const StyledField = styled.div<TField>`
 `;
 
 export const StyledContent = styled.div`
+  position: relative;
   display: flex;
-  flex: 1;
+  align-items: start;
+  flex-wrap: wrap;
+  flex: 1 1 0;
 `;
 
 export const StyledLeftSlot = styled.div`

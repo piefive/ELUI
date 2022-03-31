@@ -1,34 +1,31 @@
-import { ChangeEventHandler, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 import { usePopoverContext } from 'components/Popover';
-import { useMeasure, useMount, useUpdateEffect } from 'lib';
+import { isString, useMeasure, useMount, useUpdateEffect } from 'lib';
 
 import type { TSelectSearch } from './types';
 import { StyledHiddenText, StyledSearch, StyledSearchInput } from './styled';
 
 const MIN_SEARCH_WIDTH = 22;
 
-export const SelectSearch = ({ handleSearch, fallback = '' }: TSelectSearch) => {
+export const SelectSearch = ({ handleSearch, onClear, getMaxWidth, fallback = '' }: TSelectSearch) => {
   const [searchValue, setSearchValue] = useState(fallback);
 
-  const { isPopoverOpen } = usePopoverContext();
+  const { isPopoverOpen, forceUpdate } = usePopoverContext();
   const searchRef = useRef<HTMLInputElement>();
   const [searchTextRef, { scrollWidth }] = useMeasure(false, isPopoverOpen);
 
-  const searchWidth = scrollWidth + MIN_SEARCH_WIDTH;
+  const width = scrollWidth + MIN_SEARCH_WIDTH;
+  const maxWidth = getMaxWidth() - MIN_SEARCH_WIDTH * 2;
 
-  const handleChangeSearch: ChangeEventHandler<HTMLInputElement> = event => {
-    const { value } = event.currentTarget;
-
+  const handleChangeSearch = (value: string) => {
     setSearchValue(value);
     handleSearch(value);
+    setTimeout(forceUpdate, 30);
   };
 
   useUpdateEffect(() => {
-    if (fallback !== searchValue) {
-      setSearchValue(fallback);
-      handleSearch(fallback);
-    }
+    if (isString(fallback) && fallback !== searchValue) handleChangeSearch(fallback);
   }, [fallback]);
 
   useMount(() => searchRef.current.focus());
@@ -38,8 +35,9 @@ export const SelectSearch = ({ handleSearch, fallback = '' }: TSelectSearch) => 
       <StyledSearchInput
         ref={searchRef}
         value={searchValue}
-        style={{ width: searchWidth }}
-        onChange={handleChangeSearch}
+        style={{ width, maxWidth }}
+        onChange={event => handleChangeSearch(event.currentTarget.value)}
+        onKeyDown={onClear}
         autoComplete="off"
       />
       <StyledHiddenText ref={searchTextRef} variant="b1">

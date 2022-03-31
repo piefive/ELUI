@@ -1,6 +1,8 @@
 import styled, { css } from 'styled-components';
 
-export const StyledRightSlot = styled.div`
+import type { TStyledComponentsProps } from 'lib';
+
+export const StyledRightSlot = styled.div<{ rightSlotStyle?: TStyledComponentsProps }>`
   position: relative;
   display: flex;
   align-items: center;
