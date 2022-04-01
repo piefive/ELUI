@@ -21,5 +21,6 @@ export interface ISelect<SelectValue = TMenuValue> extends TSelectBox, Omit<TMen
   searchFallback?: string;
   placeholder?: string;
   withChevron?: boolean;
+  isCloseAfterChange?: boolean;
   leftSlot?: TRenderLeftSlot<SelectValue> | ReactNode;
 }

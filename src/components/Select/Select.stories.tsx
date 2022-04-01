@@ -60,7 +60,7 @@ export const Multiple = (args: ISelect) => {
         <Select.Option
           leftSlot={<Icon.Grid />}
           checked={values.length === items.length}
-          onClick={() => setValues(items)}
+          onClick={() => setValues(values.length === items.length ? [] : items)}
         >
           All
         </Select.Option>

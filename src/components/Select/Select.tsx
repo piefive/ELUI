@@ -1,7 +1,9 @@
+import { useCallback } from 'react';
+
 import { combineClassNames, isArrayEmpty, isFn, mergeRefs, usePropsFromChildren } from 'lib';
 import { TextFieldBox } from 'internal';
 import { Popover } from 'components/Popover';
-import { Menu, TMenuItem, TMenuValue } from 'components/Menu';
+import { Menu, TMenuHandler, TMenuItem, TMenuValue } from 'components/Menu';
 
 import type { ISelect } from './types';
 import { SELECT_CN } from './constants';
@@ -25,9 +27,11 @@ const SelectComponent = <SelectValue extends TMenuValue = TMenuValue>({
   searchFallback,
   withChevron = true,
   leftSlot,
+  onChange,
+  isCloseAfterChange,
   ...rest
 }: ISelect<SelectValue>) => {
-  const { onChange, activeValue, multiple } = rest;
+  const { activeValue, multiple } = rest;
 
   const options = usePropsFromChildren<TMenuItem<SelectValue>>(children, Menu.Item);
   const activeValues = useSelectActiveValue<SelectValue>(options, activeValue);
@@ -36,13 +40,25 @@ const SelectComponent = <SelectValue extends TMenuValue = TMenuValue>({
   const isValuesEmpty = isArrayEmpty(activeValues);
   const { handleClearLast, getMaxContentWidth, containerRef, boxRef, popoverRef, ...bindSelect } = select;
 
+  const handleChange = useCallback<TMenuHandler<SelectValue>>(
+    (...changeRest) => {
+      onChange?.(...changeRest);
+      if (isCloseAfterChange ?? !multiple) popoverRef.current.setOpen(false);
+    },
+    [isCloseAfterChange, multiple, onChange, popoverRef]
+  );
+
   return (
     <Popover
       ref={popoverRef}
       placement="bottom"
       offset={[0, 14]}
       outsideRefs={[boxRef]}
-      popover={<SelectOptions {...rest}>{children}</SelectOptions>}
+      popover={
+        <SelectOptions {...rest} onChange={handleChange}>
+          {children}
+        </SelectOptions>
+      }
       forceUpdateTarget={activeValues}
       checkTargetWidth
     >
