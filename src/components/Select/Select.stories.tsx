@@ -9,7 +9,7 @@ import { SELECT_CN } from './constants';
 import { Select } from './Select';
 
 export default {
-  title: 'ui/_unstable_Select',
+  title: 'ui/Select',
   component: Select,
   argTypes: {
     validate: { options: [true, false, null], control: { type: 'radio' } },
