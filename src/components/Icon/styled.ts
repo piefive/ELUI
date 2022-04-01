@@ -14,8 +14,10 @@ export const StyledSvg = styled.svg<TStyledSvg>`
   min-height: ${({ size }) => size}px;
   stroke: currentColor;
   fill: none;
-  transition: opacity ease-out 0.3s;
   cursor: ${({ onClick }) => (onClick ? 'pointer' : 'inherit')};
+  transition-property: opacity;
+  transition-timing-function: ease-out;
+  transition-duration: 0.3s;
 
   ${({ iconStyle, theme }) => getComponentStyle(iconStyle, { theme })}
 `;

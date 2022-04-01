@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { getAria } from 'lib';
 import { ICON_CN } from 'components/Icon';
@@ -42,6 +42,17 @@ export const StyledThumb = styled.div`
   transition-duration: 0.3s;
 `;
 
+const thumbHoverMixin = css`
+  ${StyledThumb} {
+    box-shadow: 0 0 0 4px ${({ theme }) => theme.palette.primary_800};
+  }
+
+  .${ICON_CN} {
+    cursor: pointer;
+    opacity: 1;
+  }
+`;
+
 export const StyledRail = styled.div`
   position: relative;
   width: 100%;
@@ -72,6 +83,10 @@ export const StyledRail = styled.div`
     ${StyledTrack} {
       background-color: ${({ theme }) => theme.palette.primary_400};
     }
+
+    ${StyledThumbBox}:hover {
+      ${thumbHoverMixin};
+    }
   }
 
   &:not([${getAria('aria-disabled', true)}]):focus {
@@ -81,14 +96,7 @@ export const StyledRail = styled.div`
       background-color: ${({ theme }) => theme.palette.primary_400};
     }
 
-    ${StyledThumb} {
-      box-shadow: 0 0 0 4px ${({ theme }) => theme.palette.primary_800};
-    }
-
-    .${ICON_CN} {
-      cursor: pointer;
-      opacity: 1;
-    }
+    ${thumbHoverMixin};
   }
 `;
 

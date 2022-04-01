@@ -16,7 +16,9 @@ export const isBool = (value: unknown): value is boolean => includes(value, [tru
 
 export const isArray = Array.isArray;
 
-export const isObject = (value: TAnyValue): value is typeof Object => {
+export const isArrayEmpty = (value: Array<unknown>): boolean => !value.length;
+
+export const isObject = <Obj = Record<string, unknown>>(value: TAnyValue): value is Obj => {
   const nonNullObject = value && typeof value === 'object';
 
   return nonNullObject && !includes(value, ['[object RegExp]', '[object Date]']);

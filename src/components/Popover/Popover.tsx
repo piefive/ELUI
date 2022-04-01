@@ -1,31 +1,35 @@
-import { Fragment, createElement, useMemo } from 'react';
+import { Fragment, Ref, createElement, forwardRef, useImperativeHandle, useMemo } from 'react';
 import { config, useTransition } from 'react-spring';
 
 import { combineClassNames, createEventFn, isFn } from 'lib';
 import { Portal } from 'components/Portal';
 
-import type { TPopover } from './types';
+import type { TPopover, TPopoverContext, TPopoverForwardRef } from './types';
 import { POPOVER_CN, POPOVER_TARGET_CN } from './constants';
 import { PopoverProvider, usePopover } from './hooks';
 import { StyledAnimateContainer, StyledPopover, StyledPopoverTarget } from './styled';
 
 const preventedFn = createEventFn();
 
-export const Popover = <T extends HTMLElement = HTMLDivElement>({
-  children,
-  popover,
-  popoverStyle,
-  targetStyle,
-  className,
-  animate = true,
-  isPortal = true,
-  isPopoverVisible = true,
-  onClose,
-  animateContainerStyle,
-  ...popoverOptions
-}: TPopover<T>) => {
-  const { popper, isPopoverOpen, setOpen, onToggle, targetRef } = usePopover<T>({ onClose, ...popoverOptions });
+const PopoverComponent = <T extends HTMLElement = HTMLDivElement>(
+  {
+    children,
+    popover,
+    popoverStyle,
+    targetStyle,
+    className,
+    animate = true,
+    isPortal = true,
+    isPopoverVisible = true,
+    onClose,
+    animateContainerStyle,
+    ...popoverOptions
+  }: TPopover<T>,
+  popoverRef: Ref<TPopoverContext>
+) => {
+  const instance = usePopover<T>({ onClose, ...popoverOptions });
 
+  const { popper, isPopoverOpen, setOpen, onToggle, forceUpdate, targetRef } = instance;
   const { ref, style, ...popperProps } = popper;
 
   const transitionStyle = useTransition(isPopoverOpen, {
@@ -36,7 +40,12 @@ export const Popover = <T extends HTMLElement = HTMLDivElement>({
     immediate: !animate,
   });
 
-  const ctx = useMemo(() => ({ isPopoverOpen, onToggle, setOpen }), [isPopoverOpen, onToggle, setOpen]);
+  const ctx = useMemo(
+    () => ({ isPopoverOpen, onToggle, setOpen, forceUpdate }),
+    [forceUpdate, isPopoverOpen, onToggle, setOpen]
+  );
+
+  useImperativeHandle(popoverRef, () => ctx, [ctx]);
 
   return (
     <PopoverProvider value={ctx}>
@@ -79,3 +88,7 @@ export const Popover = <T extends HTMLElement = HTMLDivElement>({
     </PopoverProvider>
   );
 };
+
+export const Popover = forwardRef<TPopoverContext, TPopover>(PopoverComponent) as TPopoverForwardRef;
+
+Popover.displayName = 'Popover';

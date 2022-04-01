@@ -16,7 +16,7 @@ type TStyledChip = {
 
 const BOX_SHADOW_PROP = '0 0 0 4px';
 
-const chipVariantMixin = ({ theme, variant, checked, scheme }: TStyledChip & { theme: DefaultTheme }) => {
+const chipVariantMixin = ({ theme, variant, checked, scheme, onClick }: TStyledChip & { theme: DefaultTheme }) => {
   if (variant === 'input') {
     if (checked)
       return css`
@@ -29,17 +29,20 @@ const chipVariantMixin = ({ theme, variant, checked, scheme }: TStyledChip & { t
           border-color: ${theme.palette.primary_400};
         }
 
-        &:focus {
-          background-color: ${theme.palette.primary_700};
-          border-color: ${theme.palette.primary_700};
-          box-shadow: ${BOX_SHADOW_PROP} ${theme.palette.primary_200};
-        }
+        ${onClick &&
+        css`
+          &:focus {
+            background-color: ${theme.palette.primary_700};
+            border-color: ${theme.palette.primary_700};
+            box-shadow: ${BOX_SHADOW_PROP} ${theme.palette.primary_200};
+          }
 
-        &:active {
-          background-color: ${theme.palette.primary_800};
-          border-color: ${theme.palette.primary_800};
-          box-shadow: none;
-        }
+          &:active {
+            background-color: ${theme.palette.primary_800};
+            border-color: ${theme.palette.primary_800};
+            box-shadow: none;
+          }
+        `}
 
         &[disabled] {
           cursor: not-allowed;
@@ -59,16 +62,19 @@ const chipVariantMixin = ({ theme, variant, checked, scheme }: TStyledChip & { t
         border-color: ${theme.palette.primary_400};
       }
 
-      &:focus {
-        background-color: ${theme.palette.white};
-        box-shadow: ${BOX_SHADOW_PROP} ${theme.palette.primary_200};
-      }
+      ${onClick &&
+      css`
+        &:focus {
+          background-color: ${theme.palette.white};
+          box-shadow: ${BOX_SHADOW_PROP} ${theme.palette.primary_200};
+        }
 
-      &:active {
-        background-color: ${theme.palette.primary_100};
-        border-color: ${theme.palette.primary_700};
-        box-shadow: none;
-      }
+        &:active {
+          background-color: ${theme.palette.primary_100};
+          border-color: ${theme.palette.primary_700};
+          box-shadow: none;
+        }
+      `}
 
       &[disabled] {
         cursor: not-allowed;
@@ -140,9 +146,10 @@ export const StyledDeleteButton = styled(Button)<{ isWhite: boolean }>`
   margin-left: 4px;
   padding: 0;
   border: 0;
+  border-radius: 4px;
+  transition-duration: 0s;
   background-color: transparent;
   color: inherit;
-  transition-duration: 0s;
 
   &:not(:disabled):hover {
     background-color: ${({ theme, isWhite }) => (isWhite ? theme.palette.white : theme.palette.primary_700)};
