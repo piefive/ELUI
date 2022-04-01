@@ -13,13 +13,24 @@ export default {
   component: Select,
   argTypes: {
     validate: { options: [true, false, null], control: { type: 'radio' } },
+    leftSlot: { control: { type: null } },
+    onChange: { control: { type: null } },
+    onClear: { control: { type: null } },
+    activeValue: { control: { type: null } },
+    onSearch: { control: { type: null } },
+    boxStyle: { control: { type: null } },
   },
   args: {
     placeholder: 'Placeholder',
     label: 'Label',
     message: 'This is the description area',
     validateMessage: 'This is an validate message',
-    disabled: true,
+    className: '',
+    searchFallback: '',
+    disabled: false,
+    isRequired: true,
+    validate: null,
+    withChevron: true,
   },
 };
 
@@ -30,8 +41,14 @@ export const Default = (args: ISelect) => {
     <StyledBox>
       <Select<string>
         {...args}
-        onChange={value => setValue(value)}
-        onClear={() => setValue('')}
+        onChange={value => {
+          setValue(value);
+          args?.onChange(value);
+        }}
+        onClear={() => {
+          setValue('');
+          args?.onClear('');
+        }}
         activeValue={value}
         leftSlot={values => values[0]?.leftSlot}
         searchFallback={args?.searchFallback || (value && `Item ${Number(value) + 1}`)}
@@ -45,6 +62,9 @@ export const Default = (args: ISelect) => {
     </StyledBox>
   );
 };
+Default.args = {
+  isCloseAfterChange: true,
+};
 
 export const Multiple = (args: ISelect) => {
   const [values, setValues] = useState<string[]>([]);
@@ -55,9 +75,15 @@ export const Multiple = (args: ISelect) => {
     <StyledBox>
       <Select<string>
         {...args}
-        onChange={value => setValues(reverseArrayValue(values, value))}
+        onChange={value => {
+          setValues(reverseArrayValue(values, value));
+          args?.onChange(value);
+        }}
         activeValue={values}
-        onClear={value => setValues(value ? reverseArrayValue(values, value) : [])}
+        onClear={value => {
+          setValues(value ? reverseArrayValue(values, value) : []);
+          args?.onClear(value);
+        }}
       >
         <Select.Option
           leftSlot={<Icon.Grid />}
@@ -77,6 +103,7 @@ export const Multiple = (args: ISelect) => {
 };
 Multiple.args = {
   multiple: true,
+  isCloseAfterChange: false,
 };
 
 const StyledBox = styled.div`
