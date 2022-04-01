@@ -14,8 +14,11 @@ export const StyledSearchInput = styled.input`
   height: 100%;
   z-index: 1;
   border: 0;
-  background-color: transparent;
+  padding-top: 2px;
+  margin-left: -2px;
   font-size: 16px;
+  letter-spacing: 0.5px;
+  background-color: transparent;
 
   &:focus {
     outline: none;

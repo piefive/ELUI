@@ -33,6 +33,7 @@ export const Default = (args: ISelect) => {
         onClear={() => setValue('')}
         activeValue={value}
         leftSlot={values => values[0]?.leftSlot}
+        searchFallback={args?.searchFallback || (value && `Item ${Number(value) + 1}`)}
       >
         {Array.from({ length: 4 }, (_, i) => (
           <Select.Option key={i} leftSlot={<Icon.Mail />} value={toString(i)}>
