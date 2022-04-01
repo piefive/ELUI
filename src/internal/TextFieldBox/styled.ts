@@ -19,10 +19,15 @@ const fieldMixin = ({ theme, isFocused, isDisabled, validate }: TField) => {
     return css`
       background-color: ${({ theme }) => theme.palette.grey_100};
       color: ${theme.palette.grey_400};
-      pointer-events: none;
+      cursor: not-allowed;
 
-      input {
-        ::-webkit-input-placeholder {
+      > * {
+        pointer-events: none;
+      }
+
+      input,
+      textarea {
+        ::placeholder {
           color: ${theme.palette.grey_400};
         }
       }

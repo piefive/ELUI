@@ -19,6 +19,7 @@ export default {
     label: 'Label',
     message: 'This is the description area',
     validateMessage: 'This is an validate message',
+    disabled: true,
   },
 };
 

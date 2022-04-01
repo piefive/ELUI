@@ -14,7 +14,7 @@ import { StyledPlaceholder, fieldMixin } from './styled';
 const SelectComponent = <SelectValue extends TMenuValue = TMenuValue>({
   className,
   children,
-  disabled,
+  disabled = false,
   label,
   isRequired,
   validate,
@@ -54,16 +54,14 @@ const SelectComponent = <SelectValue extends TMenuValue = TMenuValue>({
       placement="bottom"
       offset={[0, 14]}
       outsideRefs={[boxRef]}
-      popover={
-        <SelectOptions {...rest} onChange={handleChange}>
-          {children}
-        </SelectOptions>
-      }
+      popover={<SelectOptions {...{ ...rest, onChange: handleChange }}>{children}</SelectOptions>}
       forceUpdateTarget={activeValues}
+      {...{ disabled }}
       checkTargetWidth
     >
       {({ ref, onToggle, isPopoverOpen }) => {
         const isSearchable = isPopoverOpen && onSearch;
+        const isPlaceholderVisible = !isSearchable && isValuesEmpty && !!placeholder;
 
         return (
           <TextFieldBox
@@ -79,7 +77,7 @@ const SelectComponent = <SelectValue extends TMenuValue = TMenuValue>({
             leftSlot={isFn(leftSlot) ? leftSlot(activeValues) : leftSlot}
             {...{ ...bindSelect, label, isRequired, validate, validateMessage, message, boxStyle }}
           >
-            {!isSearchable && isValuesEmpty && !!placeholder && <StyledPlaceholder>{placeholder}</StyledPlaceholder>}
+            {isPlaceholderVisible && <StyledPlaceholder isDisabled={disabled}>{placeholder}</StyledPlaceholder>}
             <SelectValue<SelectValue> values={activeValues} isMultiple={multiple} {...{ onClear }}>
               {isSearchable && (
                 <SelectSearch
