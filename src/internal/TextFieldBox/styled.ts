@@ -101,7 +101,6 @@ export const StyledField = styled.div<TField>`
 `;
 
 export const StyledContent = styled.div`
-  position: relative;
   display: flex;
   align-items: start;
   flex-wrap: wrap;

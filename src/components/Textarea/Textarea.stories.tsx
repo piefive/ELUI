@@ -30,6 +30,8 @@ export default {
     value: '',
     isRequired: true,
     isClearable: true,
+    isResizable: false,
+    isAutoHeight: true,
     disabled: false,
     validate: null,
     placeholder: 'Placeholder',

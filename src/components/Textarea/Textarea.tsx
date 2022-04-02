@@ -1,6 +1,6 @@
-import { forwardRef, useRef } from 'react';
+import { FormEventHandler, forwardRef, useCallback, useRef, useState } from 'react';
 
-import { combineClassNames, useControlledFocus, useForkForwardedRef } from 'lib';
+import { combineClassNames, nextTick, useControlledFocus, useForkForwardedRef } from 'lib';
 import { TextFieldBox } from 'internal';
 
 import type { ITextarea } from './types';
@@ -17,6 +17,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, ITextarea>(
       validate = null,
       disabled = false,
       isResizable = true,
+      isAutoHeight,
       isClearable = true,
       isRequired,
       validateMessage,
@@ -26,13 +27,25 @@ export const Textarea = forwardRef<HTMLTextAreaElement, ITextarea>(
       onFocus,
       leftSlot,
       rightSlot,
+      onInput,
+      rows,
+      style,
       ...rest
     },
     textAreaRef
   ) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const [setRef, ref] = useForkForwardedRef<HTMLTextAreaElement>(textAreaRef);
+    const [resizeRows, setRows] = useState<number>(null);
     const { isFocused, ...focusState } = useControlledFocus({ onFocus, onBlur, ref });
+
+    const handleInput: FormEventHandler<HTMLTextAreaElement> = event => {
+      if (isAutoHeight) {
+        const rowCount = event.currentTarget.value.split('\n').length;
+        setRows(rowCount + 1);
+      }
+      onInput?.(event);
+    };
 
     const textAreaProps = {
       ref: setRef,
@@ -40,6 +53,9 @@ export const Textarea = forwardRef<HTMLTextAreaElement, ITextarea>(
       ...focusState,
       value,
       disabled,
+      onInput: handleInput,
+      style,
+      rows: resizeRows || rows,
     };
 
     return (
@@ -53,7 +69,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, ITextarea>(
       >
         {isResizable ? (
           <ResizeContainer fieldRef={ref} isDisabled={disabled}>
-            {height => <StyledTextarea style={{ height }} {...textAreaProps} />}
+            {height => <StyledTextarea {...textAreaProps} style={{ ...textAreaProps.style, height }} />}
           </ResizeContainer>
         ) : (
           <StyledTextarea {...textAreaProps} />
