@@ -18,4 +18,5 @@ export interface ITextFieldBox<Element extends HTMLElement = HTMLElement> extend
   rightSlot?: ReactNode;
   children: ReactNode;
   fieldStyle?: TStyledComponentsProps;
+  footerSlot?: ReactNode;
 }
