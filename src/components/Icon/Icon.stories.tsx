@@ -19,7 +19,7 @@ const names = Object.entries(Icons).map(([key]) => key);
 export const All = (args: TIcon) => (
   <StyledIcons>
     {names.map(name => {
-      const ComponentIcon = Icon[name];
+      const ComponentIcon = Icon[name as 'Info'];
       const component = `<Icon.${name} />`;
 
       return (
