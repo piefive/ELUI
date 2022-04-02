@@ -5,7 +5,7 @@ type TCallback = () => TAny;
 
 type TCallbackWithArgs = (...args: unknown[]) => TAny;
 
-export const nextTick = <Fn extends TCallback>(callback: Fn) => queueMicrotask(callback);
+export const nextTick = <Fn extends TCallback>(callback: Fn) => setTimeout(callback);
 
 export const nextTickFn =
   <Fn extends TCallbackWithArgs>(fn: Fn) =>

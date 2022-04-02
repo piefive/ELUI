@@ -46,7 +46,7 @@ export const scrollBarMixin = css`
 
     ::-webkit-scrollbar-thumb:vertical {
       border-radius: 4px 0 0 4px;
-      background-color: transparent;
+      background: ${({ theme }) => theme.palette.grey_400};
     }
 
     ::-webkit-scrollbar-button:vertical {
@@ -55,11 +55,6 @@ export const scrollBarMixin = css`
       background-color: transparent;
       border-color: transparent;
     }
-
-    &:hover {
-      ::-webkit-scrollbar-thumb:vertical {
-        background: ${({ theme }) => theme.palette.grey_400};
-      }
     }
   }
 `;
