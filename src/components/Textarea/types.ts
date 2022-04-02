@@ -17,4 +17,5 @@ export interface ITextarea extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   message?: string;
   boxStyle?: TStyledComponentsProps;
   onChange?: ChangeEventHandler<HTMLTextAreaElement>;
+  footerSlot?: ReactNode;
 }

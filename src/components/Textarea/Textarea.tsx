@@ -1,6 +1,6 @@
-import { FormEventHandler, forwardRef, useCallback, useRef, useState } from 'react';
+import { FormEventHandler, forwardRef, useRef, useState } from 'react';
 
-import { combineClassNames, nextTick, useControlledFocus, useForkForwardedRef } from 'lib';
+import { combineClassNames, useControlledFocus, useForkForwardedRef } from 'lib';
 import { TextFieldBox } from 'internal';
 
 import type { ITextarea } from './types';
@@ -30,6 +30,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, ITextarea>(
       onInput,
       rows,
       style,
+      footerSlot,
       ...rest
     },
     textAreaRef
@@ -63,6 +64,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, ITextarea>(
         fieldRef={ref}
         containerRef={containerRef}
         className={combineClassNames(className, TEXTAREA_CN)}
+        footerSlot={footerSlot}
         isClearable={Boolean(value && isClearable)}
         isDisabled={disabled}
         {...{ label, isRequired, validate, isFocused, leftSlot, rightSlot, validateMessage, message, boxStyle }}
