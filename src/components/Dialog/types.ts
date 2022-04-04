@@ -11,6 +11,7 @@ export type TDialog = {
   onClose?: (event: MouseEvent) => void;
   variant?: TDialogVariant;
   zIndex?: number;
+  withHeader?: boolean;
   withOverlay?: boolean;
   header?: ReactNode;
   footer?: ReactNode;

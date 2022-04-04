@@ -22,6 +22,7 @@ export const DialogContent = ({
   className,
   isOpen,
   zIndex,
+  withHeader = true,
   header,
   children,
   footer,
@@ -41,7 +42,7 @@ export const DialogContent = ({
       item && (
         <StyledDialog $isBottomSheet={isBottomSheet} style={{ ...style, zIndex }}>
           <StyledDialogBox {...{ className, boxStyle, isBottomSheet }} onClick={stopPropagation}>
-            {!!header && (
+            {withHeader && (
               <StyledDialogHeader {...{ headerStyle }}>
                 <Typography variant="st1">{header}</Typography>
                 {onClose && (

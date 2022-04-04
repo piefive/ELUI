@@ -22,6 +22,7 @@ export default {
   args: {
     isOpen: true,
     withOverlay: true,
+    withHeader: true,
     zIndex: 20,
     variant: 'modal',
     className: '',
