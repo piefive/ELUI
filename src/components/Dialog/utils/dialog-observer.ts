@@ -2,45 +2,46 @@ import type { U } from 'ts-toolbelt';
 import type { Dispatch, SetStateAction } from 'react';
 import { omit } from 'ramda';
 
+import { createException } from 'lib/utils';
+
 type TDialogObserverFn = Dispatch<SetStateAction<boolean>>;
 
 type TDialogObserver = {
   show: (name: string) => void;
   hide: (name: string) => void;
   toggle: (name: string) => void;
-  subscribe: (name: string, observer: TDialogObserverFn) => void;
-  unsubscribe: (name: string, observer: TDialogObserverFn) => void;
+  register: (name: string, observer: TDialogObserverFn) => void;
+  unregister: (name: string) => void;
 };
 
 const createDialogObserver = (): TDialogObserver => {
-  const dialogs = new Map<string, U.Nullable<TDialogObserverFn[]>>();
+  const dialogs = new Map<string, U.Nullable<TDialogObserverFn>>();
 
   const broadcast = (name: string, isOpen: SetStateAction<boolean>) => {
-    const observers = dialogs.get(name);
-    observers?.forEach(obs => obs(isOpen));
+    dialogs.get(name)?.(isOpen);
   };
 
-  const subscribe = (name: string, observer: TDialogObserverFn) => {
-    const observers = dialogs.get(name) ?? [];
-    dialogs.set(name, [...observers, observer]);
-  };
-
-  const unsubscribe = (name: string, observer: TDialogObserverFn) => {
-    const observers = dialogs.get(name);
-
-    if (observers) {
-      const next = observers.filter(fn => fn !== observer);
-      if (!next.length) dialogs.delete(name);
-      else dialogs.set(name, next);
+  const register = (name: string, observer: TDialogObserverFn) => {
+    if (dialogs.get(name)) {
+      return createException(`The dialog with the name "${name}" has already been registered`, {
+        withName: true,
+        variant: 'throw',
+      });
     }
+
+    dialogs.set(name, observer);
+  };
+
+  const unregister = (name: string) => {
+    dialogs.delete(name);
   };
 
   return {
     show: (name: string) => broadcast(name, true),
     hide: (name: string) => broadcast(name, false),
     toggle: (name: string) => broadcast(name, isOpen => !isOpen),
-    subscribe,
-    unsubscribe,
+    register,
+    unregister,
   };
 };
 

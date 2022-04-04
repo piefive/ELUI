@@ -8,10 +8,10 @@ export const useDialogVisible = (name?: string, isOpen = false) => {
   const [isVisible, setVisible] = useState(isOpen);
 
   useEffect(() => {
-    if (name) dialogObserver.subscribe(name, setVisible);
+    if (name) dialogObserver.register(name, setVisible);
 
     return () => {
-      if (name) dialogObserver.unsubscribe(name, setVisible);
+      if (name) dialogObserver.unregister(name);
     };
   }, [name]);
 
