@@ -31,8 +31,6 @@ export default {
     value: '',
     isRequired: true,
     isClearable: true,
-    isResizable: false,
-    isAutoHeight: true,
     disabled: false,
     validate: null,
     placeholder: 'Placeholder',
@@ -63,6 +61,10 @@ export const Default = (args: ITextarea) => {
     </StyledBox>
   );
 };
+Default.args = {
+  isResizable: true,
+  isAutoHeight: false,
+};
 
 export const WithFooter = (args: ITextarea) => {
   const { value: controlsValue } = args;
@@ -87,6 +89,10 @@ export const WithFooter = (args: ITextarea) => {
       />
     </StyledBox>
   );
+};
+WithFooter.args = {
+  isResizable: false,
+  isAutoHeight: true,
 };
 
 const StyledBox = styled.div`

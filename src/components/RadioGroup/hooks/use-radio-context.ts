@@ -3,7 +3,7 @@ import { createContext, useContext } from 'react';
 import type { TRadioContext } from '../types';
 
 const RadioContext = createContext<TRadioContext>(null);
-RadioContext.displayName = 'RadioProvider';
+RadioContext.displayName = 'RadioContext';
 
 export const RadioProvider = RadioContext.Provider;
 

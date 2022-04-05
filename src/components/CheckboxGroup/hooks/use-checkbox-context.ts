@@ -3,7 +3,7 @@ import { createContext, useContext } from 'react';
 import type { TCheckboxContext } from '../types';
 
 const CheckboxContext = createContext<TCheckboxContext>(null);
-CheckboxContext.displayName = 'CheckboxProvider';
+CheckboxContext.displayName = 'CheckboxContext';
 
 export const CheckboxProvider = CheckboxContext.Provider;
 

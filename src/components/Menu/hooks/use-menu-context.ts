@@ -5,7 +5,7 @@ import type { TMenuContext, TMenuValue } from '../types';
 type TContext<Value extends TMenuValue> = Context<TMenuContext<Value>>;
 
 const MenuContext = createContext<TMenuContext>(null);
-MenuContext.displayName = 'MenuProvider';
+MenuContext.displayName = 'MenuContext';
 
 export const MenuProvider = MenuContext.Provider;
 
