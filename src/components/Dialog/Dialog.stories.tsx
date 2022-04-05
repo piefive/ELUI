@@ -9,7 +9,7 @@ import { Dialog } from './Dialog';
 import { dialog } from './utils';
 
 export default {
-  title: 'ui/__unstable__Dialog',
+  title: 'ui/Dialog',
   component: Dialog,
   argTypes: {
     boxStyle: { control: { type: null } },
