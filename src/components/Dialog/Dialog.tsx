@@ -1,6 +1,7 @@
+import { useRef } from 'react';
 import { clamp } from 'ramda';
 
-import { combineClassNames, useUpdateEffect } from 'lib';
+import { combineClassNames, nextTickFn, useMount, useUpdateEffect } from 'lib';
 import { Portal } from 'components/Portal';
 
 import type { TDialog } from './types';
@@ -20,6 +21,7 @@ export const Dialog = ({
   children,
   ...rest
 }: TDialog) => {
+  const portalRef = useRef<HTMLDivElement>();
   const isVisible = useDialogVisible(name, isOpen);
 
   const layoutIndex = clamp(2, Number.MAX_SAFE_INTEGER, zIndex);
@@ -27,8 +29,10 @@ export const Dialog = ({
 
   useUpdateEffect(() => onAfterVisibleChange?.(isVisible), [isVisible]);
 
+  useMount(nextTickFn(() => portalRef.current?.setAttribute(`data-${DIALOG_CN}`, name)));
+
   return (
-    <Portal name="dialogs">
+    <Portal name="dialogs" ref={portalRef}>
       <DialogContent
         className={combineClassNames(className, DIALOG_CN)}
         isOpen={isVisible}
