@@ -11,16 +11,15 @@ export const StyledDialog = styled(animated.div)<{ $isBottomSheet: boolean }>`
   ${({ $isBottomSheet }) => {
     if ($isBottomSheet)
       return css`
-        top: auto;
         bottom: 0;
-        left: 0;
+        left: 50%;
         width: 100%;
+        max-width: 800px;
         max-height: 90%;
       `;
 
     return css`
-      top: 50%;
-      left: 50%;
+      inset: 50% auto auto 50%;
       width: 95%;
       max-width: 640px;
       max-height: 90%;

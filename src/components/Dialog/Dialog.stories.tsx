@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+import { useToggle, useUpdateEffect } from 'lib/hooks';
 import { Button } from 'components/Button';
 import { Typography } from 'components/Typography';
 
@@ -33,20 +34,28 @@ export default {
 };
 
 export const Default = (args: TDialog) => {
+  const [isVisible, onToggle] = useToggle(args.isOpen);
+
+  useUpdateEffect(() => {
+    onToggle(args.isOpen);
+  }, [args.isOpen]);
+
   return (
     <StyledBox>
-      <Button onClick={() => dialog.show(args.name ?? 'test')}>Open dialog</Button>
+      <Button onClick={onToggle}>Open dialog</Button>
       <Dialog
         {...args}
-        footer={args.footer || <Button buttonStyle={{ marginLeft: 'auto', maxWidth: 200 }}>Button</Button>}
+        isOpen={isVisible}
+        footer={args.footer || <Button buttonStyle={{ marginLeft: 'auto' }}>Button</Button>}
+        onAfterVisibleChange={onToggle}
         onClose={event => {
           dialog.hide(args.name ?? 'test');
           args.onClose(event);
         }}
       >
-        <StyledSwapBox>
-          <Typography>Swap with component</Typography>
-        </StyledSwapBox>
+        <StyledContentBox>
+          <Typography>Content</Typography>
+        </StyledContentBox>
       </Dialog>
     </StyledBox>
   );
@@ -60,7 +69,7 @@ const StyledBox = styled.div`
   box-shadow: 0 0 8px ${({ theme }) => theme.palette.grey_300};
 `;
 
-const StyledSwapBox = styled.div`
+const StyledContentBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;

@@ -9,6 +9,7 @@ export type TDialog = {
   isOpen?: boolean;
   className?: string;
   onClose?: (event: MouseEvent) => void;
+  onAfterVisibleChange?: (isVisible: boolean) => void;
   variant?: TDialogVariant;
   zIndex?: number;
   withHeader?: boolean;

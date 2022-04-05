@@ -16,4 +16,5 @@ export { useControlledFocus } from './use-controlled-focus';
 export { useClickOutside } from './use-click-outside';
 export { useMedia } from './use-media';
 export { usePropsFromChildren } from './use-props-from-children';
+export { useToggle } from './use-toggle';
 export * from './use-scroll-lock';

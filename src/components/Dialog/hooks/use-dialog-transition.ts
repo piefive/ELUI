@@ -5,13 +5,15 @@ import { useIsomorphicLayoutEffect } from 'lib';
 import type { TDialogVariant } from '../types';
 
 const getModalTransitionFrom = (isBottomSheet: boolean) => ({
-  x: isBottomSheet ? '0%' : '-50%',
-  y: isBottomSheet ? '100%' : '-50%',
+  x: '-50%',
+  y: isBottomSheet ? '100%' : '-60%',
+  opacity: isBottomSheet ? 1 : 0,
 });
 
 const getModalTransitionTo = (isBottomSheet: boolean) => ({
-  x: isBottomSheet ? '0%' : '-50%',
+  x: '-50%',
   y: isBottomSheet ? '0%' : '-50%',
+  opacity: 1,
 });
 
 export const useDialogTransition = (variant: TDialogVariant, isOpen: boolean) => {

@@ -1,7 +1,7 @@
 import { clamp } from 'ramda';
 
+import { combineClassNames, useUpdateEffect } from 'lib';
 import { Portal } from 'components/Portal';
-import { combineClassNames } from 'lib';
 
 import type { TDialog } from './types';
 import { useDialogVisible } from './hooks';
@@ -16,6 +16,7 @@ export const Dialog = ({
   variant = 'modal',
   zIndex = 20,
   withOverlay = true,
+  onAfterVisibleChange,
   children,
   ...rest
 }: TDialog) => {
@@ -23,6 +24,8 @@ export const Dialog = ({
 
   const layoutIndex = clamp(2, Number.MAX_SAFE_INTEGER, zIndex);
   const handleClose: TDialog['onClose'] = isVisible && onClose ? event => onClose(event) : undefined;
+
+  useUpdateEffect(() => onAfterVisibleChange?.(isVisible), [isVisible]);
 
   return (
     <Portal name="dialogs">
