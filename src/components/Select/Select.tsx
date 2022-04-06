@@ -29,6 +29,8 @@ const SelectComponent = <SelectValue extends TMenuValue = TMenuValue>({
   leftSlot,
   onChange,
   isCloseAfterChange,
+  isPortal,
+  zIndex,
   ...rest
 }: ISelect<SelectValue>) => {
   const { activeValue, multiple } = rest;
@@ -56,7 +58,7 @@ const SelectComponent = <SelectValue extends TMenuValue = TMenuValue>({
       outsideRefs={[boxRef]}
       popover={<SelectOptions {...{ ...rest, onChange: handleChange }}>{children}</SelectOptions>}
       forceUpdateTarget={activeValues}
-      {...{ disabled }}
+      {...{ disabled, isPortal, zIndex }}
       checkTargetWidth
     >
       {({ ref, onToggle, isPopoverOpen }) => {

@@ -31,6 +31,8 @@ export default {
     isRequired: true,
     validate: null,
     withChevron: true,
+    isPortal: true,
+    zIndex: 21,
   },
 };
 
@@ -64,6 +66,9 @@ export const Default = (args: ISelect) => {
 };
 Default.args = {
   isCloseAfterChange: true,
+};
+Default.argTypes = {
+  multiple: { control: { type: null } },
 };
 
 export const Multiple = (args: ISelect) => {

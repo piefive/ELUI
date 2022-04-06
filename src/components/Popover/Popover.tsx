@@ -1,5 +1,5 @@
 import { Fragment, Ref, createElement, forwardRef, useImperativeHandle, useMemo } from 'react';
-import { config, useTransition } from 'react-spring';
+import { useTransition } from 'react-spring';
 
 import { combineClassNames, createEventFn, isFn } from 'lib';
 import { Portal } from 'components/Portal';
@@ -23,6 +23,7 @@ const PopoverComponent = <T extends HTMLElement = HTMLDivElement>(
     isPopoverVisible = true,
     onClose,
     animateContainerStyle,
+    zIndex = 21,
     ...popoverOptions
   }: TPopover<T>,
   popoverRef: Ref<TPopoverContext>
@@ -72,7 +73,7 @@ const PopoverComponent = <T extends HTMLElement = HTMLDivElement>(
                 <StyledAnimateContainer
                   {...{ ref, ...popperProps }}
                   styled={animateContainerStyle}
-                  style={{ ...style, ...transitionStyle }}
+                  style={{ ...style, ...transitionStyle, zIndex }}
                 >
                   <StyledPopover
                     className={combineClassNames(className, POPOVER_CN)}
