@@ -2,6 +2,7 @@ import { ChangeEventHandler, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { Icon } from 'components/Icon';
+import { Button } from 'components/Button';
 
 import { Textarea } from './Textarea';
 import type { ITextarea } from './types';
@@ -59,6 +60,39 @@ export const Default = (args: ITextarea) => {
       <Textarea {...args} leftSlot={<Icon.Search />} rightSlot={<Icon.Mail />} value={value} onChange={handleChange} />
     </StyledBox>
   );
+};
+Default.args = {
+  isResizable: true,
+  isAutoHeight: false,
+};
+
+export const WithFooter = (args: ITextarea) => {
+  const { value: controlsValue } = args;
+  const [value, setValue] = useState<string>('');
+
+  const handleChange: ChangeEventHandler<HTMLTextAreaElement> = event => {
+    args.onChange(event);
+    setValue(event.target.value);
+  };
+
+  useEffect(() => {
+    setValue(controlsValue);
+  }, [controlsValue]);
+
+  return (
+    <StyledBox>
+      <Textarea
+        {...args}
+        value={value}
+        onChange={handleChange}
+        footerSlot={<Button buttonStyle={{ marginLeft: 'auto' }}>Отправить</Button>}
+      />
+    </StyledBox>
+  );
+};
+WithFooter.args = {
+  isResizable: false,
+  isAutoHeight: true,
 };
 
 const StyledBox = styled.div`

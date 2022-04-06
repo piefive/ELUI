@@ -1,11 +1,15 @@
 import styled, { DefaultTheme, css } from 'styled-components';
 import type { U } from 'ts-toolbelt';
 
+import type { TStyledComponentsProps } from 'lib';
+import { getComponentStyle } from 'lib';
+
 type TField = {
   theme: DefaultTheme;
   validate: U.Nullable<boolean>;
   isFocused: boolean;
   isDisabled: boolean;
+  fieldStyle?: TStyledComponentsProps;
 };
 
 const boxShadowSize = '0 0 0 4px';
@@ -15,10 +19,15 @@ const fieldMixin = ({ theme, isFocused, isDisabled, validate }: TField) => {
     return css`
       background-color: ${({ theme }) => theme.palette.grey_100};
       color: ${theme.palette.grey_400};
-      pointer-events: none;
+      cursor: not-allowed;
 
-      input {
-        ::-webkit-input-placeholder {
+      > * {
+        pointer-events: none;
+      }
+
+      input,
+      textarea {
+        ::placeholder {
           color: ${theme.palette.grey_400};
         }
       }
@@ -75,9 +84,9 @@ const fieldMixin = ({ theme, isFocused, isDisabled, validate }: TField) => {
 
 export const StyledField = styled.div<TField>`
   position: relative;
-  display: flex;
-  align-items: flex-start;
+  flex-wrap: wrap;
   width: 100%;
+  min-height: 48px;
   padding: 12px 16px;
   border-radius: 8px;
   overflow: hidden;
@@ -86,6 +95,21 @@ export const StyledField = styled.div<TField>`
   transition-timing-function: ease-out;
 
   ${fieldMixin};
+
+  ${({ theme, fieldStyle }) => getComponentStyle(fieldStyle, { theme })}
+`;
+
+export const StyledFieldBody = styled.div`
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+`;
+
+export const StyledContent = styled.div`
+  display: flex;
+  align-items: start;
+  flex-wrap: wrap;
+  flex: 1 1 0;
 `;
 
 export const StyledLeftSlot = styled.div`
@@ -93,4 +117,9 @@ export const StyledLeftSlot = styled.div`
   display: flex;
   align-items: center;
   margin-right: 16px;
+`;
+
+export const StyledFooterSlot = styled.div`
+  width: 100%;
+  page-break-after: always; /* Синтаксис CSS 2.1 */
 `;

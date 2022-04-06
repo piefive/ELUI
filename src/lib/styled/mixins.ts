@@ -12,6 +12,18 @@ export const normalizeMixin = css`
   font-family: ${({ theme }) => theme.fontFamily};
 `;
 
+export const tabletMedia = css`
+  ${({ theme }) => `min-width: ${theme.media.tablet}`}
+`;
+
+export const laptopMedia = css`
+  ${({ theme }) => `min-width: ${theme.media.laptop}`}
+`;
+
+export const desktopMedia = css`
+  ${({ theme }) => `min-width: ${theme.media.desktop}`}
+`;
+
 export const figmaSmoothCornersMixin = (borderRadius: string | number, cornerSmoothing: number) => css`
   border-radius: ${isNumber(borderRadius) ? `${borderRadius}px` : borderRadius};
 
@@ -25,34 +37,24 @@ export const figmaSmoothCornersMixin = (borderRadius: string | number, cornerSmo
 `;
 
 export const scrollBarMixin = css`
-  ::-webkit-scrollbar,
-  ::-webkit-scrollbar-thumb {
-    width: 26px;
-    height: 26px;
-    border-radius: 13px;
-    background-color: transparent;
-    border: 10px solid transparent;
-  }
+  @media (${tabletMedia}) {
+    ::-webkit-scrollbar {
+      width: 4px;
+      height: 26px;
+      background-color: transparent;
+    }
 
-  ::-webkit-scrollbar-thumb {
-    box-shadow: inset 0 0 0 10px transparent;
-  }
+    ::-webkit-scrollbar-thumb:vertical {
+      border-radius: 4px 0 0 4px;
+      background: ${({ theme }) => theme.palette.grey_400};
+    }
 
-  &:hover {
-    ::-webkit-scrollbar-thumb {
-      box-shadow: inset 0 0 0 10px ${({ theme }) => theme.palette.grey_100};
+    ::-webkit-scrollbar-button:vertical {
+      display: block;
+      height: 8px;
+      background-color: transparent;
+      border-color: transparent;
+    }
     }
   }
-`;
-
-export const tabletMedia = css`
-  ${({ theme }) => `min-width: ${theme.media.tablet}`}
-`;
-
-export const laptopMedia = css`
-  ${({ theme }) => `min-width: ${theme.media.laptop}`}
-`;
-
-export const desktopMedia = css`
-  ${({ theme }) => `min-width: ${theme.media.desktop}`}
 `;

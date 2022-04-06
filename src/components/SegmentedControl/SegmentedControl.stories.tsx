@@ -22,6 +22,7 @@ export const Default = (args: ISegmentedControlComponent) => {
   const [value, setValue] = useState('segment_0');
 
   const handleChange: TSegmentedControlHandler = event => {
+    console.log(event);
     args.onSegmentChange(event);
     setValue(event.currentTarget.value);
   };

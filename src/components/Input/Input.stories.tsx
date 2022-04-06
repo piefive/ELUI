@@ -4,25 +4,16 @@ import styled from 'styled-components';
 import { Icon } from 'components/Icon';
 
 import { Input } from './Input';
-import type { IInput } from './types';
+import type { IInputFieldWithMask, TInput } from './types';
 
 export default {
-  title: 'ui/Input/Base',
+  title: 'ui/Input',
   component: Input,
   argTypes: {
-    value: {
-      control: 'text',
-    },
-    leftSlot: {
-      control: { type: null },
-    },
-    rightSlot: {
-      control: { type: null },
-    },
-    validate: {
-      options: [true, false, null],
-      control: { type: 'radio' },
-    },
+    value: { control: 'text' },
+    leftSlot: { control: { type: null } },
+    rightSlot: { control: { type: null } },
+    validate: { options: [true, false, null], control: { type: 'radio' } },
   },
   args: {
     label: 'Label',
@@ -38,7 +29,7 @@ export default {
   },
 };
 
-export const Default = (args: IInput) => {
+export const Base = (args: TInput) => {
   const { value: controlsValue } = args;
   const [value, setValue] = useState<string | number>('');
 
@@ -56,6 +47,64 @@ export const Default = (args: IInput) => {
       <Input {...args} leftSlot={<Icon.Search />} rightSlot={<Icon.Mail />} value={value} onChange={handleChange} />
     </StyledBox>
   );
+};
+Base.argTypes = {
+  maskOptions: { control: { type: null } },
+};
+
+export const Password = (args: TInput) => {
+  const { value: controlsValue } = args;
+  const [value, setValue] = useState<string | number>('');
+
+  const handleChange: ChangeEventHandler<HTMLInputElement> = event => {
+    args?.onChange?.(event);
+    setValue(event.target.value);
+  };
+
+  useEffect(() => {
+    setValue(controlsValue);
+  }, [controlsValue]);
+
+  return (
+    <StyledBox>
+      <Input {...args} value={value} onChange={handleChange} />
+    </StyledBox>
+  );
+};
+Password.argTypes = {
+  type: { control: { type: null } },
+  maskOptions: { control: { type: null } },
+};
+Password.args = {
+  type: 'password',
+};
+
+export const Masked = (args: TInput) => {
+  const [value, setValue] = useState<string | number>('');
+
+  const handleChange: ChangeEventHandler<HTMLInputElement> = event => {
+    args?.onChange?.(event);
+    setValue(event.target.value);
+  };
+
+  return (
+    <StyledBox>
+      <Input
+        key={JSON.stringify((args as IInputFieldWithMask).maskOptions)}
+        {...args}
+        leftSlot={<Icon.Search />}
+        rightSlot={<Icon.Mail />}
+        value={value}
+        onChange={handleChange}
+      />
+    </StyledBox>
+  );
+};
+Masked.argTypes = {
+  value: { control: { type: null } },
+};
+Masked.args = {
+  maskOptions: { mask: '+{7}(000)000-00-00', lazy: false },
 };
 
 const StyledBox = styled.div`

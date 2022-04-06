@@ -3,7 +3,7 @@ import type { ReactNode } from 'react';
 import type { TStyledComponentsProps } from 'lib';
 
 export type TScrollContainerRef = {
-  scrollTo: (left: number, contentWidth?: number) => Promise<boolean>;
+  scrollTo: (left: number, contentWidth?: number) => void;
 };
 
 export type TScrollContainer = {

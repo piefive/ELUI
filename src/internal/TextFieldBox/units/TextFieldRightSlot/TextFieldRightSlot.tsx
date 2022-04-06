@@ -1,37 +1,33 @@
 import { useCallback } from 'react';
 
+import { dispatchEvent } from 'lib';
 import { Icon } from 'components';
 
 import { StyledContent, StyledRightSlot } from './styled';
 import type { TTextFieldRightSlot } from './types';
 
-export const TextFieldRightSlot = <Element extends HTMLInputElement | HTMLTextAreaElement>({
+export const TextFieldRightSlot = <Element extends HTMLElement>({
   rightSlot,
   isClearable,
+  innerRef,
   ...rest
 }: TTextFieldRightSlot<Element>) => {
   return (
-    <StyledRightSlot>
+    <StyledRightSlot ref={innerRef}>
       {isClearable && <Clearable<Element> {...rest} />}
       {rightSlot && <StyledContent withMargin={isClearable}>{rightSlot}</StyledContent>}
     </StyledRightSlot>
   );
 };
 
-const Clearable = <Element extends HTMLInputElement | HTMLTextAreaElement>({
-  fieldRef,
-}: Pick<TTextFieldRightSlot<Element>, 'fieldRef'>) => {
+const Clearable = <Element extends HTMLElement>({ fieldRef }: Pick<TTextFieldRightSlot<Element>, 'fieldRef'>) => {
   const onClear = useCallback(() => {
-    const element = fieldRef.current;
-
-    const valueSetter = Object.getOwnPropertyDescriptor(element, 'value').set;
-    const prototype = Object.getPrototypeOf(element);
-    const prototypeValueSetter = Object.getOwnPropertyDescriptor(prototype, 'value').set;
-
-    if (valueSetter && valueSetter !== prototypeValueSetter) prototypeValueSetter.call(element, '');
-    else valueSetter.call(element, '');
-
-    element.dispatchEvent(new Event('input', { bubbles: true }));
+    dispatchEvent({
+      event: 'input',
+      element: fieldRef.current,
+      property: 'value',
+      args: '',
+    });
   }, [fieldRef]);
 
   return <Icon.CrossSm onClick={onClear} />;

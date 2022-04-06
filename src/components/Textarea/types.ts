@@ -11,9 +11,11 @@ export interface ITextarea extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   isRequired?: boolean;
   isClearable?: boolean;
   isResizable?: boolean;
+  isAutoHeight?: boolean;
   validate?: U.Nullable<boolean>;
   validateMessage?: string;
   message?: string;
   boxStyle?: TStyledComponentsProps;
   onChange?: ChangeEventHandler<HTMLTextAreaElement>;
+  footerSlot?: ReactNode;
 }

@@ -1,4 +1,4 @@
-import type { Dispatch, ReactNode, Ref, RefObject, SetStateAction } from 'react';
+import type { Dispatch, ReactElement, ReactNode, Ref, RefObject, SetStateAction } from 'react';
 import type { U } from 'ts-toolbelt';
 import type { Placement } from '@popperjs/core';
 import type { OffsetsFunction } from '@popperjs/core/lib/modifiers/offset';
@@ -11,6 +11,7 @@ export type TPopoverContext = {
   isPopoverOpen: boolean;
   onToggle: () => void;
   setOpen: Dispatch<SetStateAction<boolean>>;
+  forceUpdate: () => void;
 };
 
 interface IPopoverOptions<T extends HTMLElement> extends TPopoverContext {
@@ -39,4 +40,10 @@ export type TPopover<T extends HTMLElement = HTMLElement> = TPopoverOptions & {
   animate?: boolean;
   isPortal?: boolean;
   isPopoverVisible?: boolean;
+};
+
+export type TPopoverForwardRef = (<Element extends HTMLElement = HTMLElement>(
+  props: TPopover<Element> & { ref?: Ref<TPopoverContext> }
+) => ReactElement) & {
+  displayName: string;
 };
