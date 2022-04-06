@@ -23,4 +23,6 @@ export interface ISelect<SelectValue = TMenuValue> extends TSelectBox, Omit<TMen
   withChevron?: boolean;
   isCloseAfterChange?: boolean;
   leftSlot?: TRenderLeftSlot<SelectValue> | ReactNode;
+  isPortal?: boolean;
+  zIndex?: number;
 }
