@@ -1,0 +1,16 @@
+import { Meta, Description } from '@storybook/addon-docs/blocks'
+
+<Meta title="Hooks/Lifecycles/useMount" parameters={{previewTabs: {'storybook/docs/panel': {hidden: true}}}}/>
+
+# useMount
+
+<Description>calls mount callbacks</Description>
+
+## Usage
+```typescript
+() => {
+  useMount(() => console.log('mounted'));
+
+  return <div/>;
+}
+```
