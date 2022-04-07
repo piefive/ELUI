@@ -1,0 +1,26 @@
+import { Meta, Description } from '@storybook/addon-docs/blocks'
+
+<Meta title="Hooks/State/useFirstMountState" parameters={{previewTabs: {'storybook/docs/panel': {hidden: true}}}}/>
+
+# `useFirstMountState`
+
+Returns `true` if component is just mounted (on first render) and `false` otherwise.
+
+## Usage
+
+```typescript jsx
+import { useFirstMountState } from 'react-use';
+
+const Demo = () => {
+  const isFirstMount = useFirstMountState();
+  const [, update] = useState(1);
+
+  return (
+    <div>
+      <span>This component mounted first time: {isFirstMount ? 'YES' : 'NO'}</span>
+      <br />
+      <button onClick={() => update(i => i + 1)}>re-render</button>
+    </div>
+  );
+};
+```

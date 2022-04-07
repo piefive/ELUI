@@ -1,0 +1,22 @@
+import { Meta, Description } from '@storybook/addon-docs/blocks'
+
+<Meta title="Hooks/UI/useClickOutside" parameters={{previewTabs: {'storybook/docs/panel': {hidden: true}}}}/>
+
+# useClickOutside
+
+<Description>Detects click outside elements</Description>
+
+## Usage
+```typescript
+() => {
+    const innerRef = useRef<HTMLDivElement>(null);
+
+    useClickOutside(() => console.log('click outside'), ref);
+
+    return (
+      <div ref={innerRef} style={{ width: 200, height: 200 }}>
+        content
+      </span>
+    );
+}
+```
