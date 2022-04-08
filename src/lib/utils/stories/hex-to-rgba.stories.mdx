@@ -1,0 +1,15 @@
+import { Meta, Description } from '@storybook/addon-docs/blocks'
+
+<Meta title="Utils/Helpers/hexToRgba" parameters={{previewTabs: {'storybook/docs/panel': {hidden: true}}}}/>
+
+# hexToRgba
+
+<Description>This helper is used to convert a color from hex to rgba format</Description>
+
+## Usage
+```typescript
+const hexColor: string = '#000000';
+const opacity: number = 0.5;
+
+const rgbaColor: string = hexToRgba(hexColor, opacity); // 'rgba(0, 0, 0, 0.5)'
+```
