@@ -4,9 +4,28 @@
 
 **[Storybook demo http://elui.p5.su](http://elui.p5.su)**
 
-## coming soon...
+### coming soon...
 
 ---
+
+## Menu
+
+- [Usage](#Usage)
+- [Contributors](#Contributors)
+
+### Usage
+
+Inside your project directory, run in terminal:
+
+```
+yarn add elui-react
+```
+
+Or with npm:
+
+```
+npm install elui-react
+```
 
 ### Contributors
 
