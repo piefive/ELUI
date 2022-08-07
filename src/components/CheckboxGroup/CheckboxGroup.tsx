@@ -1,13 +1,13 @@
 import { useMemo } from 'react';
 
-import { StyledCheckboxGroupList } from 'components/CheckboxGroup/styled';
 import { combineClassNames } from 'lib';
 import { FieldBox } from 'internal';
 
-import type { ICheckboxGroup, ICheckboxGroupComponent, TCheckboxContext } from './types';
+import type { ICheckboxGroup, ICheckboxGroupCheckbox, ICheckboxGroupComponent, TCheckboxContext } from './types';
 import { CHECKBOX_GROUP_CN } from './constants';
 import { CheckboxProvider } from './hooks';
 import { Checkbox } from './units';
+import { StyledCheckboxGroupList } from './styled';
 
 export const CheckboxGroup = (({
   className,
@@ -33,4 +33,4 @@ export const CheckboxGroup = (({
   );
 }) as ICheckboxGroup;
 
-CheckboxGroup.Checkbox = Checkbox;
+CheckboxGroup.Checkbox = Checkbox as ICheckboxGroupCheckbox;

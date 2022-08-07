@@ -15,3 +15,4 @@ export * from './Empty';
 export * from './RangeInput';
 export * from './Select';
 export * from './Dialog';
+export * from './Box';

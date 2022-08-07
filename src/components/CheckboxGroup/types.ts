@@ -6,6 +6,7 @@ import type {
   ReactNode,
 } from 'react';
 
+import { Checkbox } from 'components/CheckboxGroup/units';
 import type { ISelectionFieldBox, TFieldBox, TSelectionFieldVariant } from 'internal';
 
 export type TCheckboxChecked = boolean | 'indeterminate';
@@ -35,7 +36,9 @@ export interface ICheckboxGroupComponent extends TCheckboxContext, Omit<TFieldBo
 }
 
 export interface ICheckboxGroup extends FunctionComponent<ICheckboxGroupComponent> {
-  Checkbox: ForwardRefExoticComponent<
-    Omit<ICheckbox, 'checked' | 'onChange' | 'variant' | 'name'> & { value: string | number }
-  >;
+  Checkbox: ICheckboxGroupCheckbox;
 }
+
+export type ICheckboxGroupCheckbox = ForwardRefExoticComponent<
+  Omit<ICheckbox, 'checked' | 'onChange' | 'variant' | 'name'> & { value: string | number }
+>;
