@@ -7,3 +7,5 @@ export const theme = {
   media,
   fontFamily: FONT_FAMILY,
 };
+
+export type TTheme = typeof theme;
