@@ -27,6 +27,31 @@ Or with npm:
 npm install elui-react
 ```
 
+If you use typescript, you will need to register the types for the theme:
+
+```
+yarn add -D @types/styled-components
+```
+
+Or with npm:
+
+```
+npm install --save-dev @types/styled-components
+```
+
+Create a folder `@types` in the root of the project and create a file `styles.d.ts` in it.
+
+Inside:
+
+```ts
+import 'styled-components';
+import { TTheme } from "elui-react";
+
+declare module 'styled-components' {
+  export interface DefaultTheme extends TTheme {}
+}
+```
+
 ### Contributors
 
 #### Design
