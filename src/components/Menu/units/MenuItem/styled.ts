@@ -70,6 +70,7 @@ export const StyledMenuItemLeftContent = styled.div`
 `;
 
 export const StyledMenuItemLeftSlot = styled.div`
+  display: flex;
   margin-right: 16px;
 `;
 
