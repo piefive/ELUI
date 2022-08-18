@@ -42,18 +42,13 @@ export const usePopover = <T extends HTMLElement = HTMLElement>({
   }, [outsideRefs, popperRef, targetElement]);
 
   const handleToggle = useCallback(() => {
-    if (!disabled) {
-      setOpen(!isPopoverOpen);
-
-      if (isPopoverOpen && onClose) onClose();
-    }
-  }, [disabled, isPopoverOpen, onClose]);
+    if (disabled) return;
+    setOpen(!isPopoverOpen);
+  }, [disabled, isPopoverOpen]);
 
   const handleClose = useCallback(() => {
     setOpen(false);
-
-    if (isPopoverOpen && onClose) onClose();
-  }, [isPopoverOpen, onClose]);
+  }, []);
 
   useClickOutside(handleClose, outsideMemoRefs);
 
@@ -68,6 +63,10 @@ export const usePopover = <T extends HTMLElement = HTMLElement>({
   useUpdateEffect(() => {
     handleClose();
   }, [windowWidth]);
+
+  useUpdateEffect(() => {
+    if (!isPopoverOpen && onClose) onClose();
+  }, [isPopoverOpen]);
 
   return {
     forceUpdate,

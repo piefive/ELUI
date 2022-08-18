@@ -16,3 +16,4 @@ export * from './RangeInput';
 export * from './Select';
 export * from './Dialog';
 export * from './Box';
+export * from './Menu';
