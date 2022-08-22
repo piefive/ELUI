@@ -12,7 +12,7 @@ export const useRafState = <State = unknown>(
     frame.current = requestAnimationFrame(() => setState(value));
   }, []);
 
-  useEffect(() => () => cancelAnimationFrame(frame.current));
+  useEffect(() => () => cancelAnimationFrame(frame.current), []);
 
   return [state, setRafState];
 };

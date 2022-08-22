@@ -9,7 +9,7 @@ export const useMountedState = () => {
     return () => {
       mountedRef.current = false;
     };
-  });
+  }, []);
 
   return useCallback(() => mountedRef.current, []);
 };
