@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { clamp } from 'ramda';
 
-import { combineClassNames, nextTickFn, useMount, useUpdateEffect } from 'lib';
+import { combineClassNames, useUpdateEffect } from 'lib';
 import { Portal } from 'components/Portal';
 
 import type { TDialog } from './types';
@@ -27,9 +27,9 @@ export const Dialog = ({
   const layoutIndex = clamp(2, Number.MAX_SAFE_INTEGER, zIndex);
   const handleClose: TDialog['onClose'] = isVisible && onClose ? event => onClose(event) : undefined;
 
-  useUpdateEffect(() => onAfterVisibleChange?.(isVisible), [isVisible]);
-
-  useMount(nextTickFn(() => portalRef.current?.setAttribute(`data-${DIALOG_CN}`, name)));
+  useUpdateEffect(() => {
+    onAfterVisibleChange?.(isVisible);
+  }, [isVisible]);
 
   return (
     <Portal name="dialogs" ref={portalRef}>
