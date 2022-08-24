@@ -1,6 +1,6 @@
 {
   "name": "elui-react",
-  "version": "0.0.16",
+  "version": "0.0.20",
   "author": "Project five",
   "license": "MIT",
   "homepage": "https://Naboska.github.io/Elui",
@@ -77,7 +77,7 @@
     "ramda": "^0.28.0",
     "react-imask": "^6.4.2",
     "react-popper": "^2.2.5",
-    "react-spring": "^9.4.3",
+    "react-spring": "9.4.3",
     "scroll-lock": "^2.1.5",
     "styled-components": "^5.3.3"
   }
