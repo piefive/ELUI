@@ -48,6 +48,14 @@ interface IIcon extends TIconComponent {
   Grid: typeof Icons.Grid;
   Eye: typeof Icons.Eye;
   EyeOff: typeof Icons.EyeOff;
+  Plus: typeof Icons.Plus;
+  Trash: typeof Icons.Trash;
+  Edit: typeof Icons.Edit;
+  Folder: typeof Icons.Folder;
+  FolderPlus: typeof Icons.FolderPlus;
+  FolderMinus: typeof Icons.FolderMinus;
+  File: typeof Icons.File;
+  FilePlus: typeof Icons.FilePlus;
 }
 
 export const Icon = IconComponent as IIcon;

@@ -19,6 +19,9 @@ export const StyledDialog = styled(animated.div)<{ $isBottomSheet: boolean }>`
       `;
 
     return css`
+      display: flex;
+      align-items: center;
+      justify-content: center;
       inset: 50% auto auto 50%;
       width: 95%;
       max-width: 640px;

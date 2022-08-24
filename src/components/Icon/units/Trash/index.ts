@@ -1,0 +1,1 @@
+export { Trash } from './Trash';

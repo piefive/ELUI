@@ -1,0 +1,1 @@
+export { FolderMinus } from './FolderMinus';
