@@ -94,10 +94,12 @@ const getButtonVariant = ({ theme, variant }: IStyledButton) => {
 };
 
 export const StyledLeftSlot = styled.div`
+  display: flex;
   margin-right: 10px;
 `;
 
 export const StyledRightSlot = styled.div`
+  display: flex;
   margin-left: 10px;
 `;
 

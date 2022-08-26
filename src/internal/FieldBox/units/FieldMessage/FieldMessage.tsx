@@ -1,9 +1,10 @@
 import { animated } from 'react-spring';
+import { css } from 'styled-components';
 
-import { combineClassNames, useAnimateHeight, useDebounce, useLastValidState } from 'lib/index';
+import { Typography } from 'components/Typography';
+import { combineClassNames, getComponentStyle, useAnimateHeight, useDebounce, useLastValidState } from 'lib';
 
 import { FIELD_MESSAGE_CN } from './constants';
-import { StyledTypography } from './styled';
 import type { TFieldMessage } from './types';
 
 export const FieldMessage = ({ className, children, messageStyle }: TFieldMessage) => {
@@ -14,13 +15,16 @@ export const FieldMessage = ({ className, children, messageStyle }: TFieldMessag
   return (
     <animated.div style={animateStyle}>
       <div ref={boxRef}>
-        <StyledTypography
+        <Typography
           variant="caption"
           className={combineClassNames(className, FIELD_MESSAGE_CN)}
-          typographyStyle={messageStyle}
+          typographyStyle={({ theme }) => css`
+            color: ${({ theme }) => theme.palette.grey_700};
+            ${getComponentStyle(messageStyle, { theme })}
+          `}
         >
           {content}
-        </StyledTypography>
+        </Typography>
       </div>
     </animated.div>
   );
