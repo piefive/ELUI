@@ -27,3 +27,6 @@ export * from './FolderPlus';
 export * from './FolderMinus';
 export * from './File';
 export * from './FilePlus';
+export * from './Users';
+export * from './Layout';
+export * from './Book';

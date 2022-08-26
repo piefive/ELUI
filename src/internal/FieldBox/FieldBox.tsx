@@ -1,9 +1,9 @@
 import { forwardRef } from 'react';
 
-import { FieldLabel } from 'internal/FieldBox/units';
 import { isBool, useLastValidState } from 'lib';
 
 import type { TFieldBox } from './types';
+import { FieldLabel } from './units';
 import { StyledFieldBox, StyledMessage, StyledValidateMessage } from './styled';
 
 export const FieldBox = forwardRef<HTMLDivElement, TFieldBox>(
