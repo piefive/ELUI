@@ -28,8 +28,10 @@ export const MenuItem = <Value extends TMenuValue = TMenuValue>({
   disabled = false,
   withSeparator,
   onClick,
+  itemStyle,
+  separatorStyle,
 }: TMenuItem<Value>) => {
-  const { activeValue, onChange, multiple } = useMenuContext<Value>();
+  const { activeValue, onChange, multiple, itemsStyle } = useMenuContext<Value>();
 
   const isRightSlotRender = Boolean(rightSlot || multiple);
   const isChecked = checked ?? activeValue.some(activeValue => equals(activeValue, value));
@@ -47,11 +49,12 @@ export const MenuItem = <Value extends TMenuValue = TMenuValue>({
 
   return (
     <>
-      {withSeparator && <StyledMenuItemSeparator />}
+      {withSeparator && <StyledMenuItemSeparator {...{ separatorStyle }} />}
       <StyledMenuItemBox
         className={combineClassNames(className, MENU_ITEM_CN)}
         tabIndex={disabled || isChecked ? -1 : 0}
         {...bindAria({ checked: isChecked, disabled })}
+        {...{ itemsStyle, itemStyle }}
       >
         <StyledMenuItem onClick={handleClickItem} {...{ isChecked, disabled }}>
           <StyledMenuItemLeftContent>

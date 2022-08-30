@@ -1,13 +1,14 @@
 import styled, { DefaultTheme, css } from 'styled-components';
 
-import { getAria, normalizeMixin } from 'lib';
+import type { IMenu, TMenuItem } from 'components/Menu';
+import { getAria, getComponentStyle, normalizeMixin } from 'lib';
 
-type TStyledMenuItem = {
+interface IStyledMenuItem {
   isChecked: boolean;
   disabled: boolean;
-};
+}
 
-const menuItemMixin = ({ isChecked, disabled, theme }: TStyledMenuItem & { theme: DefaultTheme }) => {
+const menuItemMixin = ({ isChecked, disabled, theme }: IStyledMenuItem & { theme: DefaultTheme }) => {
   if (disabled)
     return css`
       background-color: ${theme.palette.white};
@@ -29,7 +30,7 @@ const menuItemMixin = ({ isChecked, disabled, theme }: TStyledMenuItem & { theme
   `;
 };
 
-export const StyledMenuItem = styled.div<TStyledMenuItem>`
+export const StyledMenuItem = styled.div<IStyledMenuItem>`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -45,7 +46,7 @@ export const StyledMenuItem = styled.div<TStyledMenuItem>`
   ${menuItemMixin};
 `;
 
-export const StyledMenuItemBox = styled.li`
+export const StyledMenuItemBox = styled.li<Pick<IMenu, 'itemsStyle'> & Pick<TMenuItem, 'itemStyle'>>`
   ${normalizeMixin};
 
   width: 100%;
@@ -62,6 +63,9 @@ export const StyledMenuItemBox = styled.li`
       }
     }
   }
+
+  ${({ theme, itemsStyle }) => getComponentStyle(itemsStyle, { theme })};
+  ${({ theme, itemStyle }) => getComponentStyle(itemStyle, { theme })};
 `;
 
 export const StyledMenuItemLeftContent = styled.div`
@@ -86,9 +90,11 @@ export const StyledMenuItemRightContent = styled.div`
   white-space: nowrap;
 `;
 
-export const StyledMenuItemSeparator = styled.div`
+export const StyledMenuItemSeparator = styled.div<Pick<TMenuItem, 'separatorStyle'>>`
   width: 100%;
   height: 1px;
   margin: 4px 0;
   background-color: ${({ theme }) => theme.palette.grey_300};
+
+  ${({ theme, separatorStyle }) => getComponentStyle(separatorStyle, { theme })};
 `;

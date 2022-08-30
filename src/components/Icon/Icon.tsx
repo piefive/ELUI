@@ -59,6 +59,8 @@ interface IIcon extends TIconComponent {
   Users: typeof Icons.Users;
   Layout: typeof Icons.Layout;
   Book: typeof Icons.Book;
+  Logout: typeof Icons.Logout;
+  User: typeof Icons.User;
 }
 
 export const Icon = IconComponent as IIcon;
