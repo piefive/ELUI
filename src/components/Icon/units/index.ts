@@ -30,3 +30,5 @@ export * from './FilePlus';
 export * from './Users';
 export * from './Layout';
 export * from './Book';
+export * from './Logout';
+export * from './User';
