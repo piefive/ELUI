@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 
-import { combineClassNames, isString } from 'lib';
+import { bindSemantics, combineClassNames, isString } from 'lib';
 import { Button } from 'components/Button';
 import { Typography } from 'components/Typography';
 
@@ -10,11 +10,27 @@ import { StyledButtons, StyledEmpty, StyledIllustration } from './styled';
 
 export const Empty = forwardRef<HTMLDivElement, TEmpty>(
   (
-    { className, title, description, image, placement = 'center', primaryBtn, secondaryBtn, boxStyle, imageStyle },
+    {
+      className,
+      title,
+      description,
+      semantics,
+      image,
+      placement = 'center',
+      primaryBtn,
+      secondaryBtn,
+      boxStyle,
+      imageStyle,
+    },
     emptyRef
   ) => {
     return (
-      <StyledEmpty ref={emptyRef} className={combineClassNames(className, EMPTY_CN)} {...{ placement, boxStyle }}>
+      <StyledEmpty
+        ref={emptyRef}
+        className={combineClassNames(className, EMPTY_CN)}
+        {...{ placement, boxStyle }}
+        {...bindSemantics(semantics)}
+      >
         {isString(image) && image.length ? (
           <StyledIllustration src={image} alt="empty_image" {...{ imageStyle }} />
         ) : (

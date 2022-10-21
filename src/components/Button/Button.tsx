@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 
-import { bindAria, combineClassNames, isString } from 'lib';
+import { bindAria, bindSemantics, combineClassNames, isString } from 'lib';
 
 import type { IButton } from './types';
 import { BUTTON_CN } from './constants';
@@ -15,6 +15,7 @@ export const Button = forwardRef<HTMLButtonElement, IButton>(
       disabled = false,
       className,
       variant = 'primary',
+      semantics,
       leftSlot,
       rightSlot,
       onKeyUp,
@@ -31,6 +32,7 @@ export const Button = forwardRef<HTMLButtonElement, IButton>(
         tabIndex={!disabled ? 0 : -1}
         {...pressActions}
         {...bindAria({ disabled, pressed: isButtonPressed })}
+        {...bindSemantics(semantics)}
         {...{ ...rest, type, ref, variant, disabled }}
       >
         {leftSlot && <StyledLeftSlot>{leftSlot}</StyledLeftSlot>}

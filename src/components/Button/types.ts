@@ -13,4 +13,5 @@ export interface IButton extends ButtonHTMLAttributes<HTMLButtonElement>, TButto
   onClick?: MouseEventHandler<HTMLButtonElement>;
   leftSlot?: ReactNode;
   rightSlot?: ReactNode;
+  semantics?: string;
 }

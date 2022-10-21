@@ -25,6 +25,7 @@ type TChipProps<Value extends TChipValue = TChipValue> = {
   value?: Value;
   onChip?: TChipHandler<Value>;
   boxStyle?: TStyledComponentsProps;
+  semantics?: string;
 };
 
 export interface IChipDefault<Value extends TChipValue = TChipValue> extends TChipProps<Value> {

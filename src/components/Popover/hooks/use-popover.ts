@@ -53,7 +53,7 @@ export const usePopover = <T extends HTMLElement = HTMLElement>({
   useClickOutside(handleClose, outsideMemoRefs);
 
   useUpdateEffect(() => {
-    if (forceUpdateTarget && forceUpdate) forceUpdate();
+    if (forceUpdateTarget && isPopoverOpen && forceUpdate) forceUpdate();
   }, [forceUpdateTarget]);
 
   useEffect(() => {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { U } from 'ts-toolbelt';
 
-import { createEluiName } from 'lib';
+import { bindSemantics, createEluiName } from 'lib';
 
 const createRootElement = (id: string) => {
   const root = document.createElement('div');
@@ -11,7 +11,7 @@ const createRootElement = (id: string) => {
   return root;
 };
 
-export const usePortal = (name: string): U.Nullable<HTMLDivElement> => {
+export const usePortal = (name: string, semantics?: string): U.Nullable<HTMLDivElement> => {
   const [portalElement, setPortalElement] = useState<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -32,6 +32,17 @@ export const usePortal = (name: string): U.Nullable<HTMLDivElement> => {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [name]);
+
+  useEffect(() => {
+    if (!portalElement || !semantics) return;
+
+    const semanticsAttr = bindSemantics(semantics);
+
+    for (const key in semanticsAttr) {
+      const value = semanticsAttr[key as keyof typeof semanticsAttr];
+      portalElement.setAttribute(key, value);
+    }
+  }, [portalElement, semantics]);
 
   return portalElement;
 };

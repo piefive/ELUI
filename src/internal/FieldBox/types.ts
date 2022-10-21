@@ -13,4 +13,5 @@ export type TFieldBox = {
   children?: ReactNode;
   onLabelClick?: () => void;
   boxStyle?: TStyledComponentsProps;
+  semantics?: string;
 };

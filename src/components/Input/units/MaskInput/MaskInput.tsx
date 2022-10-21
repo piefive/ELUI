@@ -2,7 +2,7 @@ import { MutableRefObject, memo, useCallback, useEffect, useRef, useState } from
 import { useIMask } from 'react-imask';
 import { equals } from 'ramda';
 
-import { createEventFn, createListener, dispatchEvent, mergeRefs, useFirstMountState, useMount } from 'lib';
+import { createListener, dispatchEvent, mergeRefs, useFirstMountState, useMount } from 'lib';
 
 import { StyledInput } from '../../styled';
 

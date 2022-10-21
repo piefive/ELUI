@@ -1,7 +1,7 @@
 import { Fragment, Ref, createElement, forwardRef, useImperativeHandle, useMemo } from 'react';
 import { useTransition } from 'react-spring';
 
-import { combineClassNames, createEventFn, isFn } from 'lib';
+import { bindSemantics, combineClassNames, createEventFn, isFn } from 'lib';
 import { Portal } from 'components/Portal';
 
 import type { TPopover, TPopoverContext, TPopoverForwardRef } from './types';
@@ -24,6 +24,7 @@ const PopoverComponent = <T extends HTMLElement = HTMLDivElement>(
     onClose,
     animateContainerStyle,
     zIndex = 21,
+    semantics,
     ...popoverOptions
   }: TPopover<T>,
   popoverRef: Ref<TPopoverContext>
@@ -66,13 +67,14 @@ const PopoverComponent = <T extends HTMLElement = HTMLDivElement>(
       {isPopoverVisible &&
         createElement(
           isPortal ? Portal : Fragment,
-          isPortal ? { name: POPOVER_CN } : null,
+          isPortal ? { name: POPOVER_CN, semantics } : null,
           transitionStyle(
             (transitionStyle, item) =>
               item && (
                 <StyledAnimateContainer
                   {...{ ref, ...popperProps }}
                   styled={animateContainerStyle}
+                  {...(!isPortal ? bindSemantics(semantics) : null)}
                   style={{ ...style, ...transitionStyle, zIndex }}
                 >
                   <StyledPopover

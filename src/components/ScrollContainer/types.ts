@@ -13,4 +13,5 @@ export type TScrollContainer = {
   boxStyle?: TStyledComponentsProps;
   onScroll?: (x: number) => void;
   children: ReactNode;
+  semantics?: string;
 };

@@ -27,6 +27,7 @@ export const RangeInput = forwardRef<HTMLInputElement, IRangeInput>(
       max = 99,
       value,
       disabled = false,
+      semantics,
       ...rest
     },
     rangeInputRef
@@ -47,7 +48,7 @@ export const RangeInput = forwardRef<HTMLInputElement, IRangeInput>(
     return (
       <FieldBox
         className={combineClassNames(className, RANGE_INPUT_CN)}
-        {...{ label, isRequired, validate, validateMessage, message, boxStyle }}
+        {...{ label, isRequired, validate, validateMessage, message, semantics, boxStyle }}
       >
         <StyledRail
           ref={railRef}

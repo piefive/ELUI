@@ -25,6 +25,7 @@ export interface IRadio
   extends IRadioInput,
     Omit<ISelectionFieldBox, 'children' | 'boxClassName' | 'isChecked' | 'isDisabled'> {
   className?: string;
+  semantics?: string;
 }
 
 export interface IRadioGroupComponent extends TRadioContext, Omit<TFieldBox, 'onLabelClick'> {

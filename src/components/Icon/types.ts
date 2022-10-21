@@ -11,4 +11,5 @@ export type TIcon = {
   onClick?: (e: SyntheticEvent<SVGSVGElement>) => void;
   onMouseDown?: (e: SyntheticEvent<SVGSVGElement>) => void;
   onMouseUp?: (e: SyntheticEvent<SVGSVGElement>) => void;
+  semantics?: string;
 };

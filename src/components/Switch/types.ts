@@ -13,6 +13,7 @@ export type TSwitch = {
   checkedSlot?: ReactNode;
   uncheckedSlot?: ReactNode;
   className?: string;
+  semantics?: string;
   onChange?: TSwitchHandler;
   boxStyle?: TStyledComponentsProps;
   toggleStyle?: TStyledToggleProps;

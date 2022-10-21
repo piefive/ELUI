@@ -6,6 +6,7 @@ import type { TStyledComponentsProps } from 'lib';
 export interface ITextarea extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;
   value?: string;
+  semantics?: string;
   leftSlot?: ReactNode;
   rightSlot?: ReactNode;
   isRequired?: boolean;

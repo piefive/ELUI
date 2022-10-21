@@ -2,7 +2,7 @@ import { forwardRef } from 'react';
 import { animated, useSpring } from 'react-spring';
 import { css } from 'styled-components';
 
-import { combineClassNames, useFirstMountState, usePrevious } from 'lib';
+import { bindSemantics, combineClassNames, useFirstMountState, usePrevious } from 'lib';
 
 import type { IRadio, IRadioInput } from '../../types';
 import { RADIO_CN, RADIO_INPUT_CN } from '../../constants';
@@ -24,6 +24,7 @@ export const Radio = forwardRef<HTMLInputElement, IRadio>(
       checked,
       disabled,
       name,
+      semantics,
       ...rest
     },
     radioRef
@@ -58,6 +59,7 @@ export const Radio = forwardRef<HTMLInputElement, IRadio>(
         isDisabled={Boolean(checkboxProps.disabled)}
         validate={!isGroup ? validate : null}
         validateMessage={!isGroup ? validateMessage : null}
+        {...bindSemantics(semantics)}
         boxStyle={css`
           ${isGroup &&
           css`

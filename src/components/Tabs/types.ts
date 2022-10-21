@@ -32,6 +32,7 @@ export interface ITabsComponent<TabValue = TTabValue> extends Omit<TTabsContext<
   activeLineStyle?: TStyledComponentsProps;
   children: ReactNode;
   isScrollable?: boolean;
+  semantics?: string;
 }
 
 export type ITabs = (<TabValue = TTabValue>(

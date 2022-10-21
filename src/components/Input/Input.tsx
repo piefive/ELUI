@@ -31,6 +31,7 @@ export const Input = forwardRef<HTMLInputElement, TInput>(
       isFocused,
       onComplete,
       onChange,
+      semantics,
       ...rest
     },
     inputRef
@@ -56,7 +57,7 @@ export const Input = forwardRef<HTMLInputElement, TInput>(
             {isPasswordInput && <PasswordIcon {...{ inputType, setInputType }} />}
           </>
         }
-        {...{ label, isRequired, validate, leftSlot, validateMessage, message, boxStyle }}
+        {...{ label, isRequired, validate, leftSlot, validateMessage, message, boxStyle, semantics }}
       >
         {maskOptions ? (
           <MaskInput inputRef={setRef} {...{ maskOptions, onComplete, onChange, ...inputProps }} />

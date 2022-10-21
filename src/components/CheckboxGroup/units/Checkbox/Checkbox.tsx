@@ -2,7 +2,7 @@ import { forwardRef } from 'react';
 import { includes } from 'ramda';
 import { css } from 'styled-components';
 
-import { combineClassNames } from 'lib';
+import { bindSemantics, combineClassNames } from 'lib';
 
 import type { ICheckbox, ICheckboxInput } from '../../types';
 import { CHECKBOX_CN } from '../../constants';
@@ -25,6 +25,7 @@ export const Checkbox = forwardRef<HTMLInputElement, ICheckbox>(
       checked,
       disabled,
       name,
+      semantics,
       ...rest
     },
     checkboxRef
@@ -49,6 +50,7 @@ export const Checkbox = forwardRef<HTMLInputElement, ICheckbox>(
         isDisabled={Boolean(checkboxProps.disabled)}
         validate={!isGroup ? validate : null}
         validateMessage={!isGroup ? validateMessage : null}
+        {...bindSemantics(semantics)}
         boxStyle={css`
           ${isGroup &&
           css`

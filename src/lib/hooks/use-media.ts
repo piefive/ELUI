@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { createListener, isClient } from 'lib/utils';
+import { isClient } from 'lib/utils';
 
 import { useMountedState } from './use-mounted-state';
 

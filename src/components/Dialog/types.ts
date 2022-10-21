@@ -21,4 +21,5 @@ export type TDialog = {
   headerStyle?: TStyledComponentsProps;
   bodyStyle?: TStyledComponentsProps;
   footerStyle?: TStyledComponentsProps;
+  semantics?: string;
 };

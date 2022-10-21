@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 import type { Ref } from 'react';
 
-import { bindAria, combineClassNames, createEventFn } from 'lib';
+import { bindAria, bindSemantics, combineClassNames, createEventFn } from 'lib';
 import { Typography } from 'components/Typography';
 import { Icon } from 'components/Icon';
 
@@ -13,7 +13,7 @@ import { StyledChip, StyledChipContent, StyledDeleteButton, StyledLeftSlot } fro
 const PRESSED_KEYS = ['Enter', 'Space'];
 
 const ChipComponent = <Value extends TChipValue = TChipValue>(
-  { variant = 'input', className, leftSlot, children, value, onChip, ...props }: TChip<Value>,
+  { variant = 'input', className, leftSlot, children, value, onChip, semantics, ...props }: TChip<Value>,
   chipRef: Ref<HTMLDivElement>
 ) => {
   const { scheme = 'default' } = props as IChipDefault<Value>;
@@ -28,6 +28,7 @@ const ChipComponent = <Value extends TChipValue = TChipValue>(
       tabIndex={!disabled ? 0 : -1}
       isDeletable={Boolean(onDelete)}
       {...bindAria(variant === 'input' ? { checked, disabled } : null)}
+      {...bindSemantics(semantics)}
       onClick={!disabled && onChip ? () => onChip({ value, checked }) : undefined}
       onKeyUp={
         !disabled && onChip

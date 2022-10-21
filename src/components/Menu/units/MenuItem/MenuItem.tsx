@@ -1,6 +1,6 @@
 import { equals, isNil } from 'ramda';
 
-import { bindAria, combineClassNames, isPrimitiveReactNode } from 'lib';
+import { bindAria, bindSemantics, combineClassNames, isPrimitiveReactNode } from 'lib';
 import { Checkbox } from 'components/CheckboxGroup';
 import { Typography } from 'components/Typography';
 
@@ -30,6 +30,7 @@ export const MenuItem = <Value extends TMenuValue = TMenuValue>({
   onClick,
   itemStyle,
   separatorStyle,
+  semantics,
 }: TMenuItem<Value>) => {
   const { activeValue, onChange, multiple, itemsStyle } = useMenuContext<Value>();
 
@@ -54,6 +55,7 @@ export const MenuItem = <Value extends TMenuValue = TMenuValue>({
         className={combineClassNames(className, MENU_ITEM_CN)}
         tabIndex={disabled || isChecked ? -1 : 0}
         {...bindAria({ checked: isChecked, disabled })}
+        {...bindSemantics(semantics)}
         {...{ itemsStyle, itemStyle }}
       >
         <StyledMenuItem onClick={handleClickItem} {...{ isChecked, disabled }}>

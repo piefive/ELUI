@@ -12,4 +12,5 @@ export interface IBox extends Omit<HTMLAttributes<HTMLElement>, 'onClick'>, TSty
   tag?: ElementType;
   className?: string;
   children?: ReactNode;
+  semantics?: string;
 }
