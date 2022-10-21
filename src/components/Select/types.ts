@@ -5,7 +5,7 @@ import type { TMenuContext, TMenuItem, TMenuValue } from 'components/Menu';
 
 type TSelectBox = Pick<
   ITextFieldBox,
-  'className' | 'label' | 'message' | 'validate' | 'validateMessage' | 'boxStyle' | 'isRequired'
+  'className' | 'label' | 'message' | 'validate' | 'validateMessage' | 'boxStyle' | 'isRequired' | 'semantics'
 >;
 
 export type TSearchHandler = (value: string) => void;

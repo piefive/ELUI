@@ -1,8 +1,5 @@
 import styled from 'styled-components';
 
-import { Button } from 'components/Button';
-import { Typography } from 'components/Typography';
-
 import { Empty } from './Empty';
 import type { TEmpty } from './types';
 

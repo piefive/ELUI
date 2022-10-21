@@ -31,6 +31,7 @@ const SelectComponent = <SelectValue extends TMenuValue = TMenuValue>({
   isCloseAfterChange,
   isPortal,
   zIndex,
+  semantics,
   ...rest
 }: ISelect<SelectValue>) => {
   const { activeValue, multiple } = rest;
@@ -77,7 +78,7 @@ const SelectComponent = <SelectValue extends TMenuValue = TMenuValue>({
             rightSlot={withChevron && <SelectChevron />}
             fieldStyle={fieldMixin}
             leftSlot={isFn(leftSlot) ? leftSlot(activeValues) : leftSlot}
-            {...{ ...bindSelect, label, isRequired, validate, validateMessage, message, boxStyle }}
+            {...{ ...bindSelect, label, isRequired, validate, validateMessage, message, boxStyle, semantics }}
           >
             {isPlaceholderVisible && <StyledPlaceholder isDisabled={disabled}>{placeholder}</StyledPlaceholder>}
             <SelectValue<SelectValue> values={activeValues} isMultiple={multiple} {...{ onClear }}>

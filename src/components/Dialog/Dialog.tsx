@@ -19,6 +19,7 @@ export const Dialog = ({
   withOverlay = true,
   onAfterVisibleChange,
   children,
+  semantics,
   ...rest
 }: TDialog) => {
   const portalRef = useRef<HTMLDivElement>();
@@ -32,7 +33,7 @@ export const Dialog = ({
   }, [isVisible]);
 
   return (
-    <Portal name="dialogs" ref={portalRef}>
+    <Portal name="dialogs" ref={portalRef} {...{ semantics }}>
       <DialogContent
         className={combineClassNames(className, DIALOG_CN)}
         isOpen={isVisible}

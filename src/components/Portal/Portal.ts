@@ -6,8 +6,8 @@ import { isFn } from 'lib';
 import type { TPortal } from './types';
 import { usePortal } from './hooks';
 
-export const Portal = forwardRef<HTMLDivElement, TPortal>(({ name, children }, portalRef) => {
-  const box = usePortal(name);
+export const Portal = forwardRef<HTMLDivElement, TPortal>(({ name, children, semantics }, portalRef) => {
+  const box = usePortal(name, semantics);
 
   useEffect(() => {
     if (box && portalRef) {

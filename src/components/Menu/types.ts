@@ -21,6 +21,7 @@ export type TMenuItem<Value extends TMenuValue = TMenuValue> = {
   onClick?: () => void;
   itemStyle?: TStyledComponentsProps;
   separatorStyle?: TStyledComponentsProps;
+  semantics?: string;
 };
 
 export type TMenuContext<Value extends TMenuValue = TMenuValue> = {
@@ -35,6 +36,7 @@ export interface IMenu<Value extends TMenuValue = TMenuValue> extends Omit<TMenu
   activeValue?: Value[] | Value;
   children: ReactNode;
   menuStyle?: TStyledComponentsProps;
+  semantics?: string;
 }
 
 export type TMenuForwardRef = (<Value extends TMenuValue = TMenuValue>(

@@ -2,7 +2,7 @@ import { Ref, forwardRef, useMemo, useRef } from 'react';
 import { isNil } from 'ramda';
 
 import { ScrollableVariantBox } from 'internal';
-import { combineClassNames, useUpdateEffect } from 'lib';
+import { bindSemantics, combineClassNames, useUpdateEffect } from 'lib';
 
 import type { TScrollContainerRef } from '../ScrollContainer';
 
@@ -15,6 +15,7 @@ import { StyledActiveLine, StyledTabsBox } from './styled';
 const TabsComponent = <TabValue extends TTabValue = TTabValue>(
   {
     className,
+    semantics,
     isScrollable = true,
     activeTab,
     onTabChange,
@@ -38,7 +39,7 @@ const TabsComponent = <TabValue extends TTabValue = TTabValue>(
   }, [activeTab]);
 
   return (
-    <ScrollableVariantBox ref={_scrollContainerRef} {...{ isScrollable }}>
+    <ScrollableVariantBox ref={_scrollContainerRef} {...bindSemantics(semantics)} {...{ isScrollable }}>
       <StyledTabsBox ref={tabsRef} role="tablist" className={combineClassNames(className, TABS_CN)} {...{ boxStyle }}>
         <TabsProvider value={ctx}>{children}</TabsProvider>
         <StyledActiveLine style={activeLinePositionStyle} {...{ activeLineStyle }} />

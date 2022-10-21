@@ -24,6 +24,7 @@ type TBaseTypography = {
   onClick?: (event: MouseEvent) => void;
   color?: keyof DefaultTheme['palette'] | 'inherit';
   typographyStyle?: TStyledComponentsProps;
+  semantics?: string;
 };
 
 interface TAnchor extends Omit<Partial<HTMLAnchorElement>, 'children'> {

@@ -6,13 +6,13 @@ import type {
   ReactNode,
 } from 'react';
 
-import { Checkbox } from 'components/CheckboxGroup/units';
 import type { ISelectionFieldBox, TFieldBox, TSelectionFieldVariant } from 'internal';
 
 export type TCheckboxChecked = boolean | 'indeterminate';
 
 export interface ICheckboxInput
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'checked' | 'children' | 'type' | 'className'> {
+  semantics?: string;
   checked?: TCheckboxChecked;
   onChange?: ChangeEventHandler<HTMLInputElement>;
 }

@@ -24,7 +24,7 @@ export const Media = () => {
   return (
     <>
       {Object.keys(media).map(key => {
-        const width = media[key];
+        const width = media[key as keyof typeof media];
 
         return (
           <StyledMedia key={width} style={{ width }}>

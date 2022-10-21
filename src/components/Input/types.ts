@@ -8,6 +8,7 @@ interface IBaseInputField extends Omit<InputHTMLAttributes<HTMLInputElement>, 's
   value?: string | number;
   type?: 'text' | 'number' | 'password' | 'email' | 'tel';
   onChange?: ChangeEventHandler<HTMLInputElement>;
+  semantics?: string;
 }
 
 export interface IInputFieldWithoutMask extends IBaseInputField {

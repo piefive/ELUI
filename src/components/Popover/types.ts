@@ -41,6 +41,7 @@ export type TPopover<T extends HTMLElement = HTMLElement> = TPopoverOptions & {
   isPortal?: boolean;
   isPopoverVisible?: boolean;
   zIndex?: number;
+  semantics?: string;
 };
 
 export type TPopoverForwardRef = (<Element extends HTMLElement = HTMLElement>(

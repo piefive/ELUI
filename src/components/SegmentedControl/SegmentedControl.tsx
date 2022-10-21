@@ -1,6 +1,7 @@
 import { forwardRef, useMemo, useRef } from 'react';
 import type { U } from 'ts-toolbelt';
 
+import { bindSemantics } from 'lib/utils';
 import { FieldLabel, ScrollableVariantBox } from 'internal';
 
 import type { TScrollContainerRef } from '../ScrollContainer';
@@ -12,7 +13,7 @@ import { StyledSegmentedControlBox, StyledSegmentedControlList } from './styled'
 
 const SegmentedControlComponent = forwardRef<HTMLUListElement, ISegmentedControlComponent>(
   (
-    { label, activeSegment, onSegmentChange, children, isScrollable = true, boxStyle, listStyle },
+    { label, activeSegment, onSegmentChange, semantics, children, isScrollable = true, boxStyle, listStyle },
     segmentedControlRef
   ) => {
     const _scrollContainerRef = useRef<U.Nullable<TScrollContainerRef>>();
@@ -23,7 +24,7 @@ const SegmentedControlComponent = forwardRef<HTMLUListElement, ISegmentedControl
     );
 
     return (
-      <StyledSegmentedControlBox {...{ boxStyle, isScrollable }}>
+      <StyledSegmentedControlBox {...bindSemantics(semantics)} {...{ boxStyle, isScrollable }}>
         {label && <FieldLabel {...{ label }} />}
         <ScrollableVariantBox ref={_scrollContainerRef} {...{ isScrollable }}>
           <StyledSegmentedControlList ref={segmentedControlRef} role="tablist" {...{ listStyle }}>

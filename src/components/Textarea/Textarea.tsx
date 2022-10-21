@@ -31,6 +31,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, ITextarea>(
       rows,
       style,
       footerSlot,
+      semantics,
       ...rest
     },
     textAreaRef
@@ -67,7 +68,18 @@ export const Textarea = forwardRef<HTMLTextAreaElement, ITextarea>(
         footerSlot={footerSlot}
         isClearable={Boolean(value && isClearable)}
         isDisabled={disabled}
-        {...{ label, isRequired, validate, isFocused, leftSlot, rightSlot, validateMessage, message, boxStyle }}
+        {...{
+          label,
+          isRequired,
+          validate,
+          isFocused,
+          leftSlot,
+          rightSlot,
+          validateMessage,
+          message,
+          boxStyle,
+          semantics,
+        }}
       >
         {isResizable ? (
           <ResizeContainer fieldRef={ref} isDisabled={disabled}>

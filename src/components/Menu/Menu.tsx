@@ -1,6 +1,6 @@
 import { Ref, forwardRef, useMemo } from 'react';
 
-import { combineClassNames } from 'lib';
+import { bindSemantics, combineClassNames } from 'lib';
 
 import type { IMenu, TMenuContext, TMenuForwardRef, TMenuValue } from './types';
 import { MENU_CN } from './constants';
@@ -10,7 +10,7 @@ import { MenuItem } from './units';
 import { StyledMenu } from './styled';
 
 const MenuComponent = <Value extends TMenuValue = TMenuValue>(
-  { className, children, activeValue, multiple, onChange, menuStyle, itemsStyle }: IMenu<Value>,
+  { className, children, activeValue, multiple, onChange, semantics, menuStyle, itemsStyle }: IMenu<Value>,
   boxRef: Ref<HTMLUListElement>
 ) => {
   const ctx = useMemo<TMenuContext<Value>>(
@@ -19,7 +19,12 @@ const MenuComponent = <Value extends TMenuValue = TMenuValue>(
   );
 
   return (
-    <StyledMenu ref={boxRef} className={combineClassNames(className, MENU_CN)} {...{ menuStyle }}>
+    <StyledMenu
+      ref={boxRef}
+      className={combineClassNames(className, MENU_CN)}
+      {...bindSemantics(semantics)}
+      {...{ menuStyle }}
+    >
       <MenuProvider value={ctx}>{children}</MenuProvider>
     </StyledMenu>
   );

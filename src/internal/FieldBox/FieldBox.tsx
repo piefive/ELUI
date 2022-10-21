@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 
-import { isBool, useLastValidState } from 'lib';
+import { bindSemantics, isBool, useLastValidState } from 'lib';
 
 import type { TFieldBox } from './types';
 import { FieldLabel } from './units';
@@ -8,13 +8,24 @@ import { StyledFieldBox, StyledMessage, StyledValidateMessage } from './styled';
 
 export const FieldBox = forwardRef<HTMLDivElement, TFieldBox>(
   (
-    { className, validate = null, children, validateMessage, message, label, isRequired, onLabelClick, boxStyle },
+    {
+      className,
+      validate = null,
+      semantics,
+      children,
+      validateMessage,
+      message,
+      label,
+      isRequired,
+      onLabelClick,
+      boxStyle,
+    },
     fieldRef
   ) => {
     const validateState = useLastValidState(validate, [true, false]);
 
     return (
-      <StyledFieldBox ref={fieldRef} {...{ className, boxStyle }}>
+      <StyledFieldBox ref={fieldRef} {...bindSemantics(semantics)} {...{ className, boxStyle }}>
         {label && <FieldLabel onClick={onLabelClick} {...{ label, isRequired }} />}
         {children}
         <StyledValidateMessage validate={validateState}>{isBool(validate) && validateMessage}</StyledValidateMessage>

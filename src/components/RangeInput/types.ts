@@ -4,7 +4,7 @@ import type { TFieldBox } from 'internal';
 
 type TRangeInputField = Pick<
   TFieldBox,
-  'className' | 'label' | 'isRequired' | 'validate' | 'validateMessage' | 'message' | 'boxStyle'
+  'className' | 'label' | 'isRequired' | 'validate' | 'validateMessage' | 'message' | 'boxStyle' | 'semantics'
 >;
 
 export interface IRangeInput

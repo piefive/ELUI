@@ -13,4 +13,5 @@ export type TEmpty = {
   secondaryBtn?: Omit<IButton, 'variant'>;
   boxStyle?: TStyledComponentsProps;
   imageStyle?: TStyledComponentsProps;
+  semantics?: string;
 };

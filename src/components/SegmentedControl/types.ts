@@ -18,6 +18,7 @@ export type TSegmentedControlContext = {
 };
 
 export interface ISegmentedControlComponent extends Omit<TSegmentedControlContext, '_scrollBoxRef'> {
+  semantics?: string;
   label?: string;
   isScrollable?: boolean;
   children: ReactNode;

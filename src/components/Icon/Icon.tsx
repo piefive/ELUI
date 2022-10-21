@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 
-import { bindAria, combineClassNames } from 'lib';
+import { bindAria, bindSemantics, combineClassNames } from 'lib';
 
 import type { TIcon } from './types';
 import * as Icons from './units';
@@ -8,7 +8,7 @@ import { StyledSvg } from './styled';
 import { ICON_CN } from './constants';
 
 export const IconComponent = forwardRef<SVGSVGElement, TIcon>(
-  ({ children, className, size, viewBox, ...rest }, iconRef) => {
+  ({ children, className, semantics, size, viewBox, ...rest }, iconRef) => {
     return (
       <StyledSvg
         ref={iconRef}
@@ -17,6 +17,7 @@ export const IconComponent = forwardRef<SVGSVGElement, TIcon>(
         size={size ?? 24}
         {...rest}
         {...bindAria({ hidden: true })}
+        {...bindSemantics(semantics)}
       >
         {children}
       </StyledSvg>

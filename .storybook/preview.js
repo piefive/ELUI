@@ -1,4 +1,3 @@
-import {StrictMode} from 'react';
 import {addDecorator, addParameters} from "@storybook/react";
 import {DocsContainer, DocsPage} from "@storybook/addon-docs";
 
@@ -10,11 +9,11 @@ import {ConfigProvider} from "../src/components/ConfigProvider";
 //configure(require.context('../src', true, /\.stories\.mdx$/), module);
 
 addDecorator(storyFn => (
-  <StrictMode>
+  <>
     <ConfigProvider fontURL="./fonts/fonts.css" paintWorklets={['./worklets/figma-smooth-corners.js']}>
       {storyFn()}
     </ConfigProvider>
-  </StrictMode>
+  </>
 ));
 
 
