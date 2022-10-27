@@ -12,7 +12,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, ITextarea>(
   (
     {
       className,
-      value = '',
+      value,
       boxStyle,
       validate = null,
       disabled = false,
