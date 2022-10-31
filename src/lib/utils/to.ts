@@ -1,7 +1,8 @@
-import { isArray, isObject } from './is';
+import { isArray, isNil, isObject } from './is';
 
 export const toArray = <Value>(value?: Value | Value[]): Value[] => {
-  if (!value) return [];
+  if (isNil(value)) return [];
+
   return isArray(value) ? value : [value];
 };
 

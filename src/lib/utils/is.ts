@@ -26,6 +26,11 @@ export const isObject = <Obj = Record<string, unknown>>(value: TAnyValue): value
 
 export const isUndefined = (value: unknown): value is undefined => typeof value === 'undefined';
 
+export const isNull = (value: unknown): value is null => value === null;
+
+export const isNil = (value: unknown): value is undefined | null | typeof NaN =>
+  isUndefined(value) || isNull(value) || isNaN(value);
+
 export const isFn = <Fn extends (...args: unknown[]) => unknown = (...args: unknown[]) => unknown>(
   value: unknown
 ): value is Fn => typeof value === 'function';
