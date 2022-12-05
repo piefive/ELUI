@@ -1,4 +1,4 @@
-import { MutableRefObject, memo, useCallback, useEffect, useRef, useState } from 'react';
+import { FocusEventHandler, MutableRefObject, memo, useCallback, useEffect, useRef, useState } from 'react';
 import { useIMask } from 'react-imask';
 import { equals } from 'ramda';
 
@@ -20,6 +20,24 @@ export const MaskInput = memo(
       dispatchEvent({ event: 'input', element: ref.current, property: 'value', args: value });
     }, []);
 
+    const handleBlurEvent = useCallback<FocusEventHandler<HTMLInputElement>>(
+      event => {
+        if (event.relatedTarget) return;
+
+        onBlur?.(event);
+      },
+      [onBlur]
+    );
+
+    const handleFocusEvent = useCallback<FocusEventHandler<HTMLInputElement>>(
+      event => {
+        if (event.relatedTarget) return;
+
+        onFocus?.(event);
+      },
+      [onFocus]
+    );
+
     const { ref: innerRef, maskRef } = useIMask(opts, {
       onAccept: !isFirstMount ? updateInput : undefined,
       onComplete,
@@ -34,12 +52,18 @@ export const MaskInput = memo(
       const maskInput = innerRef.current as HTMLInputElement;
       const listener = createListener(ref.current, 'focus', () => maskInput?.focus());
       listener.on();
+
       return () => listener.off();
     });
 
     return (
       <>
-        <StyledInput ref={innerRef as MutableRefObject<HTMLInputElement>} {...{ onBlur, onFocus, placeholder, type }} />
+        <StyledInput
+          ref={innerRef as MutableRefObject<HTMLInputElement>}
+          {...{ onFocus, placeholder, type }}
+          onBlur={handleBlurEvent}
+          onFocus={handleFocusEvent}
+        />
         <StyledMaskInput ref={mergeRefs(inputRef, ref)} tabIndex={-1} {...rest} />
       </>
     );
