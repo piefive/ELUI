@@ -22,7 +22,7 @@ export const MaskInput = memo(
 
     const handleBlurEvent = useCallback<FocusEventHandler<HTMLInputElement>>(
       event => {
-        if (event.relatedTarget) return;
+        if (event.relatedTarget === ref.current) return;
 
         onBlur?.(event);
       },
@@ -31,7 +31,7 @@ export const MaskInput = memo(
 
     const handleFocusEvent = useCallback<FocusEventHandler<HTMLInputElement>>(
       event => {
-        if (event.relatedTarget) return;
+        if (event.relatedTarget === ref.current) return;
 
         onFocus?.(event);
       },
